@@ -3,20 +3,698 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CHR Analytics Services Catalog - Explore our comprehensive analytics services and pricing tiers">
+    <meta name="keywords" content="CHR, analytics, services, pricing, dashboard, Looker">
     <title>CHR Analytics Services Catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --telus-purple: #4B0082;
+            --telus-dark: #2d3748;
+            --telus-light: #f7fafc;
+            --telus-border: #e2e8f0;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --info: #4299e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--telus-purple) 0%, #6B2D5C 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--telus-purple) 0%, #6B2D5C 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header .telus-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header p {
+            font-size: 1.15em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            padding: 30px;
+            background: var(--telus-light);
+            border-bottom: 2px solid var(--telus-border);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: var(--telus-dark);
+            font-size: 0.95em;
+        }
+
+        .control-group input,
+        .control-group select {
+            padding: 12px;
+            border: 2px solid var(--telus-border);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: var(--telus-purple);
+            box-shadow: 0 0 0 3px rgba(75, 0, 130, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .btn-primary {
+            background: var(--telus-purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3a0066;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(75, 0, 130, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--telus-border);
+            color: var(--telus-dark);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-print {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #38a169;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--telus-purple) 0%, #6B2D5C 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(75, 0, 130, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: var(--telus-dark);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            transition: background 0.3s ease;
+        }
+
+        th:hover {
+            background: #1a202c;
+        }
+
+        th.sortable::after {
+            content: ' ⇅';
+            opacity: 0.5;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+
+        th.sort-asc::after {
+            content: ' ↑';
+            opacity: 1;
+        }
+
+        th.sort-desc::after {
+            content: ' ↓';
+            opacity: 1;
+        }
+
+        td {
+            padding: 18px 15px;
+            border-bottom: 1px solid var(--telus-border);
+            color: #4a5568;
+        }
+
+        tbody tr:hover {
+            background: var(--telus-light);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .service-name {
+            font-weight: 700;
+            color: var(--telus-dark);
+            font-size: 1.05em;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        .tier-standard {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .tier-advanced {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .tier-enterprise {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .tier-pcn {
+            background: #e9d8fd;
+            color: #553399;
+        }
+
+        .price-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .price-free {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .price-paid {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .price-included {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .price-tba {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .time-estimate {
+            color: #718096;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 40px;
+            color: #718096;
+        }
+
+        .no-results h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--telus-dark);
+        }
+
+        .legend {
+            background: var(--telus-light);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            border-left: 4px solid var(--telus-purple);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            background: var(--telus-dark);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-top: 4px solid var(--telus-purple);
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: #4299e1;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .controls, .btn, .stats, .legend, .footer {
+                display: none;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.9em;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>CHR Analytics Services Catalog</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Welcome to the CHR Analytics Services Catalog</h2>
-            <p>This catalog provides an overview of the analytics services available under CHR.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 The CHR Team</p>
-    </footer>
+    <div class="container">
+        <div class="header">
+            <div class="telus-badge">🏥 TELUS Healthcare Solutions</div>
+            <h1>CHR Analytics Services</h1>
+            <p>Comprehensive pricing and service options for your healthcare analytics needs</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="searchInput">🔍 Search Services</label>
+                <input type="text" id="searchInput" placeholder="Dashboard, Looker, Training...">
+            </div>
+
+            <div class="control-group">
+                <label for="tierFilter">📦 Filter by Tier</label>
+                <select id="tierFilter">
+                    <option value="">All Tiers</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="Enterprise">Enterprise</option>
+                    <option value="Alberta PCN">Alberta PCN</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="priceFilter">💵 Filter by Price Type</label>
+                <select id="priceFilter">
+                    <option value="">All Services</option>
+                    <option value="free">Free ($0)</option>
+                    <option value="paid">Paid Services</option>
+                    <option value="included">Included in Package</option>
+                    <option value="tba">TBA (To Be Announced)</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="resetFilters()">↻ Reset Filters</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ Print/Export</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3 id="totalServices">0</h3>
+                    <p>Total Services</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="paidServices">0</h3>
+                    <p>Paid Services</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="freeServices">0</h3>
+                    <p>Free Services</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="includedServices">0</h3>
+                    <p>Included Services</p>
+                </div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #c6f6d5;"></div>
+                    <span><strong>Free/Included:</strong> No additional charge</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #fed7d7;"></div>
+                    <span><strong>Paid Services:</strong> Additional charge applies</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #feebc8;"></div>
+                    <span><strong>TBA:</strong> Pricing to be determined</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #e9d8fd;"></div>
+                    <span><strong>Alberta PCN:</strong> Specialized tier</span>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="servicesTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" onclick="sortTable('service')">Service Name</th>
+                            <th class="sortable" onclick="sortTable('tiers')">Available Tiers</th>
+                            <th class="sortable" onclick="sortTable('price')">Price</th>
+                            <th class="sortable" onclick="sortTable('time')">Time Estimate</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <h3>No services found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>CHR Analytics Services Catalog</strong></p>
+            <p>For questions or to request services, please contact your TELUS Healthcare Solutions representative.</p>
+            <p style="font-size: 0.9em; margin-top: 15px;">© 2026 TELUS Healthcare Solutions. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        const servicesData = [
+            { service: "Bug or Error", tiers: ["Standard", "Advanced", "Enterprise"], price: "$0", priceType: "free", time: "60-120 min", description: "Mark as Bug/Error in subject line" },
+            { service: "Dashboard Issues", tiers: ["Standard", "Advanced", "Enterprise"], price: "$0", priceType: "free", time: "15-30 min", description: "Filter not working, date range issues, data display errors, loading errors" },
+            { service: "Minor Dashboard Updates", tiers: ["Standard", "Advanced", "Enterprise"], price: "$0", priceType: "free", time: "15-60 min", description: "Update titles, labels, descriptions, fix typos, simple additions" },
+            { service: "Access & Permissions", tiers: ["Standard", "Advanced", "Enterprise"], price: "$0", priceType: "free", time: "15-60 min", description: "User access issues, permission levels, login troubleshooting" },
+            { service: "Consultation Request", tiers: ["Standard", "Advanced", "Enterprise"], price: "$300", priceType: "paid", time: "60-90 min", description: "Analytics capabilities, requirements analysis, dashboard requirements" },
+            { service: "New Simple Custom Dashboard", tiers: ["Standard", "Advanced", "Enterprise"], price: "$400", priceType: "paid", time: "60-120 min", description: "New dashboard, max 9 tiles, max 29 columns, one page requirement" },
+            { service: "New Complex Custom Dashboard", tiers: ["Standard", "Advanced", "Enterprise"], price: "$1,000", priceType: "paid", time: "240-360 min", description: "New dashboard, 10+ tiles, 30+ columns, multiple pages" },
+            { service: "Modify Existing Dashboard", tiers: ["Standard", "Advanced", "Enterprise"], price: "$200", priceType: "paid", time: "30-60 min", description: "Edit tiles, add new tiles, one page of requirements" },
+            { service: "Complex Modifications to Existing Dashboard", tiers: ["Standard", "Advanced", "Enterprise"], price: "$600", priceType: "paid", time: "120-240 min", description: "LookML changes, multiple pages, complex adjustments" },
+            { service: "Looker Additional User Request", tiers: ["Enterprise", "Alberta PCN"], price: "$30 CAD/month", priceType: "paid", time: "Ongoing", description: "Additional charge for more than 2 users per month" },
+            { service: "Swap Looker Licensed User", tiers: ["Enterprise", "Alberta PCN"], price: "Included", priceType: "included", time: "Varies", description: "Disable user and move/add another user" },
+            { service: "Build Your Own Dashboard", tiers: ["Advanced", "Enterprise", "Alberta PCN"], price: "Included", priceType: "included", time: "TBA", description: "Clients able to build their own dashboards" },
+            { service: "Edit Your Own Dashboard", tiers: ["Advanced", "Enterprise", "Alberta PCN"], price: "Included", priceType: "included", time: "TBA", description: "Clients able to edit their own custom dashboards" },
+            { service: "Multi-Domain Reporting", tiers: ["Alberta PCN"], price: "Included", priceType: "included", time: "TBA", description: "Report for multiple domains and manage dashboards between clients" },
+            { service: "Looker Training", tiers: ["Enterprise", "Alberta PCN"], price: "Included", priceType: "included", time: "60-90 min", description: "Training on Looker UI, dashboard management, folder organization" },
+            { service: "CHR Analytics Training", tiers: ["Advanced", "Enterprise", "Alberta PCN"], price: "Included", priceType: "included", time: "60-90 min", description: "Training on editing and building dashboards, Explores, Dimensions" },
+            { service: "Automated Scheduled Reports", tiers: ["Advanced", "Enterprise", "Alberta PCN"], price: "Included", priceType: "included", time: "TBA", description: "Create reports scheduled for export, generally to SFTP" },
+            { service: "New Implementation", tiers: ["Standard", "Advanced", "Enterprise"], price: "Included", priceType: "included", time: "Varies", description: "2 Custom Dashboards for Standard, 6 for Complex clients" }
+        ];
+
+        let currentSort = { column: null, direction: 'asc' };
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            const noResults = document.getElementById('noResults');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                updateStats(data);
+                return;
+            }
+
+            noResults.style.display = 'none';
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td class="service-name">${item.service}</td>
+                    <td>
+                        ${item.tiers.map(tier => {
+                            let tierClass = 'tier-standard';
+                            if (tier === 'Advanced') tierClass = 'tier-advanced';
+                            if (tier === 'Enterprise') tierClass = 'tier-enterprise';
+                            if (tier === 'Alberta PCN') tierClass = 'tier-pcn';
+                            return `<span class="tier-badge ${tierClass}">${tier}</span>`;
+                        }).join('')}
+                    </td>
+                    <td>
+                        <span class="price-badge price-${item.priceType}">${item.price}</span>
+                    </td>
+                    <td class="time-estimate">${item.time}</td>
+                    <td>${item.description}</td>
+                </tr>
+            `).join('');
+
+            updateStats(data);
+        }
+
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const tierFilter = document.getElementById('tierFilter').value;
+            const priceFilter = document.getElementById('priceFilter').value;
+
+            let filtered = servicesData.filter(item => {
+                const matchesSearch = item.service.toLowerCase().includes(search) ||
+                                    item.description.toLowerCase().includes(search);
+                const matchesTier = !tierFilter || item.tiers.includes(tierFilter);
+                const matchesPrice = !priceFilter || item.priceType === priceFilter;
+
+                return matchesSearch && matchesTier && matchesPrice;
+            });
+
+            renderTable(filtered);
+        }
+
+        function sortTable(column) {
+            const headers = document.querySelectorAll('th.sortable');
+            headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+
+            const sorted = [...servicesData].sort((a, b) => {
+                let aVal, bVal;
+
+                if (column === 'service') {
+                    aVal = a.service.toLowerCase();
+                    bVal = b.service.toLowerCase();
+                } else if (column === 'price') {
+                    aVal = parseFloat(a.price.replace(/[^0-9.-]/g, '')) || 0;
+                    bVal = parseFloat(b.price.replace(/[^0-9.-]/g, '')) || 0;
+                } else if (column === 'tiers') {
+                    aVal = a.tiers.join(',');
+                    bVal = b.tiers.join(',');
+                } else if (column === 'time') {
+                    aVal = a.time;
+                    bVal = b.time;
+                }
+
+                const comparison = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+                return currentSort.direction === 'asc' ? comparison : -comparison;
+            });
+
+            const header = Array.from(headers).find(h => h.textContent.toLowerCase().includes(column));
+            if (header) {
+                header.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+            }
+
+            renderTable(sorted);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('tierFilter').value = '';
+            document.getElementById('priceFilter').value = '';
+            currentSort = { column: null, direction: 'asc' };
+            renderTable(servicesData);
+        }
+
+        function updateStats(data) {
+            const total = data.length;
+            const paid = data.filter(d => d.priceType === 'paid').length;
+            const free = data.filter(d => d.priceType === 'free').length;
+            const included = data.filter(d => d.priceType === 'included').length;
+
+            document.getElementById('totalServices').textContent = total;
+            document.getElementById('paidServices').textContent = paid;
+            document.getElementById('freeServices').textContent = free;
+            document.getElementById('includedServices').textContent = included;
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+        document.getElementById('tierFilter').addEventListener('change', filterTable);
+        document.getElementById('priceFilter').addEventListener('change', filterTable);
+
+        renderTable(servicesData);
+    </script>
 </body>
 </html>
