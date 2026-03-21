@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Pricing & Services Matrix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .pricing-model {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pricing-model h2 {
+            color: #1e40af;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .pricing-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .pricing-info-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .pricing-info-item.standard {
+            border-left-color: #dc2626;
+        }
+
+        .pricing-info-item.included {
+            border-left-color: #10b981;
+        }
+
+        .pricing-info-item h4 {
+            color: #1e40af;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .pricing-info-item.standard h4 {
+            color: #dc2626;
+        }
+
+        .pricing-info-item.included h4 {
+            color: #10b981;
+        }
+
+        .pricing-info-item p {
+            color: #4b5563;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .controls {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.95em;
+        }
+
+        .control-group input {
+            padding: 10px 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: #2d3748;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .service-row {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .service-row:hover {
+            background: #f0f4ff !important;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expand-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .price-standard {
+            background: #fee2e2;
+            color: #742a2a;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .price-included {
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .price-na {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .description-row {
+            display: none;
+            background: #f9fafb;
+        }
+
+        .description-row.show {
+            display: table-row;
+        }
+
+        .description-cell {
+            padding: 20px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .description-cell ul {
+            margin: 10px 0 10px 20px;
+        }
+
+        .description-cell li {
+            margin-bottom: 5px;
+        }
+
+        .legend {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 2px;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+            font-size: 0.75em;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+
+            .control-group {
+                width: 100%;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Analytics Pricing & Services Matrix</h1>
+            <p>Complete pricing reference for all tiers</p>
+        </div>
+
+        <div class="content">
+            <!-- PRICING MODEL EXPLANATION -->
+            <div class="pricing-model">
+                <h2>📊 Pricing Model Overview</h2>
+                
+                <div class="pricing-info">
+                    <div class="pricing-info-item standard">
+                        <h4>💳 Standard Tier</h4>
+                        <p><strong>PAYS per service</strong> - Charged for each service used. Prices shown in red below.</p>
+                    </div>
+                    <div class="pricing-info-item included">
+                        <h4>✅ Advanced Tier</h4>
+                        <p><strong>ALL INCLUDED</strong> - Services included in package hours. No additional charges.</p>
+                    </div>
+                    <div class="pricing-info-item included">
+                        <h4>✅ Enterprise Tier</h4>
+                        <p><strong>ALL INCLUDED</strong> - Services included in package hours. No additional charges.</p>
+                    </div>
+                    <div class="pricing-info-item included">
+                        <h4>✅ Alberta PCN</h4>
+                        <p><strong>ALL INCLUDED</strong> - Services included in package hours. No additional charges.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats">
+                <div class="stat-card">
+                    <h3 id="totalServices">0</h3>
+                    <p>Total Services</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="paidServices">0</h3>
+                    <p>Paid (Standard)</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="includedServices">0</h3>
+                    <p>Included</p>
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="controls">
+                <div class="control-group">
+                    <label for="searchInput">🔍 Search Services</label>
+                    <input type="text" id="searchInput" placeholder="Dashboard, Looker, Training...">
+                </div>
+                <button class="btn btn-primary" onclick="resetFilters()">↻ Reset</button>
+            </div>
+
+            <!-- LEGEND -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #fee2e2;"></div>
+                    <span><strong>Red:</strong> Standard tier pays this amount</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #dcfce7;"></div>
+                    <span><strong>Green:</strong> Included in package hours</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #f3f4f6;"></div>
+                    <span><strong>Gray:</strong> Not available for this tier</span>
+                </div>
+            </div>
+
+            <!-- PRICING TABLE -->
+            <div class="table-wrapper">
+                <table id="pricingTable">
+                    <thead>
+                        <tr>
+                            <th>Service Name</th>
+                            <th>Standard</th>
+                            <th>Advanced</th>
+                            <th>Enterprise</th>
+                            <th>Alberta PCN</th>
+                            <th>Time Estimate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const servicesData = [
+            { service: "Bug or Error", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-120 min", description: "Mark as Bug/Error in subject line. Report any technical issues or errors encountered in the system." },
+            { service: "Dashboard Issues", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "15-30 min", description: "Fix broken filters, date ranges, or data display issues. Examples: Filter not working correctly, Date range showing wrong period, Data not displaying properly, Dashboard loading errors." },
+            { service: "Minor Dashboard Updates", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "15-60 min", description: "Quick updates to dashboard titles, labels, or descriptions. Examples: Update dashboard title, Change chart labels, Update descriptions, Fix typos, Simple additions (1 column, 1 filter)." },
+            { service: "Access & Permissions", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "15-60 min", description: "Troubleshoot dashboard access issues or answer permissions questions. Examples: User can't see a dashboard, Explain permission levels, Grant/revoke access, Troubleshoot login issues." },
+            { service: "Consultation Request", standard: "$300", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-90 min", description: "In-depth consultation on analytics capabilities and requirements analysis. Includes: What analytics is capable of, Deeper requirements analysis, Dashboard requirements and data points, Filter recommendations." },
+            { service: "New Simple Custom Dashboard", standard: "$400", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-120 min", description: "Create a new custom dashboard with basic requirements. Specifications: New dashboard that does not exist currently, Custom requirements, Maximum 9 dashboard tiles, Maximum 29 dashboard columns, One page requirement." },
+            { service: "New Complex Custom Dashboard", standard: "$1,000", advanced: "Included", enterprise: "Included", alberta: "Included", time: "240-360 min", description: "Create a new custom dashboard with complex requirements. Specifications: New dashboard that does not exist currently, Custom requirements, 10 or more dashboard tiles, 30 or more dashboard columns, Multiple pages of requirements." },
+            { service: "Modify Existing Dashboard", standard: "$200", advanced: "Included", enterprise: "Included", alberta: "Included", time: "30-60 min", description: "Edit and modify an existing dashboard. Examples: Editing existing tiles to include more information, Adding new dashboard tiles to an existing dashboard, One page of requirements." },
+            { service: "Complex Modifications to Existing Dashboard", standard: "$600", advanced: "Included", enterprise: "Included", alberta: "Included", time: "120-240 min", description: "Complex edits to existing dashboards requiring advanced changes. Examples: Edits requiring LookML changes to accommodate requirements, Multiple pages of requirements, Complex adjustments to existing dashboard tiles." },
+            { service: "Looker Additional User Request", standard: "N/A", advanced: "N/A", enterprise: "$30 CAD/mo", alberta: "$30 CAD/mo", time: "Ongoing", description: "Additional charge for Looker users beyond the standard 2 included users. Cost: $30 CAD per month per additional user. Available for: Enterprise and Alberta PCN tiers." },
+            { service: "Swap Looker Licensed User", standard: "N/A", advanced: "N/A", enterprise: "Included", alberta: "Included", time: "Varies", description: "Disable one user and move/add another Looker licensed user. Useful for: Replacing departing staff, Changing user access, Managing license allocation." },
+            { service: "Build Your Own Dashboard", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "TBA", description: "Clients able to build their own dashboards for analytics using the dashboard builder interface. Empowers users to create custom analytics without analyst support." },
+            { service: "Edit Your Own Dashboard", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "TBA", description: "Clients able to edit their own custom dashboards independently. Allows users to maintain and update dashboards without requesting analyst support." },
+            { service: "Multi-Domain Reporting", standard: "N/A", advanced: "N/A", enterprise: "N/A", alberta: "Included", time: "TBA", description: "Ability for one user to report for multiple domains and manage dashboards between multiple clients. Exclusive to Alberta PCN tier for cross-clinic reporting." },
+            { service: "Looker Training", standard: "N/A", advanced: "N/A", enterprise: "Included", alberta: "Included", time: "60-90 min", description: "Training on Looker UI and dashboard management. Topics: Looker UI navigation, How to move dashboards, Manage folders, Dashboard organization best practices." },
+            { service: "CHR Analytics Training", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-90 min", description: "Training on editing and building dashboards in CHR Analytics. Topics: Basics of editing dashboards, Building dashboards, Explores and Dimensions, Data model overview." },
+            { service: "Automated Scheduled Reports", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "TBA", description: "Create separate reports that can be scheduled for automatic export. Typically exported to SFTP or email on a recurring schedule." },
+            { service: "New Implementation", standard: "Included", advanced: "Included", enterprise: "Included", alberta: "Included", time: "Varies", description: "Initial setup and dashboard creation during implementation. Standard: 2 custom dashboards included, Complex clients (35+ RGU): 6 custom dashboards included." }
+        ];
+
+        function getPriceClass(price) {
+            if (price === "Included") return "price-included";
+            if (price === "N/A") return "price-na";
+            return "price-standard";
+        }
+
+        function toggleDescription(index) {
+            const descRow = document.getElementById(`desc-${index}`);
+            const icon = document.getElementById(`icon-${index}`);
+            
+            descRow.classList.toggle('show');
+            icon.classList.toggle('expanded');
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+
+            tbody.innerHTML = data.map((item, index) => `
+                <tr class="service-row" onclick="toggleDescription(${index})">
+                    <td class="service-name">
+                        <span class="expand-icon" id="icon-${index}">▼</span>
+                        ${item.service}
+                    </td>
+                    <td><span class="${getPriceClass(item.standard)}">${item.standard}</span></td>
+                    <td><span class="${getPriceClass(item.advanced)}">${item.advanced}</span></td>
+                    <td><span class="${getPriceClass(item.enterprise)}">${item.enterprise}</span></td>
+                    <td><span class="${getPriceClass(item.alberta)}">${item.alberta}</span></td>
+                    <td>${item.time}</td>
+                </tr>
+                <tr class="description-row" id="desc-${index}">
+                    <td colspan="6" class="description-cell">
+                        <strong>Description:</strong> ${item.description}
+                    </td>
+                </tr>
+            `).join('');
+
+            updateStats(data);
+        }
+
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = servicesData.filter(item => {
+                return item.service.toLowerCase().includes(search) || 
+                       item.description.toLowerCase().includes(search);
+            });
+
+            renderTable(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            renderTable(servicesData);
+        }
+
+        function updateStats(data) {
+            const total = data.length;
+            const paid = data.filter(d => d.standard !== "N/A" && d.standard !== "Included").length;
+            const included = data.filter(d => d.standard === "Included" || d.advanced === "Included").length;
+
+            document.getElementById('totalServices').textContent = total;
+            document.getElementById('paidServices').textContent = paid;
+            document.getElementById('includedServices').textContent = included;
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+
+        renderTable(servicesData);
+    </script>
+</body>
+</html>
