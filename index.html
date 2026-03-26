@@ -1,540 +1,1272 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHR Analytics - Pricing & Services Matrix</title>
+    <title>Analytics Service Catalog</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #4B0082 0%, #6B2D5C 100%);
+            background: #f0f4f8;
             min-height: 100vh;
-            padding: 20px;
         }
 
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
+        /* HEADER */
         .header {
-            background: linear-gradient(135deg, #4B0082 0%, #6B2D5C 100%);
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
             color: white;
-            padding: 40px;
-            text-align: center;
+            padding: 32px 40px;
         }
+        .header-inner { max-width: 1400px; margin: 0 auto; }
+        .header h1 { font-size: 2em; font-weight: 700; margin-bottom: 6px; }
+        .header p { opacity: 0.85; font-size: 1em; }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
+        /* WORKFLOW BANNER */
+        .workflow-banner {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e0f2fe 100%);
+            border-bottom: 2px solid #bfdbfe;
+            padding: 16px 40px;
         }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .pricing-model {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border: 2px solid #4B0082;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-
-        .pricing-model h2 {
-            color: #4B0082;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-
-        .pricing-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .pricing-info-item {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #4B0082;
-        }
-
-        .pricing-info-item.standard {
-            border-left-color: #dc2626;
-        }
-
-        .pricing-info-item.included {
-            border-left-color: #10b981;
-        }
-
-        .pricing-info-item h4 {
-            color: #4B0082;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .pricing-info-item.standard h4 {
-            color: #dc2626;
-        }
-
-        .pricing-info-item.included h4 {
-            color: #10b981;
-        }
-
-        .pricing-info-item p {
-            color: #4b5563;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        .controls {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
+        .workflow-inner {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #1e40af;
+            white-space: nowrap;
+        }
+        .workflow-step .step-num {
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+        .workflow-arrow {
+            color: #93c5fd;
+            font-size: 1.1em;
+            margin: 0 10px;
+        }
+
+        /* MAIN LAYOUT */
+        .main-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+            padding: 24px 20px;
+            align-items: start;
+        }
+
+        /* SEARCH & FILTERS */
+        .search-filter-bar {
+            background: white;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            display: flex;
+            gap: 16px;
             align-items: flex-end;
             flex-wrap: wrap;
         }
+        .search-group {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .search-group label {
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .search-group input {
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95em;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-group input:focus { border-color: #3b82f6; }
 
-        .control-group {
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .filter-group label {
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-pill {
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            font-size: 0.82em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4b5563;
+        }
+        .filter-pill:hover { border-color: #3b82f6; color: #3b82f6; }
+        .filter-pill.active { background: #3b82f6; border-color: #3b82f6; color: white; }
+        .filter-pill.quick.active { background: #0ea5e9; border-color: #0ea5e9; }
+        .filter-pill.standard.active { background: #6366f1; border-color: #6366f1; }
+        .filter-pill.complex.active { background: #f59e0b; border-color: #f59e0b; }
+        .filter-pill.addon.active { background: #a855f7; border-color: #a855f7; }
+        .filter-pill.selfservice.active { background: #10b981; border-color: #10b981; }
+
+        /* SECTION HEADERS */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+        }
+        .section-header .section-icon { font-size: 1.5em; }
+        .section-header h2 { font-size: 1.15em; font-weight: 700; }
+        .section-header .section-count {
+            margin-left: auto;
+            font-size: 0.78em;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        .section-header .section-desc {
+            font-size: 0.8em;
+            font-weight: 400;
+            opacity: 0.75;
+            margin-left: 4px;
+        }
+
+        .section-quick .section-header { border-color: #0ea5e9; color: #0369a1; }
+        .section-quick .section-header .section-count { background: #e0f2fe; color: #0369a1; }
+
+        .section-standard .section-header { border-color: #6366f1; color: #4338ca; }
+        .section-standard .section-header .section-count { background: #e0e7ff; color: #4338ca; }
+
+        .section-complex .section-header { border-color: #f59e0b; color: #b45309; }
+        .section-complex .section-header .section-count { background: #fef3c7; color: #b45309; }
+
+        .section-addon .section-header { border-color: #a855f7; color: #7e22ce; }
+        .section-addon .section-header .section-count { background: #f3e8ff; color: #7e22ce; }
+
+        .section-selfservice .section-header { border-color: #10b981; color: #065f46; }
+        .section-selfservice .section-header .section-count { background: #d1fae5; color: #065f46; }
+
+        /* SERVICE CARDS GRID */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        /* SERVICE CARD */
+        .service-card {
+            background: white;
+            border-radius: 14px;
+            border: 2px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .service-card.selected {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15), 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card-top-bar {
+            height: 5px;
+        }
+        .quick .card-top-bar { background: #0ea5e9; }
+        .standard-svc .card-top-bar { background: #6366f1; }
+        .complex .card-top-bar { background: #f59e0b; }
+        .addon .card-top-bar { background: #a855f7; }
+        .selfservice .card-top-bar { background: #10b981; }
+
+        .card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+
+        .card-badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-quick { background: #e0f2fe; color: #0369a1; }
+        .badge-standard { background: #e0e7ff; color: #4338ca; }
+        .badge-complex { background: #fef3c7; color: #b45309; }
+        .badge-addon { background: #f3e8ff; color: #7e22ce; }
+        .badge-selfservice { background: #d1fae5; color: #065f46; }
+        .badge-ba { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        .badge-time { background: #f3f4f6; color: #374151; }
+
+        .card-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.85em;
+            color: #6b7280;
+            line-height: 1.55;
+            margin-bottom: 12px;
+            flex: 1;
+        }
+
+        .card-expand-btn {
+            background: none;
+            border: none;
+            color: #3b82f6;
+            font-size: 0.8em;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-align: left;
+        }
+        .card-expand-btn:hover { color: #1d4ed8; }
+        .expand-arrow { transition: transform 0.25s; display: inline-block; }
+        .expand-arrow.open { transform: rotate(180deg); }
+
+        .card-details {
+            display: none;
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 0.82em;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        .card-details.show { display: block; }
+        .card-details ul { margin: 6px 0 0 16px; }
+        .card-details li { margin-bottom: 3px; }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            padding: 12px 18px 14px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .btn-select {
+            flex: 1;
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: 2px solid #3b82f6;
+            background: white;
+            color: #3b82f6;
+            font-weight: 700;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-select:hover { background: #3b82f6; color: white; }
+        .btn-select.selected-btn { background: #3b82f6; color: white; }
+        .btn-select.selected-btn:hover { background: #dc2626; border-color: #dc2626; }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9ca3af;
+            font-size: 0.95em;
+        }
+
+        /* ===== RIGHT PANEL ===== */
+        .summary-panel {
+            position: sticky;
+            top: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 18px 20px;
+        }
+        .panel-header h3 { font-size: 1em; font-weight: 700; margin-bottom: 2px; }
+        .panel-header p { font-size: 0.78em; opacity: 0.8; }
+
+        .panel-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .panel-stat {
+            background: #f9fafb;
+            padding: 12px 16px;
+            text-align: center;
+        }
+        .panel-stat .stat-val { font-size: 1.4em; font-weight: 700; color: #1f2937; }
+        .panel-stat .stat-label { font-size: 0.72em; color: #6b7280; font-weight: 600; text-transform: uppercase; }
+
+        .panel-body { padding: 16px; }
+
+        .selected-list {
+            min-height: 80px;
+            max-height: 260px;
+            overflow-y: auto;
+            margin-bottom: 14px;
+        }
+
+        .selected-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 10px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.82em;
+        }
+        .selected-item .item-name { flex: 1; font-weight: 600; color: #1e40af; line-height: 1.3; }
+        .selected-item .item-time { color: #6b7280; font-size: 0.9em; margin-top: 2px; }
+        .selected-item .remove-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.1em;
+            padding: 0;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .selected-item .remove-btn:hover { color: #dc2626; }
+
+        .empty-selection {
+            text-align: center;
+            padding: 24px 10px;
+            color: #9ca3af;
+            font-size: 0.82em;
+            border: 2px dashed #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .ba-warning {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 0.8em;
+            color: #991b1b;
+            display: none;
+        }
+        .ba-warning.show { display: block; }
+        .ba-warning strong { display: block; margin-bottom: 2px; }
+
+        .next-steps {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 0.78em;
+            color: #166534;
+        }
+        .next-steps strong { display: block; margin-bottom: 6px; font-size: 1.05em; }
+        .next-steps ol { margin-left: 14px; }
+        .next-steps li { margin-bottom: 3px; line-height: 1.4; }
+
+        .panel-actions {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-
-        .control-group label {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.95em;
-        }
-
-        .control-group input {
-            padding: 10px 15px;
-            border: 2px solid #cbd5e0;
-            border-radius: 8px;
-            font-size: 1em;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95em;
-        }
-
-        .btn-primary {
-            background: #4B0082;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #3a0066;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        table {
+        .btn-submit {
             width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        thead {
-            background: #2d3748;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: white;
-            position: sticky;
-            top: 0;
-        }
-
-        th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e2e8f0;
-            color: #4a5568;
-        }
-
-        tbody tr:hover {
-            background: #f7fafc;
-        }
-
-        .service-row {
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95em;
             cursor: pointer;
-            user-select: none;
+            transition: all 0.2s;
         }
-
-        .service-row:hover {
-            background: #f0f4ff !important;
-        }
-
-        .service-name {
-            font-weight: 600;
-            color: #2d3748;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .expand-icon {
-            display: inline-block;
-            transition: transform 0.3s ease;
-            font-size: 1.2em;
-        }
-
-        .expand-icon.expanded {
-            transform: rotate(180deg);
-        }
-
-        .price-standard {
-            background: #fee2e2;
-            color: #742a2a;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.85em;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .price-included {
-            background: #dcfce7;
-            color: #166534;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.85em;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .price-na {
-            background: #f3f4f6;
+        .btn-submit:hover:not(:disabled) { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); transform: translateY(-1px); }
+        .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .btn-clear {
+            width: 100%;
+            padding: 9px;
+            background: white;
             color: #6b7280;
-            padding: 4px 8px;
-            border-radius: 6px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-weight: 600;
             font-size: 0.85em;
-            text-align: center;
-            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
         }
+        .btn-clear:hover { border-color: #dc2626; color: #dc2626; }
 
-        .description-row {
+        /* MODAL */
+        .modal-overlay {
             display: none;
-            background: #f9fafb;
-        }
-
-        .description-row.show {
-            display: table-row;
-        }
-
-        .description-cell {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            color: #4a5568;
-            line-height: 1.6;
         }
-
-        .description-cell ul {
-            margin: 10px 0 10px 20px;
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 580px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-
-        .description-cell li {
-            margin-bottom: 5px;
-        }
-
-        .legend {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 12px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .legend-item {
+        .modal-header {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 18px 18px 0 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
         }
-
-        .legend-box {
-            width: 30px;
-            height: 30px;
-            border-radius: 6px;
-            flex-shrink: 0;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #4B0082 0%, #6B2D5C 100%);
+        .modal-header h2 { font-size: 1.2em; }
+        .modal-close {
+            background: rgba(255,255,255,0.15);
+            border: none;
             color: white;
-            padding: 8px 10px;
-            border-radius: 8px;
-            text-align: center;
-            min-height: 80px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1em;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
+        .modal-close:hover { background: rgba(255,255,255,0.25); }
+        .modal-body { padding: 28px; }
 
-        .stat-card h3 {
-            font-size: 1.4em;
-            margin-bottom: 2px;
+        .modal-services-list {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+        }
+        .modal-services-list h4 { font-size: 0.85em; color: #0369a1; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+        .modal-service-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88em;
+            color: #1e40af;
+            font-weight: 600;
+            padding: 4px 0;
         }
 
-        .stat-card p {
-            opacity: 0.9;
-            font-size: 0.75em;
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-group label .required { color: #dc2626; }
+        .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+        .form-group textarea:focus, .form-group select:focus { border-color: #3b82f6; }
+        .form-group .hint { font-size: 0.75em; color: #9ca3af; margin-top: 4px; }
+
+        .urgency-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .urgency-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .urgency-option:hover { border-color: #3b82f6; }
+        .urgency-option.selected { border-color: #3b82f6; background: #eff6ff; }
+        .urgency-option .urgency-label { font-size: 0.82em; font-weight: 700; color: #374151; display: block; }
+        .urgency-option .urgency-desc { font-size: 0.72em; color: #6b7280; display: block; margin-top: 2px; }
+
+        .modal-footer {
+            padding: 16px 28px 24px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn-modal-cancel {
+            flex: 1;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        .btn-modal-cancel:hover { border-color: #9ca3af; }
+        .btn-modal-submit {
+            flex: 2;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-modal-submit:hover { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .btn-modal-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* SUCCESS MODAL */
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .success-modal.show { display: flex; }
+        .success-box {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .success-icon { font-size: 3.5em; margin-bottom: 16px; }
+        .success-box h2 { font-size: 1.4em; color: #1f2937; margin-bottom: 10px; }
+        .success-box p { color: #6b7280; font-size: 0.9em; line-height: 1.6; margin-bottom: 20px; }
+        .btn-success-close {
+            padding: 12px 28px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.95em;
         }
 
-        @media (max-width: 768px) {
-            .controls {
-                flex-direction: column;
-            }
+        /* SECTION WRAPPER */
+        .catalog-section { margin-bottom: 8px; }
+        .section-hidden { display: none; }
 
-            .control-group {
-                width: 100%;
-            }
-
-            table {
-                font-size: 0.9em;
-            }
-
-            th, td {
-                padding: 10px;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .content {
-                padding: 20px;
-            }
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .summary-panel { position: static; }
+            .header { padding: 24px 20px; }
+            .header h1 { font-size: 1.5em; }
+            .workflow-banner { padding: 12px 20px; }
+            .workflow-step { font-size: 0.75em; }
+        }
+        @media (max-width: 600px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .workflow-inner { gap: 6px; }
+            .workflow-arrow { margin: 0 4px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💰 CHR Analytics - Pricing & Services Matrix</h1>
-            <p>Complete pricing reference for all tiers</p>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-inner">
+        <h1>📊 Analytics Service Catalog</h1>
+        <p>Browse available services, build your request, and submit to our analytics team</p>
+    </div>
+</div>
+
+<!-- WORKFLOW BANNER -->
+<div class="workflow-banner">
+    <div class="workflow-inner">
+        <div class="workflow-step">
+            <span class="step-num">1</span>
+            Browse & Select Services
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">2</span>
+            Submit Your Request
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">3</span>
+            Care Team Reviews & Quotes
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">4</span>
+            BA Review (if complex)
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">5</span>
+            Analytics Team Builds
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">6</span>
+            You Receive Results ✓
+        </div>
+    </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+    <!-- LEFT: CATALOG -->
+    <div class="catalog-area">
+
+        <!-- SEARCH & FILTERS -->
+        <div class="search-filter-bar">
+            <div class="search-group">
+                <label>🔍 Search Services</label>
+                <input type="text" id="searchInput" placeholder="Dashboard, Training, Bug fix...">
+            </div>
+            <div class="filter-group">
+                <label>Filter by Type</label>
+                <div class="filter-pills">
+                    <button class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">All</button>
+                    <button class="filter-pill quick" data-filter="quick" onclick="setFilter('quick', this)">⚡ Quick Fixes</button>
+                    <button class="filter-pill standard" data-filter="standard" onclick="setFilter('standard', this)">🔧 Standard</button>
+                    <button class="filter-pill complex" data-filter="complex" onclick="setFilter('complex', this)">⚙️ Complex</button>
+                    <button class="filter-pill addon" data-filter="addon" onclick="setFilter('addon', this)">➕ Add-ons</button>
+                    <button class="filter-pill selfservice" data-filter="selfservice" onclick="setFilter('selfservice', this)">🎁 Self-Service</button>
+                </div>
+            </div>
         </div>
 
-        <div class="content">
-            <!-- PRICING MODEL EXPLANATION -->
-            <div class="pricing-model">
-                <h2>📊 Pricing Model Overview</h2>
-                
-                <div class="pricing-info">
-                    <div class="pricing-info-item standard">
-                        <h4>💳 Standard Tier</h4>
-                        <p><strong>PAYS per service</strong> - Charged for each service used. Prices shown in red below.</p>
-                    </div>
-                    <div class="pricing-info-item included">
-                        <h4>✅ Advanced Tier</h4>
-                        <p><strong>ALL INCLUDED</strong> - Services included in package hours. No additional charges.</p>
-                    </div>
-                    <div class="pricing-info-item included">
-                        <h4>✅ Enterprise Tier</h4>
-                        <p><strong>ALL INCLUDED</strong> - Services included in package hours. No additional charges.</p>
-                    </div>
-                    <div class="pricing-info-item included">
-                        <h4>✅ Alberta PCN</h4>
-                        <p><strong>ALL INCLUDED</strong> - Services included in package hours. No additional charges.</p>
-                    </div>
+        <!-- SECTIONS -->
+        <div id="catalogContent"></div>
+
+    </div>
+
+    <!-- RIGHT: SUMMARY PANEL -->
+    <div class="summary-panel">
+        <div class="panel-header">
+            <h3>📋 Your Request</h3>
+            <p>Select services from the catalog</p>
+        </div>
+        <div class="panel-stats">
+            <div class="panel-stat">
+                <div class="stat-val" id="statCount">0</div>
+                <div class="stat-label">Services</div>
+            </div>
+            <div class="panel-stat">
+                <div class="stat-val" id="statHours">0</div>
+                <div class="stat-label">Est. Hours</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div id="selectedList" class="selected-list">
+                <div class="empty-selection">
+                    <div style="font-size:1.8em;margin-bottom:6px;">🛒</div>
+                    No services selected yet.<br>Browse the catalog and click <strong>Select</strong>.
                 </div>
             </div>
 
-            <!-- STATS -->
-            <div class="stats">
-                <div class="stat-card">
-                    <h3 id="totalServices">0</h3>
-                    <p>Total Services</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="paidServices">0</h3>
-                    <p>Paid (Standard)</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="includedServices">0</h3>
-                    <p>Included</p>
-                </div>
+            <div class="ba-warning" id="baWarning">
+                <strong>⚠️ BA Review Required</strong>
+                One or more of your selected services requires a Business Analyst review before scheduling. This may add 1–2 business days to your timeline.
             </div>
 
-            <!-- CONTROLS -->
-            <div class="controls">
-                <div class="control-group">
-                    <label for="searchInput">🔍 Search Services</label>
-                    <input type="text" id="searchInput" placeholder="Dashboard, Looker, Training...">
-                </div>
-                <button class="btn btn-primary" onclick="resetFilters()">↻ Reset</button>
+            <div class="next-steps">
+                <strong>📌 What Happens Next</strong>
+                <ol>
+                    <li>Submit your request with details</li>
+                    <li>Care team reviews & determines scope</li>
+                    <li>BA reviews complex items if needed</li>
+                    <li>Analytics team schedules & builds</li>
+                    <li>You receive your deliverable ✓</li>
+                </ol>
             </div>
 
-            <!-- LEGEND -->
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-box" style="background: #fee2e2;"></div>
-                    <span><strong>Red:</strong> Standard tier pays this amount</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-box" style="background: #dcfce7;"></div>
-                    <span><strong>Green:</strong> Included in package hours</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-box" style="background: #f3f4f6;"></div>
-                    <span><strong>Gray:</strong> Not available for this tier</span>
-                </div>
-            </div>
-
-            <!-- PRICING TABLE -->
-            <div class="table-wrapper">
-                <table id="pricingTable">
-                    <thead>
-                        <tr>
-                            <th>Service Name</th>
-                            <th>Standard</th>
-                            <th>Advanced</th>
-                            <th>Enterprise</th>
-                            <th>Alberta PCN</th>
-                            <th>Time Estimate</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                    </tbody>
-                </table>
+            <div class="panel-actions">
+                <button class="btn-submit" id="submitBtn" disabled onclick="openModal()">
+                    Submit Request →
+                </button>
+                <button class="btn-clear" onclick="clearAll()">✕ Clear All</button>
             </div>
         </div>
     </div>
 
-    <script>
-        const servicesData = [
-            { service: "Bug or Error", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-120 min", description: "Mark as Bug/Error in subject line. Report any technical issues or errors encountered in the system." },
-            { service: "Dashboard Issues", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "15-30 min", description: "Fix broken filters, date ranges, or data display issues. Examples: Filter not working correctly, Date range showing wrong period, Data not displaying properly, Dashboard loading errors." },
-            { service: "Minor Dashboard Updates", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "15-60 min", description: "Quick updates to dashboard titles, labels, or descriptions. Examples: Update dashboard title, Change chart labels, Update descriptions, Fix typos, Simple additions (1 column, 1 filter)." },
-            { service: "Access & Permissions", standard: "$0", advanced: "Included", enterprise: "Included", alberta: "Included", time: "15-60 min", description: "Troubleshoot dashboard access issues or answer permissions questions. Examples: User can't see a dashboard, Explain permission levels, Grant/revoke access, Troubleshoot login issues." },
-            { service: "Consultation Request", standard: "$300", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-90 min", description: "In-depth consultation on analytics capabilities and requirements analysis. Includes: What analytics is capable of, Deeper requirements analysis, Dashboard requirements and data points, Filter recommendations." },
-            { service: "New Simple Custom Dashboard", standard: "$400", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-120 min", description: "Create a new custom dashboard with basic requirements. Specifications: New dashboard that does not exist currently, Custom requirements, Maximum 9 dashboard tiles, Maximum 29 dashboard columns, One page requirement." },
-            { service: "New Complex Custom Dashboard", standard: "$1,000", advanced: "Included", enterprise: "Included", alberta: "Included", time: "240-360 min", description: "Create a new custom dashboard with complex requirements. Specifications: New dashboard that does not exist currently, Custom requirements, 10 or more dashboard tiles, 30 or more dashboard columns, Multiple pages of requirements." },
-            { service: "Modify Existing Dashboard", standard: "$200", advanced: "Included", enterprise: "Included", alberta: "Included", time: "30-60 min", description: "Edit and modify an existing dashboard. Examples: Editing existing tiles to include more information, Adding new dashboard tiles to an existing dashboard, One page of requirements." },
-            { service: "Complex Modifications to Existing Dashboard", standard: "$600", advanced: "Included", enterprise: "Included", alberta: "Included", time: "120-240 min", description: "Complex edits to existing dashboards requiring advanced changes. Examples: Edits requiring LookML changes to accommodate requirements, Multiple pages of requirements, Complex adjustments to existing dashboard tiles." },
-            { service: "Looker Additional User Request", standard: "N/A", advanced: "N/A", enterprise: "$30 CAD/mo", alberta: "$30 CAD/mo", time: "Ongoing", description: "Additional charge for Looker users beyond the standard 2 included users. Cost: $30 CAD per month per additional user. Available for: Enterprise and Alberta PCN tiers." },
-            { service: "Swap Looker Licensed User", standard: "N/A", advanced: "N/A", enterprise: "Included", alberta: "Included", time: "Varies", description: "Disable one user and move/add another Looker licensed user. Useful for: Replacing departing staff, Changing user access, Managing license allocation." },
-            { service: "Build Your Own Dashboard", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "TBA", description: "Clients able to build their own dashboards for analytics using the dashboard builder interface. Empowers users to create custom analytics without analyst support." },
-            { service: "Edit Your Own Dashboard", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "TBA", description: "Clients able to edit their own custom dashboards independently. Allows users to maintain and update dashboards without requesting analyst support." },
-            { service: "Multi-Domain Reporting", standard: "N/A", advanced: "N/A", enterprise: "N/A", alberta: "Included", time: "TBA", description: "Ability for one user to report for multiple domains and manage dashboards between multiple clients. Exclusive to Alberta PCN tier for cross-clinic reporting." },
-            { service: "Looker Training", standard: "N/A", advanced: "N/A", enterprise: "Included", alberta: "Included", time: "60-90 min", description: "Training on Looker UI and dashboard management. Topics: Looker UI navigation, How to move dashboards, Manage folders, Dashboard organization best practices." },
-            { service: "CHR Analytics Training", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "60-90 min", description: "Training on editing and building dashboards in CHR Analytics. Topics: Basics of editing dashboards, Building dashboards, Explores and Dimensions, Data model overview." },
-            { service: "Automated Scheduled Reports", standard: "N/A", advanced: "Included", enterprise: "Included", alberta: "Included", time: "TBA", description: "Create separate reports that can be scheduled for automatic export. Typically exported to SFTP or email on a recurring schedule." },
-            { service: "New Implementation", standard: "Included", advanced: "Included", enterprise: "Included", alberta: "Included", time: "Varies", description: "Initial setup and dashboard creation during implementation. Standard: 2 custom dashboards included, Complex clients (35+ RGU): 6 custom dashboards included." }
-        ];
+</div>
 
-        function getPriceClass(price) {
-            if (price === "Included") return "price-included";
-            if (price === "N/A") return "price-na";
-            return "price-standard";
+<!-- REQUEST MODAL -->
+<div class="modal-overlay" id="requestModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>📝 Submit Your Analytics Request</h2>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-services-list">
+                <h4>Selected Services</h4>
+                <div id="modalServicesList"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Describe Your Requirements <span class="required">*</span></label>
+                <textarea id="reqDescription" rows="5" placeholder="Please describe what you need in as much detail as possible. Include: what data you want to see, any specific metrics or KPIs, which dashboards are affected, and your desired outcome."></textarea>
+                <div class="hint">Minimum 20 characters. The more detail you provide, the faster we can scope your request.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Urgency Level <span style="color:#9ca3af;font-weight:400;">(Optional)</span></label>
+                <div class="urgency-options">
+                    <div class="urgency-option selected" data-urgency="standard" onclick="selectUrgency(this)">
+                        <span class="urgency-label">📅 Standard</span>
+                        <span class="urgency-desc">2–4 weeks</span>
+                    </div>
+                    <div class="urgency-option" data-urgency="high" onclick="selectUrgency(this)">
+                        <span class="urgency-label">🔶 High</span>
+                        <span class="urgency-desc">1–2 weeks</span>
+                    </div>
+                    <div class="urgency-option" data-urgency="critical" onclick="selectUrgency(this)">
+                        <span class="urgency-label">🔴 Critical</span>
+                        <span class="urgency-desc">ASAP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Notes <span style="color:#9ca3af;font-weight:400;">(Optional)</span></label>
+                <textarea id="reqNotes" rows="2" placeholder="Any other context, constraints, or preferences..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-modal-submit" id="modalSubmitBtn" onclick="submitRequest()">Submit Request →</button>
+        </div>
+    </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-modal" id="successModal">
+    <div class="success-box">
+        <div class="success-icon">✅</div>
+        <h2>Request Submitted!</h2>
+        <p>Your analytics request has been received. Our care team will review your submission, determine the scope, and reach out to you within 1–2 business days.</p>
+        <p style="margin-bottom:20px;"><strong>If BA review is required</strong>, please allow an additional 1–2 business days before scheduling begins.</p>
+        <button class="btn-success-close" onclick="closeSuccess()">Back to Catalog</button>
+    </div>
+</div>
+
+<script>
+    // ===== DATA =====
+    const services = [
+        {
+            id: 1, category: 'quick', baRequired: false,
+            name: 'Bug or Error', icon: '🐛',
+            time: '60–120 min', timeHours: 1.5,
+            shortDesc: 'Report any technical issues or errors encountered in the system.',
+            fullDesc: 'Mark as Bug/Error in the subject line when submitting. Our team will investigate and resolve the issue.',
+            bullets: ['System errors or unexpected behaviour', 'Data discrepancies or missing records', 'Dashboard not loading or crashing', 'Any other technical malfunction']
+        },
+        {
+            id: 2, category: 'quick', baRequired: false,
+            name: 'Dashboard Issues', icon: '📊',
+            time: '15–30 min', timeHours: 0.5,
+            shortDesc: 'Fix broken filters, date ranges, or data display issues.',
+            fullDesc: 'Quick resolution of dashboard functionality problems.',
+            bullets: ['Filter not working correctly', 'Date range showing wrong period', 'Data not displaying properly', 'Dashboard loading errors']
+        },
+        {
+            id: 3, category: 'quick', baRequired: false,
+            name: 'Minor Dashboard Updates', icon: '✏️',
+            time: '15–60 min', timeHours: 0.75,
+            shortDesc: 'Quick updates to dashboard titles, labels, descriptions, or simple additions.',
+            fullDesc: 'Small cosmetic or minor structural changes to existing dashboards.',
+            bullets: ['Update dashboard title or chart labels', 'Fix typos or update descriptions', 'Simple additions (1 column, 1 filter)', 'Minor layout adjustments']
+        },
+        {
+            id: 4, category: 'quick', baRequired: false,
+            name: 'Access & Permissions', icon: '🔐',
+            time: '15–60 min', timeHours: 0.75,
+            shortDesc: 'Troubleshoot dashboard access issues or manage user permissions.',
+            fullDesc: 'Resolve access-related problems and manage permission levels.',
+            bullets: ['User cannot see a dashboard', 'Explain permission levels', 'Grant or revoke access', 'Troubleshoot login issues']
+        },
+        {
+            id: 5, category: 'standard', baRequired: false,
+            name: 'Consultation Request', icon: '💬',
+            time: '60–90 min', timeHours: 1.25,
+            shortDesc: 'In-depth consultation on analytics capabilities and requirements analysis.',
+            fullDesc: 'Work with our analytics team to explore what\'s possible and define your needs.',
+            bullets: ['Understand available analytics capabilities', 'Deep-dive requirements analysis', 'Dashboard requirements and data points', 'Filter and metric recommendations']
+        },
+        {
+            id: 6, category: 'standard', baRequired: false,
+            name: 'New Simple Custom Dashboard', icon: '📈',
+            time: '60–120 min', timeHours: 1.5,
+            shortDesc: 'Create a new custom dashboard with up to 9 tiles and one page of requirements.',
+            fullDesc: 'A brand-new dashboard built to your custom specifications.',
+            bullets: ['New dashboard (does not exist currently)', 'Maximum 9 dashboard tiles', 'Maximum 29 dashboard columns', 'One page of requirements']
+        },
+        {
+            id: 7, category: 'standard', baRequired: false,
+            name: 'Modify Existing Dashboard', icon: '🔧',
+            time: '30–60 min', timeHours: 0.75,
+            shortDesc: 'Edit and enhance an existing dashboard with new tiles or additional information.',
+            fullDesc: 'Make targeted improvements to a dashboard that already exists.',
+            bullets: ['Edit existing tiles to include more information', 'Add new tiles to an existing dashboard', 'One page of requirements', 'No LookML changes required']
+        },
+        {
+            id: 8, category: 'standard', baRequired: false,
+            name: 'Looker Training', icon: '📚',
+            time: '60–90 min', timeHours: 1.25,
+            shortDesc: 'Training on Looker UI, dashboard management, and folder organization.',
+            fullDesc: 'Get up to speed on using Looker effectively.',
+            bullets: ['Looker UI navigation', 'How to move and manage dashboards', 'Folder organization best practices', 'Dashboard sharing and permissions']
+        },
+        {
+            id: 9, category: 'standard', baRequired: false,
+            name: 'CHR Analytics Training', icon: '🎓',
+            time: '60–90 min', timeHours: 1.25,
+            shortDesc: 'Training on editing and building dashboards in CHR Analytics.',
+            fullDesc: 'Learn the fundamentals of CHR Analytics to become more self-sufficient.',
+            bullets: ['Basics of editing dashboards', 'Building dashboards from scratch', 'Explores and Dimensions overview', 'Data model overview']
+        },
+        {
+            id: 10, category: 'standard', baRequired: false,
+            name: 'Automated Scheduled Reports', icon: '🤖',
+            time: 'TBA', timeHours: 1.5,
+            shortDesc: 'Create reports that automatically export on a recurring schedule.',
+            fullDesc: 'Set up automated report delivery to keep your team informed without manual effort.',
+            bullets: ['Scheduled exports to SFTP or email', 'Recurring delivery (daily, weekly, monthly)', 'Custom report format and content', 'Automated alerts and notifications']
+        },
+        {
+            id: 11, category: 'complex', baRequired: true,
+            name: 'New Complex Custom Dashboard', icon: '🏗️',
+            time: '240–360 min', timeHours: 5,
+            shortDesc: 'Create a new dashboard with 10+ tiles, 30+ columns, or multiple pages of requirements.',
+            fullDesc: 'A comprehensive, multi-faceted dashboard for complex reporting needs. Requires BA review before scheduling.',
+            bullets: ['10 or more dashboard tiles', '30 or more dashboard columns', 'Multiple pages of requirements', 'May require LookML changes']
+        },
+        {
+            id: 12, category: 'complex', baRequired: true,
+            name: 'Complex Modifications to Existing Dashboard', icon: '⚙️',
+            time: '120–240 min', timeHours: 3,
+            shortDesc: 'Advanced edits requiring LookML changes or multiple pages of requirements.',
+            fullDesc: 'Deep modifications to existing dashboards that go beyond surface-level changes. Requires BA review.',
+            bullets: ['Edits requiring LookML changes', 'Multiple pages of requirements', 'Complex adjustments to existing tiles', 'Structural changes to data model']
+        },
+        {
+            id: 13, category: 'complex', baRequired: true,
+            name: 'Multi-Domain Reporting', icon: '🌐',
+            time: 'TBA', timeHours: 4,
+            shortDesc: 'Report across multiple domains and manage dashboards between multiple clients.',
+            fullDesc: 'Cross-clinic or cross-domain reporting for organizations managing multiple sites. Requires BA review.',
+            bullets: ['One user reports for multiple domains', 'Manage dashboards across multiple clients', 'Cross-clinic data aggregation', 'Requires BA scoping before scheduling']
+        },
+        {
+            id: 14, category: 'addon', baRequired: false,
+            name: 'Looker Additional User Request', icon: '👤',
+            time: 'Ongoing', timeHours: 0.25,
+            shortDesc: 'Add a Looker licensed user beyond your standard allocation.',
+            fullDesc: 'Request an additional Looker user seat for your organization.',
+            bullets: ['Additional user beyond standard allocation', 'Monthly recurring charge applies', 'User receives full Looker access', 'Contact care team for current pricing']
+        },
+        {
+            id: 15, category: 'addon', baRequired: false,
+            name: 'Swap Looker Licensed User', icon: '🔄',
+            time: 'Varies', timeHours: 0.5,
+            shortDesc: 'Disable one user and transfer their Looker license to a new user.',
+            fullDesc: 'Useful when staff changes require license reallocation.',
+            bullets: ['Disable departing user account', 'Transfer license to new user', 'Manage license allocation', 'No additional cost for like-for-like swap']
+        },
+        {
+            id: 16, category: 'addon', baRequired: false,
+            name: 'New Implementation', icon: '🚀',
+            time: 'Varies', timeHours: 3,
+            shortDesc: 'Initial setup and dashboard creation for new clients or new environments.',
+            fullDesc: 'Full onboarding and implementation of analytics for your organization.',
+            bullets: ['Initial system setup and configuration', 'Custom dashboards built during onboarding', 'Data connection and validation', 'Handover and orientation session']
+        },
+        {
+            id: 17, category: 'selfservice', baRequired: false,
+            name: 'Build Your Own Dashboard', icon: '🛠️',
+            time: 'Self-paced', timeHours: 0,
+            shortDesc: 'Use the dashboard builder to create your own analytics dashboards independently.',
+            fullDesc: 'Empowers you to create custom analytics without needing to submit a request.',
+            bullets: ['Access to dashboard builder interface', 'No analyst support required', 'Create dashboards at your own pace', 'Training available if needed']
+        },
+        {
+            id: 18, category: 'selfservice', baRequired: false,
+            name: 'Edit Your Own Dashboard', icon: '✏️',
+            time: 'Self-paced', timeHours: 0,
+            shortDesc: 'Independently edit and maintain your own custom dashboards.',
+            fullDesc: 'Update and refine your dashboards without requesting analyst support.',
+            bullets: ['Edit existing custom dashboards', 'No wait time or request needed', 'Full control over your own dashboards', 'Training available if needed']
         }
+    ];
 
-        function toggleDescription(index) {
-            const descRow = document.getElementById(`desc-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-            
-            descRow.classList.toggle('show');
-            icon.classList.toggle('expanded');
+    const sections = [
+        { key: 'quick', label: 'Quick Fixes', icon: '⚡', desc: '15–60 min · No BA review required · Typically resolved same day', cssClass: 'section-quick', cardClass: 'quick', badgeClass: 'badge-quick', badgeLabel: 'Quick Fix' },
+        { key: 'standard', label: 'Standard Services', icon: '🔧', desc: '60–120 min · May require BA review · 2–5 business day turnaround', cssClass: 'section-standard', cardClass: 'standard-svc', badgeClass: 'badge-standard', badgeLabel: 'Standard' },
+        { key: 'complex', label: 'Complex Projects', icon: '⚙️', desc: '120+ min · BA review required · 5–10+ business days', cssClass: 'section-complex', cardClass: 'complex', badgeClass: 'badge-complex', badgeLabel: 'Complex' },
+        { key: 'addon', label: 'Additional Services', icon: '➕', desc: 'Ongoing or one-time add-ons · Pricing determined by care team', cssClass: 'section-addon', cardClass: 'addon', badgeClass: 'badge-addon', badgeLabel: 'Add-on' },
+        { key: 'selfservice', label: 'Self-Service', icon: '🎁', desc: 'Do it yourself · No request needed · Training available', cssClass: 'section-selfservice', cardClass: 'selfservice', badgeClass: 'badge-selfservice', badgeLabel: 'Self-Service' }
+    ];
+
+    // ===== STATE =====
+    let selectedServices = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let expandedCards = new Set();
+    let selectedUrgency = 'standard';
+
+    // ===== RENDER =====
+    function renderCatalog() {
+        const container = document.getElementById('catalogContent');
+        container.innerHTML = '';
+
+        sections.forEach(section => {
+            let sectionServices = services.filter(s => s.category === section.key);
+
+            // Apply filter
+            if (currentFilter !== 'all' && currentFilter !== section.key) return;
+
+            // Apply search
+            if (currentSearch) {
+                sectionServices = sectionServices.filter(s =>
+                    s.name.toLowerCase().includes(currentSearch) ||
+                    s.shortDesc.toLowerCase().includes(currentSearch) ||
+                    s.fullDesc.toLowerCase().includes(currentSearch) ||
+                    (s.bullets && s.bullets.some(b => b.toLowerCase().includes(currentSearch)))
+                );
+            }
+
+            if (sectionServices.length === 0) return;
+
+            const sectionEl = document.createElement('div');
+            sectionEl.className = `catalog-section ${section.cssClass}`;
+
+            const cardsHtml = sectionServices.map(s => renderCard(s, section)).join('');
+
+            sectionEl.innerHTML = `
+                <div class="section-header">
+                    <span class="section-icon">${section.icon}</span>
+                    <h2>${section.label} <span class="section-desc">${section.desc}</span></h2>
+                    <span class="section-count">${sectionServices.length} service${sectionServices.length !== 1 ? 's' : ''}</span>
+                </div>
+                <div class="cards-grid">${cardsHtml}</div>
+            `;
+
+            container.appendChild(sectionEl);
+        });
+
+        if (container.innerHTML === '') {
+            container.innerHTML = `<div class="empty-state">🔍 No services match your search. Try different keywords or <button onclick="resetSearch()" style="background:none;border:none;color:#3b82f6;cursor:pointer;font-weight:600;">reset filters</button>.</div>`;
         }
+    }
 
-        function renderTable(data) {
-            const tbody = document.getElementById('tableBody');
+    function renderCard(s, section) {
+        const isSelected = selectedServices.some(sel => sel.id === s.id);
+        const isExpanded = expandedCards.has(s.id);
 
-            tbody.innerHTML = data.map((item, index) => `
-                <tr class="service-row" onclick="toggleDescription(${index})">
-                    <td class="service-name">
-                        <span class="expand-icon" id="icon-${index}">▼</span>
-                        ${item.service}
-                    </td>
-                    <td><span class="${getPriceClass(item.standard)}">${item.standard}</span></td>
-                    <td><span class="${getPriceClass(item.advanced)}">${item.advanced}</span></td>
-                    <td><span class="${getPriceClass(item.enterprise)}">${item.enterprise}</span></td>
-                    <td><span class="${getPriceClass(item.alberta)}">${item.alberta}</span></td>
-                    <td>${item.time}</td>
-                </tr>
-                <tr class="description-row" id="desc-${index}">
-                    <td colspan="6" class="description-cell">
-                        <strong>Description:</strong> ${item.description}
-                    </td>
-                </tr>
+        return `
+            <div class="service-card ${section.cardClass} ${isSelected ? 'selected' : ''}" id="card-${s.id}">
+                <div class="card-top-bar"></div>
+                <div class="card-body">
+                    <div class="card-badges">
+                        <span class="badge ${section.badgeClass}">${section.badgeLabel}</span>
+                        ${s.baRequired ? '<span class="badge badge-ba">⚠️ BA Review</span>' : ''}
+                        <span class="badge badge-time">⏱️ ${s.time}</span>
+                    </div>
+                    <div class="card-title">${s.icon} ${s.name}</div>
+                    <div class="card-desc">${s.shortDesc}</div>
+                    <button class="card-expand-btn" onclick="toggleExpand(${s.id})">
+                        <span class="expand-arrow ${isExpanded ? 'open' : ''}" id="arrow-${s.id}">▼</span>
+                        ${isExpanded ? 'Hide Details' : 'View Full Details'}
+                    </button>
+                    <div class="card-details ${isExpanded ? 'show' : ''}" id="details-${s.id}">
+                        <strong>What's included:</strong>
+                        <ul>${s.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+                        ${s.baRequired ? '<br><strong style="color:#991b1b;">⚠️ Note:</strong> This service requires a Business Analyst review before scheduling. Your care team will coordinate this after submission.' : ''}
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-select ${isSelected ? 'selected-btn' : ''}" id="btn-${s.id}" onclick="toggleSelect(${s.id})">
+                        ${isSelected ? '✓ Selected (Click to Remove)' : '+ Select Service'}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function toggleExpand(id) {
+        if (expandedCards.has(id)) {
+            expandedCards.delete(id);
+        } else {
+            expandedCards.add(id);
+        }
+        renderCatalog();
+    }
+
+    function toggleSelect(id) {
+        const service = services.find(s => s.id === id);
+        const idx = selectedServices.findIndex(s => s.id === id);
+        if (idx >= 0) {
+            selectedServices.splice(idx, 1);
+        } else {
+            selectedServices.push(service);
+        }
+        renderCatalog();
+        updatePanel();
+    }
+
+    function updatePanel() {
+        const count = selectedServices.length;
+        const totalHours = selectedServices.reduce((sum, s) => sum + s.timeHours, 0);
+        const hasBA = selectedServices.some(s => s.baRequired);
+
+        document.getElementById('statCount').textContent = count;
+        document.getElementById('statHours').textContent = totalHours > 0 ? (totalHours % 1 === 0 ? totalHours : totalHours.toFixed(1)) : '0';
+        document.getElementById('submitBtn').disabled = count === 0;
+
+        const baWarn = document.getElementById('baWarning');
+        if (hasBA) baWarn.classList.add('show');
+        else baWarn.classList.remove('show');
+
+        const listEl = document.getElementById('selectedList');
+        if (count === 0) {
+            listEl.innerHTML = `<div class="empty-selection"><div style="font-size:1.8em;margin-bottom:6px;">🛒</div>No services selected yet.<br>Browse the catalog and click <strong>Select</strong>.</div>`;
+        } else {
+            listEl.innerHTML = selectedServices.map(s => `
+                <div class="selected-item">
+                    <div style="flex:1;">
+                        <div class="item-name">${s.icon} ${s.name}</div>
+                        <div class="item-time">⏱️ ${s.time}${s.baRequired ? ' · ⚠️ BA Review' : ''}</div>
+                    </div>
+                    <button class="remove-btn" onclick="toggleSelect(${s.id})" title="Remove">✕</button>
+                </div>
             `).join('');
-
-            updateStats(data);
         }
+    }
 
-        function filterTable() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
+    // ===== FILTERS =====
+    function setFilter(filter, el) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        renderCatalog();
+    }
 
-            let filtered = servicesData.filter(item => {
-                return item.service.toLowerCase().includes(search) || 
-                       item.description.toLowerCase().includes(search);
-            });
+    function resetSearch() {
+        currentFilter = 'all';
+        currentSearch = '';
+        document.getElementById('searchInput').value = '';
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        document.querySelector('[data-filter="all"]').classList.add('active');
+        renderCatalog();
+    }
 
-            renderTable(filtered);
-        }
+    document.getElementById('searchInput').addEventListener('input', function() {
+        currentSearch = this.value.toLowerCase().trim();
+        renderCatalog();
+    });
 
-        function resetFilters() {
-            document.getElementById('searchInput').value = '';
-            renderTable(servicesData);
-        }
+    function clearAll() {
+        selectedServices = [];
+        renderCatalog();
+        updatePanel();
+    }
 
-        function updateStats(data) {
-            const total = data.length;
-            const paid = data.filter(d => d.standard !== "N/A" && d.standard !== "Included").length;
-            const included = data.filter(d => d.standard === "Included" || d.advanced === "Included").length;
+    // ===== MODAL =====
+    function openModal() {
+        const listEl = document.getElementById('modalServicesList');
+        listEl.innerHTML = selectedServices.map(s => `
+            <div class="modal-service-item">✓ ${s.icon} ${s.name} <span style="color:#6b7280;font-weight:400;margin-left:auto;font-size:0.9em;">⏱️ ${s.time}</span></div>
+        `).join('');
+        document.getElementById('reqDescription').value = '';
+        document.getElementById('reqNotes').value = '';
+        document.getElementById('requestModal').classList.add('show');
+        validateModalForm();
+    }
 
-            document.getElementById('totalServices').textContent = total;
-            document.getElementById('paidServices').textContent = paid;
-            document.getElementById('includedServices').textContent = included;
-        }
+    function closeModal() {
+        document.getElementById('requestModal').classList.remove('show');
+    }
 
-        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+    function selectUrgency(el) {
+        document.querySelectorAll('.urgency-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedUrgency = el.dataset.urgency;
+    }
 
-        renderTable(servicesData);
-    </script>
+    function validateModalForm() {
+        const desc = document.getElementById('reqDescription').value.trim();
+        document.getElementById('modalSubmitBtn').disabled = desc.length < 20;
+    }
+
+    document.addEventListener('input', function(e) {
+        if (e.target.id === 'reqDescription') validateModalForm();
+    });
+
+   function submitRequest() {
+    const description = document.getElementById('reqDescription').value;
+    const notes = document.getElementById('reqNotes').value;
+    const urgency = selectedUrgency;
+    
+    // Get today's date
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    // Build email body (same format as your original form)
+    let emailBody = `📋 PACT - Analytics Service Request\n`;
+    emailBody += `Date Submitted: ${today}\n\n`;
+    emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    
+    emailBody += `📌 Services Requested:\n`;
+    selectedServices.forEach(s => {
+        emailBody += `   - ${s.icon} ${s.name} (⏱️ ${s.time})${s.baRequired ? ' [⚠️ BA Review Required]' : ''}\n`;
+    });
+    emailBody += `\n`;
+    
+    emailBody += `⏱️ Total Estimated Hours: ${selectedServices.reduce((sum, s) => sum + s.timeHours, 0)} hours\n`;
+    emailBody += `⚠️ BA Review Required: ${selectedServices.some(s => s.baRequired) ? 'Yes' : 'No'}\n`;
+    emailBody += `🔶 Urgency Level: ${urgency.charAt(0).toUpperCase() + urgency.slice(1)}\n\n`;
+    
+    emailBody += `📝 Request Details:\n`;
+    emailBody += `   ${description.replace(/\n/g, '\n   ')}\n\n`;
+    
+    if (notes) {
+        emailBody += `📌 Additional Notes:\n`;
+        emailBody += `   ${notes.replace(/\n/g, '\n   ')}\n\n`;
+    }
+    
+    emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    emailBody += `💼 Pricing:\n`;
+    emailBody += `   To be determined by CARE team\n\n`;
+    emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    emailBody += `\n✨ This request was submitted via the Analytics Service Catalog`;
+    
+    // Encode for Gmail
+    const encodedBody = encodeURIComponent(emailBody);
+    const subject = encodeURIComponent('PACT - Analytics Service Request');
+    
+    // Open Gmail compose
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=dalia.elias@telus.com&su=${subject}&body=${encodedBody}`;
+    window.open(gmailLink, '_blank');
+    
+    closeModal();
+    setTimeout(() => {
+        document.getElementById('successModal').classList.add('show');
+    }, 200);
+}
+
+
+    function closeSuccess() {
+        document.getElementById('successModal').classList.remove('show');
+        clearAll();
+    }
+
+    // Close modal on overlay click
+    document.getElementById('requestModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    document.getElementById('successModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSuccess();
+    });
+
+    // ===== INIT =====
+    renderCatalog();
+    updatePanel();
+</script>
 </body>
 </html>
