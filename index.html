@@ -65,6 +65,75 @@
             margin: 0 10px;
         }
 
+        /* TIER EXPLANATION */
+        .tier-section {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 28px 40px;
+        }
+        .tier-inner { max-width: 1400px; margin: 0 auto; }
+        .tier-section h2 {
+            font-size: 1.05em;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tier-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .tier-card {
+            border-radius: 12px;
+            padding: 16px 18px;
+            border: 1.5px solid;
+        }
+        .tier-card.t1 { background: #fef9f0; border-color: #f59e0b; }
+        .tier-card.t2 { background: #f0f9ff; border-color: #3b82f6; }
+        .tier-card.t3 { background: #f0fdf4; border-color: #10b981; }
+        .tier-card.t4 { background: #fdf4ff; border-color: #a855f7; }
+
+        .tier-card .tier-name {
+            font-size: 0.82em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+        .tier-card.t1 .tier-name { color: #b45309; }
+        .tier-card.t2 .tier-name { color: #1d4ed8; }
+        .tier-card.t3 .tier-name { color: #065f46; }
+        .tier-card.t4 .tier-name { color: #7e22ce; }
+
+        .tier-card .tier-desc {
+            font-size: 0.82em;
+            color: #4b5563;
+            line-height: 1.55;
+        }
+        .tier-card .tier-highlight {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+        .tier-card.t1 .tier-highlight { color: #b45309; }
+        .tier-card.t2 .tier-highlight { color: #1d4ed8; }
+        .tier-card.t3 .tier-highlight { color: #065f46; }
+        .tier-card.t4 .tier-highlight { color: #7e22ce; }
+
+        .tier-note {
+            margin-top: 14px;
+            font-size: 0.8em;
+            color: #6b7280;
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 10px 14px;
+            border-left: 3px solid #d1d5db;
+        }
+
         /* MAIN LAYOUT */
         .main-layout {
             max-width: 1400px;
@@ -146,7 +215,8 @@
         .filter-pill.standard.active { background: #6366f1; border-color: #6366f1; }
         .filter-pill.complex.active { background: #f59e0b; border-color: #f59e0b; }
         .filter-pill.addon.active { background: #a855f7; border-color: #a855f7; }
-        .filter-pill.selfservice.active { background: #10b981; border-color: #10b981; }
+        .filter-pill.advanced.active { background: #3b82f6; border-color: #3b82f6; }
+        .filter-pill.enterprise.active { background: #0f766e; border-color: #0f766e; }
 
         /* SECTION HEADERS */
         .section-header {
@@ -185,8 +255,11 @@
         .section-addon .section-header { border-color: #a855f7; color: #7e22ce; }
         .section-addon .section-header .section-count { background: #f3e8ff; color: #7e22ce; }
 
-        .section-selfservice .section-header { border-color: #10b981; color: #065f46; }
-        .section-selfservice .section-header .section-count { background: #d1fae5; color: #065f46; }
+        .section-advanced .section-header { border-color: #3b82f6; color: #1d4ed8; }
+        .section-advanced .section-header .section-count { background: #dbeafe; color: #1d4ed8; }
+
+        .section-enterprise .section-header { border-color: #0f766e; color: #0f766e; }
+        .section-enterprise .section-header .section-count { background: #ccfbf1; color: #0f766e; }
 
         /* SERVICE CARDS GRID */
         .cards-grid {
@@ -216,14 +289,13 @@
             box-shadow: 0 0 0 3px rgba(59,130,246,0.15), 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .card-top-bar {
-            height: 5px;
-        }
+        .card-top-bar { height: 5px; }
         .quick .card-top-bar { background: #0ea5e9; }
         .standard-svc .card-top-bar { background: #6366f1; }
         .complex .card-top-bar { background: #f59e0b; }
         .addon .card-top-bar { background: #a855f7; }
-        .selfservice .card-top-bar { background: #10b981; }
+        .advanced-svc .card-top-bar { background: #3b82f6; }
+        .enterprise-svc .card-top-bar { background: #0f766e; }
 
         .card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
 
@@ -245,7 +317,9 @@
         .badge-standard { background: #e0e7ff; color: #4338ca; }
         .badge-complex { background: #fef3c7; color: #b45309; }
         .badge-addon { background: #f3e8ff; color: #7e22ce; }
-        .badge-selfservice { background: #d1fae5; color: #065f46; }
+        .badge-advanced { background: #dbeafe; color: #1d4ed8; }
+        .badge-enterprise { background: #ccfbf1; color: #0f766e; border: 1px solid #99f6e4; }
+        .badge-pcn { background: #fdf4ff; color: #7e22ce; border: 1px solid #e9d5ff; }
         .badge-ba { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
         .badge-time { background: #f3f4f6; color: #374151; }
 
@@ -319,6 +393,31 @@
         .btn-select:hover { background: #3b82f6; color: white; }
         .btn-select.selected-btn { background: #3b82f6; color: white; }
         .btn-select.selected-btn:hover { background: #dc2626; border-color: #dc2626; }
+
+        /* Section callout banners */
+        .section-callout {
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.85em;
+        }
+        .section-callout .callout-icon { font-size: 1.5em; flex-shrink: 0; margin-top: 2px; }
+        .section-callout strong { display: block; font-size: 1em; margin-bottom: 3px; }
+        .section-callout span { opacity: 0.9; line-height: 1.5; }
+
+        .callout-advanced {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 2px solid #3b82f6;
+            color: #1d4ed8;
+        }
+        .callout-enterprise {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            border: 2px solid #0f766e;
+            color: #0f766e;
+        }
 
         /* EMPTY STATE */
         .empty-state {
@@ -529,9 +628,7 @@
             padding: 4px 0;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
         .form-group label {
             display: block;
             font-size: 0.85em;
@@ -553,6 +650,19 @@
         }
         .form-group textarea:focus, .form-group select:focus { border-color: #3b82f6; }
         .form-group .hint { font-size: 0.75em; color: #9ca3af; margin-top: 4px; }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .form-group input[type="text"]:focus { border-color: #3b82f6; }
 
         .urgency-options {
             display: flex;
@@ -641,11 +751,8 @@
             font-size: 0.95em;
         }
 
-        /* SECTION WRAPPER */
         .catalog-section { margin-bottom: 8px; }
-        .section-hidden { display: none; }
 
-        /* RESPONSIVE */
         @media (max-width: 900px) {
             .main-layout { grid-template-columns: 1fr; }
             .summary-panel { position: static; }
@@ -653,11 +760,13 @@
             .header h1 { font-size: 1.5em; }
             .workflow-banner { padding: 12px 20px; }
             .workflow-step { font-size: 0.75em; }
+            .tier-section { padding: 20px; }
         }
         @media (max-width: 600px) {
             .cards-grid { grid-template-columns: 1fr; }
             .workflow-inner { gap: 6px; }
             .workflow-arrow { margin: 0 4px; }
+            .tier-cards { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -686,7 +795,7 @@
         <span class="workflow-arrow">→</span>
         <div class="workflow-step">
             <span class="step-num">3</span>
-            Care Team Reviews & Quotes
+            Care Team Reviews & Scopes
         </div>
         <span class="workflow-arrow">→</span>
         <div class="workflow-step">
@@ -702,6 +811,38 @@
         <div class="workflow-step">
             <span class="step-num">6</span>
             You Receive Results ✓
+        </div>
+    </div>
+</div>
+
+<!-- TIER EXPLANATION -->
+<div class="tier-section">
+    <div class="tier-inner">
+        <h2>🏷️ Understanding Your Service Package</h2>
+        <div class="tier-cards">
+            <div class="tier-card t1">
+                <div class="tier-name">Analytics Essentials</div>
+                <span class="tier-highlight">Pay-per-service</span>
+                <div class="tier-desc">Each service is scoped and quoted individually by the CARE team based on your request. Pricing is determined after submission.</div>
+            </div>
+            <div class="tier-card t2">
+                <div class="tier-name">Analytics Advanced</div>
+                <span class="tier-highlight">5 included hours/month</span>
+                <div class="tier-desc">Your package includes 5 analyst hours per month. Most services are covered within your allocation. Additional hours beyond your package are quoted by the CARE team.</div>
+            </div>
+            <div class="tier-card t3">
+                <div class="tier-name">Analytics Enterprise</div>
+                <span class="tier-highlight">10 included hours/month</span>
+                <div class="tier-desc">Your package includes 10 analyst hours per month. Most services are covered within your allocation. Additional hours beyond your package are quoted by the CARE team.</div>
+            </div>
+            <div class="tier-card t4">
+                <div class="tier-name">Alberta PCN</div>
+                <span class="tier-highlight">All services included</span>
+                <div class="tier-desc">All analytics services are fully included in your package, including multi-domain reporting across your clinics. No additional charges for standard services.</div>
+            </div>
+        </div>
+        <div class="tier-note">
+            💡 <strong>Not sure which package you're on?</strong> Contact your CARE team at <strong>care.emraccounts@telus.com</strong> — they'll confirm your tier and available hours before your request is scoped.
         </div>
     </div>
 </div>
@@ -723,10 +864,10 @@
                 <div class="filter-pills">
                     <button class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">All</button>
                     <button class="filter-pill quick" data-filter="quick" onclick="setFilter('quick', this)">⚡ Quick Fixes</button>
-                    <button class="filter-pill standard" data-filter="standard" onclick="setFilter('standard', this)">🔧 Standard</button>
-                    <button class="filter-pill complex" data-filter="complex" onclick="setFilter('complex', this)">⚙️ Complex</button>
-                    <button class="filter-pill addon" data-filter="addon" onclick="setFilter('addon', this)">➕ Add-ons</button>
-                    <button class="filter-pill selfservice" data-filter="selfservice" onclick="setFilter('selfservice', this)">🎁 Self-Service</button>
+                    <button class="filter-pill standard" data-filter="standard" onclick="setFilter('standard', this)">🔧 Core Services</button>
+                    <button class="filter-pill complex" data-filter="complex" onclick="setFilter('complex', this)">⚙️ Complex Projects</button>
+                    <button class="filter-pill advanced" data-filter="advanced" onclick="setFilter('advanced', this)">📦 Advanced Clients</button>
+                    <button class="filter-pill enterprise" data-filter="enterprise" onclick="setFilter('enterprise', this)">🏢 Enterprise & PCN</button>
                 </div>
             </div>
         </div>
@@ -801,9 +942,24 @@
             </div>
 
             <div class="form-group">
+                <label>Customer Domain / URL <span class="required">*</span></label>
+                <input type="text" id="reqDomain" placeholder="e.g., myclinic.teluschr.com">
+            </div>
+
+            <div class="form-group">
+                <label>Client Contact Name & Email <span class="required">*</span></label>
+                <input type="text" id="reqContact" placeholder="Your Name (email@example.com)">
+            </div>
+
+            <div class="form-group">
                 <label>Describe Your Requirements <span class="required">*</span></label>
                 <textarea id="reqDescription" rows="5" placeholder="Please describe what you need in as much detail as possible. Include: what data you want to see, any specific metrics or KPIs, which dashboards are affected, and your desired outcome."></textarea>
                 <div class="hint">Minimum 20 characters. The more detail you provide, the faster we can scope your request.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Link to Screenshot, Mockup, or Existing Dashboard <span style="color:#9ca3af;font-weight:400;">(Optional)</span></label>
+                <input type="text" id="reqVisual" placeholder="Paste link or dashboard ID here">
             </div>
 
             <div class="form-group">
@@ -831,7 +987,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
-            <button class="btn-modal-submit" id="modalSubmitBtn" onclick="submitRequest()">Submit Request →</button>
+            <button class="btn-modal-submit" id="modalSubmitBtn" disabled onclick="submitRequest()">Generate Email to CARE Team →</button>
         </div>
     </div>
 </div>
@@ -841,8 +997,8 @@
     <div class="success-box">
         <div class="success-icon">✅</div>
         <h2>Request Submitted!</h2>
-        <p>Your analytics request has been received. Our care team will review your submission, determine the scope, and reach out to you within 1–2 business days.</p>
-        <p style="margin-bottom:20px;"><strong>If BA review is required</strong>, please allow an additional 1–2 business days before scheduling begins.</p>
+        <p>Your Gmail compose window has opened with your request pre-filled and addressed to the CARE team at <strong>care.emraccounts@telus.com</strong>.</p>
+        <p style="margin-bottom:20px;">Please review the email and click <strong>Send</strong> to complete your submission. The team will review your request and reach out within 1–2 business days.</p>
         <button class="btn-success-close" onclick="closeSuccess()">Back to Catalog</button>
     </div>
 </div>
@@ -850,10 +1006,11 @@
 <script>
     // ===== DATA =====
     const services = [
+        // QUICK FIXES - All tiers
         {
             id: 1, category: 'quick', baRequired: false,
             name: 'Bug or Error', icon: '🐛',
-            time: '60–120 min', timeHours: 1.5,
+            time: 'Varies', timeHours: 1.5,
             shortDesc: 'Report any technical issues or errors encountered in the system.',
             fullDesc: 'Mark as Bug/Error in the subject line when submitting. Our team will investigate and resolve the issue.',
             bullets: ['System errors or unexpected behaviour', 'Data discrepancies or missing records', 'Dashboard not loading or crashing', 'Any other technical malfunction']
@@ -861,7 +1018,7 @@
         {
             id: 2, category: 'quick', baRequired: false,
             name: 'Dashboard Issues', icon: '📊',
-            time: '15–30 min', timeHours: 0.5,
+            time: 'Varies', timeHours: 0.5,
             shortDesc: 'Fix broken filters, date ranges, or data display issues.',
             fullDesc: 'Quick resolution of dashboard functionality problems.',
             bullets: ['Filter not working correctly', 'Date range showing wrong period', 'Data not displaying properly', 'Dashboard loading errors']
@@ -869,19 +1026,12 @@
         {
             id: 3, category: 'quick', baRequired: false,
             name: 'Minor Dashboard Updates', icon: '✏️',
-            time: '15–60 min', timeHours: 0.75,
+            time: 'Varies', timeHours: 0.75,
             shortDesc: 'Quick updates to dashboard titles, labels, descriptions, or simple additions.',
             fullDesc: 'Small cosmetic or minor structural changes to existing dashboards.',
             bullets: ['Update dashboard title or chart labels', 'Fix typos or update descriptions', 'Simple additions (1 column, 1 filter)', 'Minor layout adjustments']
         },
-        {
-            id: 4, category: 'quick', baRequired: false,
-            name: 'Access & Permissions', icon: '🔐',
-            time: '15–60 min', timeHours: 0.75,
-            shortDesc: 'Troubleshoot dashboard access issues or manage user permissions.',
-            fullDesc: 'Resolve access-related problems and manage permission levels.',
-            bullets: ['User cannot see a dashboard', 'Explain permission levels', 'Grant or revoke access', 'Troubleshoot login issues']
-        },
+        // CORE SERVICES - All tiers
         {
             id: 5, category: 'standard', baRequired: false,
             name: 'Consultation Request', icon: '💬',
@@ -901,35 +1051,12 @@
         {
             id: 7, category: 'standard', baRequired: false,
             name: 'Modify Existing Dashboard', icon: '🔧',
-            time: '30–60 min', timeHours: 0.75,
+            time: 'Varies', timeHours: 0.75,
             shortDesc: 'Edit and enhance an existing dashboard with new tiles or additional information.',
             fullDesc: 'Make targeted improvements to a dashboard that already exists.',
             bullets: ['Edit existing tiles to include more information', 'Add new tiles to an existing dashboard', 'One page of requirements', 'No LookML changes required']
         },
-        {
-            id: 8, category: 'standard', baRequired: false,
-            name: 'Looker Training', icon: '📚',
-            time: '60–90 min', timeHours: 1.25,
-            shortDesc: 'Training on Looker UI, dashboard management, and folder organization.',
-            fullDesc: 'Get up to speed on using Looker effectively.',
-            bullets: ['Looker UI navigation', 'How to move and manage dashboards', 'Folder organization best practices', 'Dashboard sharing and permissions']
-        },
-        {
-            id: 9, category: 'standard', baRequired: false,
-            name: 'CHR Analytics Training', icon: '🎓',
-            time: '60–90 min', timeHours: 1.25,
-            shortDesc: 'Training on editing and building dashboards in CHR Analytics.',
-            fullDesc: 'Learn the fundamentals of CHR Analytics to become more self-sufficient.',
-            bullets: ['Basics of editing dashboards', 'Building dashboards from scratch', 'Explores and Dimensions overview', 'Data model overview']
-        },
-        {
-            id: 10, category: 'standard', baRequired: false,
-            name: 'Automated Scheduled Reports', icon: '🤖',
-            time: 'TBA', timeHours: 1.5,
-            shortDesc: 'Create reports that automatically export on a recurring schedule.',
-            fullDesc: 'Set up automated report delivery to keep your team informed without manual effort.',
-            bullets: ['Scheduled exports to SFTP or email', 'Recurring delivery (daily, weekly, monthly)', 'Custom report format and content', 'Automated alerts and notifications']
-        },
+        // COMPLEX PROJECTS - All tiers
         {
             id: 11, category: 'complex', baRequired: true,
             name: 'New Complex Custom Dashboard', icon: '🏗️',
@@ -952,10 +1079,38 @@
             time: 'TBA', timeHours: 4,
             shortDesc: 'Report across multiple domains and manage dashboards between multiple clients.',
             fullDesc: 'Cross-clinic or cross-domain reporting for organizations managing multiple sites. Requires BA review.',
-            bullets: ['One user reports for multiple domains', 'Manage dashboards across multiple clients', 'Cross-clinic data aggregation', 'Requires BA scoping before scheduling']
+            bullets: ['One user reports for multiple domains', 'Manage dashboards across multiple clients', 'Cross-clinic data aggregation', 'Requires BA scoping before scheduling'],
+            tierNote: 'Alberta PCN clients only'
+        },
+        // ADVANCED CLIENT SERVICES
+        {
+            id: 30, category: 'advanced', baRequired: false,
+            name: 'Automated Scheduled Reports', icon: '🤖',
+            time: 'TBA', timeHours: 1.5,
+            shortDesc: 'Create reports that automatically export on a recurring schedule.',
+            fullDesc: 'Set up automated report delivery to keep your team informed without manual effort.',
+            bullets: ['Scheduled exports to SFTP or email', 'Recurring delivery (daily, weekly, monthly)', 'Custom report format and content', 'Automated alerts and notifications'],
+            tierNote: 'Available for Advanced & Enterprise clients'
+        },
+        // ENTERPRISE & PCN SERVICES
+        {
+            id: 20, category: 'enterprise', baRequired: false,
+            name: 'Looker Training', icon: '📚',
+            time: '60–90 min', timeHours: 1.25,
+            shortDesc: 'Training on Looker UI, dashboard management, and folder organization.',
+            fullDesc: 'Get up to speed on using Looker effectively.',
+            bullets: ['Looker UI navigation', 'How to move and manage dashboards', 'Folder organization best practices', 'Dashboard sharing and permissions']
         },
         {
-            id: 14, category: 'addon', baRequired: false,
+            id: 21, category: 'enterprise', baRequired: false,
+            name: 'CHR Analytics Training', icon: '🎓',
+            time: '60–90 min', timeHours: 1.25,
+            shortDesc: 'Training on editing and building dashboards in CHR Analytics.',
+            fullDesc: 'Learn the fundamentals of CHR Analytics to become more self-sufficient.',
+            bullets: ['Basics of editing dashboards', 'Building dashboards from scratch', 'Explores and Dimensions overview', 'Data model overview']
+        },
+        {
+            id: 22, category: 'enterprise', baRequired: false,
             name: 'Looker Additional User Request', icon: '👤',
             time: 'Ongoing', timeHours: 0.25,
             shortDesc: 'Add a Looker licensed user beyond your standard allocation.',
@@ -963,45 +1118,53 @@
             bullets: ['Additional user beyond standard allocation', 'Monthly recurring charge applies', 'User receives full Looker access', 'Contact care team for current pricing']
         },
         {
-            id: 15, category: 'addon', baRequired: false,
+            id: 23, category: 'enterprise', baRequired: false,
             name: 'Swap Looker Licensed User', icon: '🔄',
             time: 'Varies', timeHours: 0.5,
             shortDesc: 'Disable one user and transfer their Looker license to a new user.',
             fullDesc: 'Useful when staff changes require license reallocation.',
             bullets: ['Disable departing user account', 'Transfer license to new user', 'Manage license allocation', 'No additional cost for like-for-like swap']
-        },
-        {
-            id: 16, category: 'addon', baRequired: false,
-            name: 'New Implementation', icon: '🚀',
-            time: 'Varies', timeHours: 3,
-            shortDesc: 'Initial setup and dashboard creation for new clients or new environments.',
-            fullDesc: 'Full onboarding and implementation of analytics for your organization.',
-            bullets: ['Initial system setup and configuration', 'Custom dashboards built during onboarding', 'Data connection and validation', 'Handover and orientation session']
-        },
-        {
-            id: 17, category: 'selfservice', baRequired: false,
-            name: 'Build Your Own Dashboard - Enterprise analytics ONLY', icon: '🛠️',
-            time: 'Self-paced', timeHours: 0,
-            shortDesc: 'Use the dashboard builder to create your own analytics dashboards independently.',
-            fullDesc: 'Empowers you to create custom analytics without needing to submit a request.',
-            bullets: ['Access to dashboard builder interface', 'No analyst support required', 'Create dashboards at your own pace', 'Training available if needed']
-        },
-        {
-            id: 18, category: 'selfservice', baRequired: false,
-            name: 'Edit Your Own Dashboard - Enterprise analytics ONLY', icon: '✏️',
-            time: 'Self-paced', timeHours: 0,
-            shortDesc: 'Independently edit and maintain your own custom dashboards.',
-            fullDesc: 'Update and refine your dashboards without requesting analyst support.',
-            bullets: ['Edit existing custom dashboards', 'No wait time or request needed', 'Full control over your own dashboards', 'Training available if needed']
         }
     ];
 
     const sections = [
-        { key: 'quick', label: 'Quick Fixes', icon: '⚡', desc: '15–60 min · No BA review required · Typically resolved in 2–5 business day turnaround', cssClass: 'section-quick', cardClass: 'quick', badgeClass: 'badge-quick', badgeLabel: 'Quick Fix' },
-        { key: 'standard', label: 'Standard Services', icon: '🔧', desc: '60–120 min · May require BA review · 2–5 business day turnaround', cssClass: 'section-standard', cardClass: 'standard-svc', badgeClass: 'badge-standard', badgeLabel: 'Standard' },
-        { key: 'complex', label: 'Complex Projects', icon: '⚙️', desc: '120+ min · BA review required · 5–10+ business days', cssClass: 'section-complex', cardClass: 'complex', badgeClass: 'badge-complex', badgeLabel: 'Complex' },
-        { key: 'addon', label: 'Additional Services', icon: '➕', desc: 'Ongoing or one-time add-ons · Pricing determined by care team', cssClass: 'section-addon', cardClass: 'addon', badgeClass: 'badge-addon', badgeLabel: 'Add-on' },
-        { key: 'selfservice', label: 'Self-Service', icon: '🎁', desc: 'Do it yourself · No request needed · Training available', cssClass: 'section-selfservice', cardClass: 'selfservice', badgeClass: 'badge-selfservice', badgeLabel: 'Self-Service' }
+        {
+            key: 'quick', label: 'Quick Fixes', icon: '⚡',
+            desc: '15–60 min · No BA review required · Typically resolved within 2–5 business days',
+            cssClass: 'section-quick', cardClass: 'quick', badgeClass: 'badge-quick', badgeLabel: 'Quick Fix'
+        },
+        {
+            key: 'standard', label: 'Core Services', icon: '🔧',
+            desc: '60–120 min · May require BA review · 2–5 business day turnaround',
+            cssClass: 'section-standard', cardClass: 'standard-svc', badgeClass: 'badge-standard', badgeLabel: 'Core Service'
+        },
+        {
+            key: 'complex', label: 'Complex Projects', icon: '⚙️',
+            desc: '120+ min · BA review required · 5–10+ business days',
+            cssClass: 'section-complex', cardClass: 'complex', badgeClass: 'badge-complex', badgeLabel: 'Complex'
+        },
+        {
+            key: 'advanced', label: 'Advanced Client Services', icon: '📦',
+            desc: 'Available for Advanced & Enterprise clients · Included in your monthly hours',
+            cssClass: 'section-advanced', cardClass: 'advanced-svc', badgeClass: 'badge-advanced', badgeLabel: 'Advanced',
+            callout: {
+                type: 'advanced',
+                icon: '📦',
+                title: 'Advanced & Enterprise Clients',
+                text: 'The services in this section are available to Analytics Advanced and Enterprise package clients. They are included within your monthly hours allocation. If you are unsure whether these apply to your package, contact your CARE team.'
+            }
+        },
+        {
+            key: 'enterprise', label: 'Enterprise & PCN Services', icon: '🏢',
+            desc: 'Available for Enterprise & Alberta PCN clients · Included in your package',
+            cssClass: 'section-enterprise', cardClass: 'enterprise-svc', badgeClass: 'badge-enterprise', badgeLabel: 'Enterprise',
+            callout: {
+                type: 'enterprise',
+                icon: '🏢',
+                title: 'Enterprise & Alberta PCN Clients Only',
+                text: 'The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. These are included in your monthly hours allocation. If you\'re unsure whether these apply to your package, contact your CARE team.'
+            }
+        }
     ];
 
     // ===== STATE =====
@@ -1019,10 +1182,8 @@
         sections.forEach(section => {
             let sectionServices = services.filter(s => s.category === section.key);
 
-            // Apply filter
             if (currentFilter !== 'all' && currentFilter !== section.key) return;
 
-            // Apply search
             if (currentSearch) {
                 sectionServices = sectionServices.filter(s =>
                     s.name.toLowerCase().includes(currentSearch) ||
@@ -1037,6 +1198,19 @@
             const sectionEl = document.createElement('div');
             sectionEl.className = `catalog-section ${section.cssClass}`;
 
+            let calloutHtml = '';
+            if (section.callout) {
+                calloutHtml = `
+                    <div class="section-callout callout-${section.callout.type}">
+                        <span class="callout-icon">${section.callout.icon}</span>
+                        <div>
+                            <strong>${section.callout.title}</strong>
+                            <span>${section.callout.text}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
             const cardsHtml = sectionServices.map(s => renderCard(s, section)).join('');
 
             sectionEl.innerHTML = `
@@ -1045,6 +1219,7 @@
                     <h2>${section.label} <span class="section-desc">${section.desc}</span></h2>
                     <span class="section-count">${sectionServices.length} service${sectionServices.length !== 1 ? 's' : ''}</span>
                 </div>
+                ${calloutHtml}
                 <div class="cards-grid">${cardsHtml}</div>
             `;
 
@@ -1060,6 +1235,13 @@
         const isSelected = selectedServices.some(sel => sel.id === s.id);
         const isExpanded = expandedCards.has(s.id);
 
+        let tierBadge = '';
+        if (s.tierNote === 'Alberta PCN clients only') {
+            tierBadge = '<span class="badge badge-pcn">🌐 PCN Only</span>';
+        } else if (s.tierNote && s.tierNote.includes('Advanced')) {
+            tierBadge = '<span class="badge badge-advanced">📦 Adv & Ent</span>';
+        }
+
         return `
             <div class="service-card ${section.cardClass} ${isSelected ? 'selected' : ''}" id="card-${s.id}">
                 <div class="card-top-bar"></div>
@@ -1067,6 +1249,7 @@
                     <div class="card-badges">
                         <span class="badge ${section.badgeClass}">${section.badgeLabel}</span>
                         ${s.baRequired ? '<span class="badge badge-ba">⚠️ BA Review</span>' : ''}
+                        ${tierBadge}
                         <span class="badge badge-time">⏱️ ${s.time}</span>
                     </div>
                     <div class="card-title">${s.icon} ${s.name}</div>
@@ -1079,6 +1262,7 @@
                         <strong>What's included:</strong>
                         <ul>${s.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
                         ${s.baRequired ? '<br><strong style="color:#991b1b;">⚠️ Note:</strong> This service requires a Business Analyst review before scheduling. Your care team will coordinate this after submission.' : ''}
+                        ${s.tierNote ? `<br><strong style="color:#0f766e;">📌 Availability:</strong> ${s.tierNote}.` : ''}
                     </div>
                 </div>
                 <div class="card-actions">
@@ -1176,6 +1360,9 @@
         `).join('');
         document.getElementById('reqDescription').value = '';
         document.getElementById('reqNotes').value = '';
+        document.getElementById('reqDomain').value = '';
+        document.getElementById('reqContact').value = '';
+        document.getElementById('reqVisual').value = '';
         document.getElementById('requestModal').classList.add('show');
         validateModalForm();
     }
@@ -1192,71 +1379,83 @@
 
     function validateModalForm() {
         const desc = document.getElementById('reqDescription').value.trim();
-        document.getElementById('modalSubmitBtn').disabled = desc.length < 20;
+        const domain = document.getElementById('reqDomain').value.trim();
+        const contact = document.getElementById('reqContact').value.trim();
+        document.getElementById('modalSubmitBtn').disabled = desc.length < 20 || domain.length === 0 || contact.length === 0;
     }
 
     document.addEventListener('input', function(e) {
-        if (e.target.id === 'reqDescription') validateModalForm();
+        if (['reqDescription', 'reqDomain', 'reqContact'].includes(e.target.id)) validateModalForm();
     });
 
-   function submitRequest() {
-    const description = document.getElementById('reqDescription').value;
-    const notes = document.getElementById('reqNotes').value;
-    const urgency = selectedUrgency;
-    
-    // Get today's date
-    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    
-    // Build email body (same format as your original form)
-    let emailBody = `📋 PACT - Analytics Service Request\n`;
-    emailBody += `Date Submitted: ${today}\n\n`;
-    emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    
-    emailBody += `📌 Services Requested:\n`;
-    selectedServices.forEach(s => {
-        emailBody += `   - ${s.icon} ${s.name} (⏱️ ${s.time})${s.baRequired ? ' [⚠️ BA Review Required]' : ''}\n`;
-    });
-    emailBody += `\n`;
-    
-    emailBody += `⏱️ Total Estimated Hours: ${selectedServices.reduce((sum, s) => sum + s.timeHours, 0)} hours\n`;
-    emailBody += `⚠️ BA Review Required: ${selectedServices.some(s => s.baRequired) ? 'Yes' : 'No'}\n`;
-    emailBody += `🔶 Urgency Level: ${urgency.charAt(0).toUpperCase() + urgency.slice(1)}\n\n`;
-    
-    emailBody += `📝 Request Details:\n`;
-    emailBody += `   ${description.replace(/\n/g, '\n   ')}\n\n`;
-    
-    if (notes) {
-        emailBody += `📌 Additional Notes:\n`;
-        emailBody += `   ${notes.replace(/\n/g, '\n   ')}\n\n`;
+    function submitRequest() {
+        const description = document.getElementById('reqDescription').value;
+        const notes = document.getElementById('reqNotes').value;
+        const domain = document.getElementById('reqDomain').value;
+        const contact = document.getElementById('reqContact').value;
+        const visual = document.getElementById('reqVisual').value;
+        const urgency = selectedUrgency;
+
+        const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        let emailBody = `📋 PACT - Analytics Service Request\n`;
+        emailBody += `Date Submitted: ${today}\n\n`;
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+        emailBody += `📌 Services Requested:\n`;
+        selectedServices.forEach(s => {
+            emailBody += `   • ${s.icon} ${s.name} (⏱️ ${s.time})${s.baRequired ? ' [⚠️ BA Review Required]' : ''}${s.tierNote ? ` [${s.tierNote}]` : ''}\n`;
+        });
+        emailBody += `\n`;
+
+        emailBody += `⏱️ Total Estimated Hours: ${selectedServices.reduce((sum, s) => sum + s.timeHours, 0)} hours\n`;
+        emailBody += `⚠️ BA Review Required: ${selectedServices.some(s => s.baRequired) ? 'Yes' : 'No'}\n`;
+        emailBody += `🔶 Urgency Level: ${urgency.charAt(0).toUpperCase() + urgency.slice(1)}\n\n`;
+
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+        emailBody += `🌐 Customer Domain/URL:\n`;
+        emailBody += `   ${domain}\n\n`;
+
+        emailBody += `👤 Client Contact:\n`;
+        emailBody += `   ${contact}\n\n`;
+
+        emailBody += `📝 Request Details:\n`;
+        emailBody += `   ${description.replace(/\n/g, '\n   ')}\n\n`;
+
+        if (visual) {
+            emailBody += `🔗 Visual Reference:\n`;
+            emailBody += `   ${visual}\n\n`;
+        }
+
+        if (notes) {
+            emailBody += `📌 Additional Notes:\n`;
+            emailBody += `   ${notes.replace(/\n/g, '\n   ')}\n\n`;
+        }
+
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        emailBody += `💼 Pricing:\n`;
+        emailBody += `   To be determined by CARE team\n\n`;
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+        emailBody += `\n✨ This request was submitted via the Analytics Service Catalog`;
+
+        const encodedBody = encodeURIComponent(emailBody);
+        const subject = encodeURIComponent('PACT - Analytics Service Request');
+
+        const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=care.emraccounts@telus.com&su=${subject}&body=${encodedBody}`;
+        window.open(gmailLink, '_blank');
+
+        closeModal();
+        setTimeout(() => {
+            document.getElementById('successModal').classList.add('show');
+        }, 200);
     }
-    
-    emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    emailBody += `💼 Pricing:\n`;
-    emailBody += `   To be determined by CARE team\n\n`;
-    emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    emailBody += `\n✨ This request was submitted via the Analytics Service Catalog`;
-    
-    // Encode for Gmail
-    const encodedBody = encodeURIComponent(emailBody);
-    const subject = encodeURIComponent('PACT - Analytics Service Request');
-    
-    // Open Gmail compose
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=dalia.elias@telus.com&su=${subject}&body=${encodedBody}`;
-    window.open(gmailLink, '_blank');
-    
-    closeModal();
-    setTimeout(() => {
-        document.getElementById('successModal').classList.add('show');
-    }, 200);
-}
-
 
     function closeSuccess() {
         document.getElementById('successModal').classList.remove('show');
         clearAll();
     }
 
-    // Close modal on overlay click
     document.getElementById('requestModal').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
