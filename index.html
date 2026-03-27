@@ -1398,7 +1398,7 @@
 
         const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        let emailBody = `📋 PACT - Analytics Service Request\n`;
+        let emailBody = `📋 Analytics Service Request\n`;
         emailBody += `Date Submitted: ${today}\n\n`;
         emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
@@ -1440,7 +1440,7 @@
         emailBody += `\n✨ This request was submitted via the Analytics Service Catalog`;
 
         const encodedBody = encodeURIComponent(emailBody);
-        const subject = encodeURIComponent('PACT - Analytics Service Request');
+        const subject = encodeURIComponent('Analytics Service Request');
 
         const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=care.emraccounts@telus.com&su=${subject}&body=${encodedBody}`;
         window.open(gmailLink, '_blank');
