@@ -14,14 +14,6 @@
             min-height: 100vh;
         }
 
-        /* TELUS Colors:
-           Purple: #4B286D
-           Green: #66CC00
-           Dark Purple: #2B1B4E
-           Light Purple: #7B5EA7
-        */
-
-        /* HEADER */
         .header {
             background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%);
             color: white;
@@ -32,7 +24,6 @@
         .header h1 { font-size: 2em; font-weight: 700; margin-bottom: 6px; }
         .header p { opacity: 0.85; font-size: 1em; }
 
-        /* WORKFLOW BANNER */
         .workflow-banner {
             background: linear-gradient(135deg, #f5f0ff 0%, #ede8f5 100%);
             border-bottom: 2px solid #7B5EA7;
@@ -73,7 +64,6 @@
             margin: 0 10px;
         }
 
-        /* TIER EXPLANATION */
         .tier-section {
             background: white;
             border-bottom: 1px solid #e5e7eb;
@@ -142,7 +132,6 @@
             border-left: 3px solid #4B286D;
         }
 
-        /* MAIN LAYOUT */
         .main-layout {
             max-width: 1400px;
             margin: 0 auto;
@@ -153,7 +142,6 @@
             align-items: start;
         }
 
-        /* SEARCH & FILTERS */
         .search-filter-bar {
             background: white;
             border-radius: 14px;
@@ -225,7 +213,6 @@
         .filter-pill.advanced.active { background: #66CC00; border-color: #66CC00; color: #1a1a1a; }
         .filter-pill.enterprise.active { background: #3a7a00; border-color: #3a7a00; }
 
-        /* SECTION HEADERS */
         .section-header {
             display: flex;
             align-items: center;
@@ -252,20 +239,15 @@
 
         .section-quick .section-header { border-color: #7B5EA7; color: #4B286D; }
         .section-quick .section-header .section-count { background: #f5f0ff; color: #4B286D; }
-
         .section-standard .section-header { border-color: #4B286D; color: #2B1B4E; }
         .section-standard .section-header .section-count { background: #ede8f5; color: #2B1B4E; }
-
         .section-complex .section-header { border-color: #2B1B4E; color: #2B1B4E; }
         .section-complex .section-header .section-count { background: #e8e4f0; color: #2B1B4E; }
-
         .section-advanced .section-header { border-color: #66CC00; color: #3a7a00; }
         .section-advanced .section-header .section-count { background: #f0fff0; color: #3a7a00; }
-
         .section-enterprise .section-header { border-color: #3a7a00; color: #2d6600; }
         .section-enterprise .section-header .section-count { background: #e8ffe8; color: #2d6600; }
 
-        /* SERVICE CARDS GRID */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -273,7 +255,6 @@
             margin-bottom: 32px;
         }
 
-        /* SERVICE CARD */
         .service-card {
             background: white;
             border-radius: 14px;
@@ -396,7 +377,6 @@
         .btn-select.selected-btn { background: #4B286D; color: white; }
         .btn-select.selected-btn:hover { background: #dc2626; border-color: #dc2626; }
 
-        /* Section callout banners */
         .section-callout {
             border-radius: 12px;
             padding: 14px 18px;
@@ -421,7 +401,6 @@
             color: #2d6600;
         }
 
-        /* EMPTY STATE */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -429,7 +408,6 @@
             font-size: 0.95em;
         }
 
-        /* ===== RIGHT PANEL ===== */
         .summary-panel {
             position: sticky;
             top: 20px;
@@ -567,7 +545,6 @@
         }
         .btn-clear:hover { border-color: #dc2626; color: #dc2626; }
 
-        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -722,7 +699,6 @@
         .btn-modal-submit:hover { background: linear-gradient(135deg, #2B1B4E 0%, #1a0f2e 100%); }
         .btn-modal-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* SUCCESS MODAL */
         .success-modal {
             display: none;
             position: fixed;
@@ -780,7 +756,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <div class="header-inner">
         <h1>📊 Analytics Service Catalog</h1>
@@ -788,7 +763,6 @@
     </div>
 </div>
 
-<!-- WORKFLOW BANNER -->
 <div class="workflow-banner">
     <div class="workflow-inner">
         <div class="workflow-step">
@@ -823,7 +797,6 @@
     </div>
 </div>
 
-<!-- TIER EXPLANATION -->
 <div class="tier-section">
     <div class="tier-inner">
         <h2>🏷️ Understanding Your Service Package</h2>
@@ -855,13 +828,9 @@
     </div>
 </div>
 
-<!-- MAIN LAYOUT -->
 <div class="main-layout">
 
-    <!-- LEFT: CATALOG -->
     <div class="catalog-area">
-
-        <!-- SEARCH & FILTERS -->
         <div class="search-filter-bar">
             <div class="search-group">
                 <label>🔍 Search Services</label>
@@ -880,12 +849,9 @@
             </div>
         </div>
 
-        <!-- SECTIONS -->
         <div id="catalogContent"></div>
-
     </div>
 
-    <!-- RIGHT: SUMMARY PANEL -->
     <div class="summary-panel">
         <div class="panel-header">
             <h3>📋 Your Request</h3>
@@ -1012,11 +978,75 @@
 </div>
 
 <script>
-    const services = [
+    /**
+     * parseTimeToHours(timeStr)
+     * Converts a time string to hours using the average of any range.
+     * - "60–90 min"   → avg(60,90)/60  = 1.25 hrs
+     * - "60–120 min"  → avg(60,120)/60 = 1.5 hrs
+     * - "240–360 min" → avg(240,360)/60 = 5 hrs
+     * - "TBA", "Ongoing", "Varies" → 3 hrs (placeholder)
+     */
+    function parseTimeToHours(timeStr) {
+        if (!timeStr) return 3;
+        const s = timeStr.trim().toLowerCase();
+        if (s === 'tba' || s === 'ongoing' || s === 'varies') return 3;
+
+        // Match range like "60–90 min" or "60-120 min"
+        const rangeMatch = s.match(/(\d+)\s*[–\-]\s*(\d+)\s*min/);
+        if (rangeMatch) {
+            const low = parseInt(rangeMatch[1], 10);
+            const high = parseInt(rangeMatch[2], 10);
+            // Average, converted to hours, rounded to 2 decimal places
+            return Math.round(((low + high) / 2 / 60) * 100) / 100;
+        }
+
+        // Match single value like "90 min"
+        const singleMatch = s.match(/(\d+)\s*min/);
+        if (singleMatch) {
+            return Math.round((parseInt(singleMatch[1], 10) / 60) * 100) / 100;
+        }
+
+        // Match hours like "2 hr" or "2 hours"
+        const hourMatch = s.match(/(\d+(?:\.\d+)?)\s*hr/);
+        if (hourMatch) {
+            return parseFloat(hourMatch[1]);
+        }
+
+        return 3; // fallback placeholder
+    }
+
+    /**
+     * formatHours(totalHours)
+     * Returns a clean string: whole numbers without decimals, decimals otherwise.
+     * Always prefixed with "Est. " for clarity.
+     */
+    function formatHoursDisplay(hours) {
+        const rounded = Math.round(hours * 100) / 100;
+        const numStr = (rounded % 1 === 0)
+            ? String(Math.floor(rounded))
+            : parseFloat(rounded.toFixed(2)).toString();
+        return `Est. ${numStr} hrs`;
+    }
+
+    /**
+     * formatHoursShort(hours)
+     * Just the number, no prefix — used for the stat panel counter.
+     */
+    function formatHoursShort(hours) {
+        if (hours === 0) return '0';
+        const rounded = Math.round(hours * 100) / 100;
+        return (rounded % 1 === 0)
+            ? String(Math.floor(rounded))
+            : parseFloat(rounded.toFixed(2)).toString();
+    }
+
+    // ── Services ──────────────────────────────────────────────────────────────
+    // timeHours is computed automatically from the `time` string via parseTimeToHours
+    const servicesRaw = [
         {
             id: 1, category: 'quick', baRequired: false,
             name: 'Bug or Error', icon: '🐛',
-            time: '60–120 min', timeHours: 1.5,
+            time: '60–120 min',
             shortDesc: 'Report any technical issues or errors encountered in the system.',
             fullDesc: 'Mark as Bug/Error in the subject line when submitting.',
             bullets: ['System errors or unexpected behaviour', 'Data discrepancies or missing records', 'Dashboard not loading or crashing', 'Any other technical malfunction']
@@ -1024,7 +1054,7 @@
         {
             id: 2, category: 'quick', baRequired: false,
             name: 'Dashboard Issues', icon: '📊',
-            time: '60–90 min', timeHours: 0.5,
+            time: '60–90 min',
             shortDesc: 'Fix broken filters, date ranges, or data display issues.',
             fullDesc: 'Quick resolution of dashboard functionality problems.',
             bullets: ['Filter not working correctly', 'Date range showing wrong period', 'Data not displaying properly', 'Dashboard loading errors']
@@ -1032,7 +1062,7 @@
         {
             id: 3, category: 'quick', baRequired: false,
             name: 'Minor Dashboard Updates', icon: '✏️',
-            time: '60–90 min', timeHours: 0.75,
+            time: '60–90 min',
             shortDesc: 'Quick updates to dashboard titles, labels, descriptions, or simple additions.',
             fullDesc: 'Small cosmetic or minor structural changes to existing dashboards.',
             bullets: ['Update dashboard title or chart labels', 'Fix typos or update descriptions', 'Simple additions (1 column, 1 filter)', 'Minor layout adjustments']
@@ -1040,15 +1070,15 @@
         {
             id: 5, category: 'standard', baRequired: false,
             name: 'Consultation Request', icon: '💬',
-            time: '60–90 min', timeHours: 1.25,
+            time: '60–90 min',
             shortDesc: 'In-depth consultation on analytics capabilities and requirements analysis.',
-            fullDesc: 'Work with our analytics team to explore what\'s possible and define your needs.',
+            fullDesc: "Work with our analytics team to explore what's possible and define your needs.",
             bullets: ['Understand available analytics capabilities', 'Deep-dive requirements analysis', 'Dashboard requirements and data points', 'Filter and metric recommendations']
         },
         {
             id: 6, category: 'standard', baRequired: false,
             name: 'New Simple Custom Dashboard', icon: '📈',
-            time: '60–120 min', timeHours: 1.5,
+            time: '60–120 min',
             shortDesc: 'Create a new custom dashboard with up to 9 tiles and one page of requirements.',
             fullDesc: 'A brand-new dashboard built to your custom specifications.',
             bullets: ['New dashboard (does not exist currently)', 'Maximum 9 dashboard tiles', 'Maximum 29 dashboard columns', 'One page of requirements']
@@ -1056,7 +1086,7 @@
         {
             id: 7, category: 'standard', baRequired: false,
             name: 'Modify Existing Dashboard', icon: '🔧',
-            time: '60–120 min', timeHours: 0.75,
+            time: '60–120 min',
             shortDesc: 'Edit and enhance an existing dashboard with new tiles or additional information.',
             fullDesc: 'Make targeted improvements to a dashboard that already exists.',
             bullets: ['Edit existing tiles to include more information', 'Add new tiles to an existing dashboard', 'One page of requirements', 'No LookML changes required']
@@ -1064,7 +1094,7 @@
         {
             id: 11, category: 'complex', baRequired: true,
             name: 'New Complex Custom Dashboard', icon: '🏗️',
-            time: '240–360 min', timeHours: 5,
+            time: '240–360 min',
             shortDesc: 'Create a new dashboard with 10+ tiles, 30+ columns, or multiple pages of requirements.',
             fullDesc: 'A comprehensive, multi-faceted dashboard for complex reporting needs. Requires BA review before scheduling.',
             bullets: ['10 or more dashboard tiles', '30 or more dashboard columns', 'Multiple pages of requirements', 'May require LookML changes']
@@ -1072,7 +1102,7 @@
         {
             id: 12, category: 'complex', baRequired: true,
             name: 'Complex Modifications to Existing Dashboard', icon: '⚙️',
-            time: '120–240 min', timeHours: 3,
+            time: '120–240 min',
             shortDesc: 'Advanced edits requiring LookML changes or multiple pages of requirements.',
             fullDesc: 'Deep modifications to existing dashboards that go beyond surface-level changes. Requires BA review.',
             bullets: ['Edits requiring LookML changes', 'Multiple pages of requirements', 'Complex adjustments to existing tiles', 'Structural changes to data model']
@@ -1080,7 +1110,7 @@
         {
             id: 13, category: 'complex', baRequired: true,
             name: 'Multi-Domain Reporting', icon: '🌐',
-            time: 'TBA', timeHours: 4,
+            time: 'TBA',
             shortDesc: 'Report across multiple domains and manage dashboards between multiple clients.',
             fullDesc: 'Cross-clinic or cross-domain reporting for organizations managing multiple sites. Requires BA review.',
             bullets: ['One user reports for multiple domains', 'Manage dashboards across multiple clients', 'Cross-clinic data aggregation', 'Requires BA scoping before scheduling'],
@@ -1089,7 +1119,7 @@
         {
             id: 30, category: 'advanced', baRequired: false,
             name: 'Automated Scheduled Reports', icon: '🤖',
-            time: 'TBA', timeHours: 1.5,
+            time: 'TBA',
             shortDesc: 'Create reports that automatically export on a recurring schedule.',
             fullDesc: 'Set up automated report delivery to keep your team informed without manual effort.',
             bullets: ['Scheduled exports to SFTP or email', 'Recurring delivery (daily, weekly, monthly)', 'Custom report format and content', 'Automated alerts and notifications'],
@@ -1098,7 +1128,7 @@
         {
             id: 20, category: 'enterprise', baRequired: false,
             name: 'Looker Training', icon: '📚',
-            time: '60–90 min', timeHours: 1.25,
+            time: '60–90 min',
             shortDesc: 'Training on Looker UI, dashboard management, and folder organization.',
             fullDesc: 'Get up to speed on using Looker effectively.',
             bullets: ['Looker UI navigation', 'How to move and manage dashboards', 'Folder organization best practices', 'Dashboard sharing and permissions']
@@ -1106,7 +1136,7 @@
         {
             id: 21, category: 'enterprise', baRequired: false,
             name: 'CHR Analytics Training', icon: '🎓',
-            time: '60–90 min', timeHours: 1.25,
+            time: '60–90 min',
             shortDesc: 'Training on editing and building dashboards in CHR Analytics.',
             fullDesc: 'Learn the fundamentals of CHR Analytics to become more self-sufficient.',
             bullets: ['Basics of editing dashboards', 'Building dashboards from scratch', 'Explores and Dimensions overview', 'Data model overview']
@@ -1114,7 +1144,7 @@
         {
             id: 22, category: 'enterprise', baRequired: false,
             name: 'Looker Additional User Request', icon: '👤',
-            time: 'Ongoing', timeHours: 0.25,
+            time: 'Ongoing',
             shortDesc: 'Add a Looker licensed user beyond your standard allocation.',
             fullDesc: 'Request an additional Looker user seat for your organization.',
             bullets: ['Additional user beyond standard allocation', 'Monthly recurring charge applies', 'User receives full Looker access', 'Contact care team for current pricing']
@@ -1122,12 +1152,18 @@
         {
             id: 23, category: 'enterprise', baRequired: false,
             name: 'Swap Looker Licensed User', icon: '🔄',
-            time: 'Varies', timeHours: 0.5,
+            time: 'Varies',
             shortDesc: 'Disable one user and transfer their Looker license to a new user.',
             fullDesc: 'Useful when staff changes require license reallocation.',
             bullets: ['Disable departing user account', 'Transfer license to new user', 'Manage license allocation', 'No additional cost for like-for-like swap']
         }
     ];
+
+    // Automatically compute timeHours from the time string
+    const services = servicesRaw.map(s => ({
+        ...s,
+        timeHours: parseTimeToHours(s.time)
+    }));
 
     const sections = [
         {
@@ -1164,7 +1200,7 @@
                 type: 'enterprise',
                 icon: '🏢',
                 title: 'Enterprise & Alberta PCN Clients Only',
-                text: 'The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. These are included in your monthly hours allocation. If you\'re unsure whether these apply to your package, contact your CARE team.'
+                text: "The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. These are included in your monthly hours allocation. If you're unsure whether these apply to your package, contact your CARE team."
             }
         }
     ];
@@ -1174,6 +1210,11 @@
     let currentSearch = '';
     let expandedCards = new Set();
     let selectedUrgency = 'standard';
+
+    function isTBATime(timeStr) {
+        const s = (timeStr || '').trim().toLowerCase();
+        return s === 'tba' || s === 'ongoing' || s === 'varies';
+    }
 
     function renderCatalog() {
         const container = document.getElementById('catalogContent');
@@ -1234,6 +1275,12 @@
     function renderCard(s, section) {
         const isSelected = selectedServices.some(sel => sel.id === s.id);
         const isExpanded = expandedCards.has(s.id);
+        const tba = isTBATime(s.time);
+
+        // "Est. 1.25 hrs" for ranges/single, "Est. 3 hrs (TBA)" for TBA/Ongoing/Varies
+        const estLabel = tba
+            ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+            : formatHoursDisplay(s.timeHours);
 
         let tierBadge = '';
         if (s.tierNote === 'Alberta PCN clients only') {
@@ -1250,7 +1297,7 @@
                         <span class="badge ${section.badgeClass}">${section.badgeLabel}</span>
                         ${s.baRequired ? '<span class="badge badge-ba">⚠️ BA Review</span>' : ''}
                         ${tierBadge}
-                        <span class="badge badge-time">⏱️ ${s.time}</span>
+                        <span class="badge badge-time">⏱️ ${s.time} · ${estLabel}</span>
                     </div>
                     <div class="card-title">${s.icon} ${s.name}</div>
                     <div class="card-desc">${s.shortDesc}</div>
@@ -1263,6 +1310,7 @@
                         <ul>${s.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
                         ${s.baRequired ? '<br><strong style="color:#991b1b;">⚠️ Note:</strong> This service requires a Business Analyst review before scheduling. Your care team will coordinate this after submission.' : ''}
                         ${s.tierNote ? `<br><strong style="color:#3a7a00;">📌 Availability:</strong> ${s.tierNote}.` : ''}
+                        ${tba ? '<br><strong style="color:#6b7280;">ℹ️ Duration:</strong> Exact time is TBA — 3 hrs used as a planning estimate.' : ''}
                     </div>
                 </div>
                 <div class="card-actions">
@@ -1297,11 +1345,12 @@
 
     function updatePanel() {
         const count = selectedServices.length;
+        // All timeHours are proper numbers computed by parseTimeToHours
         const totalHours = selectedServices.reduce((sum, s) => sum + s.timeHours, 0);
         const hasBA = selectedServices.some(s => s.baRequired);
 
         document.getElementById('statCount').textContent = count;
-        document.getElementById('statHours').textContent = totalHours > 0 ? (totalHours % 1 === 0 ? totalHours : totalHours.toFixed(1)) : '0';
+        document.getElementById('statHours').textContent = formatHoursShort(totalHours);
         document.getElementById('submitBtn').disabled = count === 0;
 
         const baWarn = document.getElementById('baWarning');
@@ -1312,15 +1361,21 @@
         if (count === 0) {
             listEl.innerHTML = `<div class="empty-selection"><div style="font-size:1.8em;margin-bottom:6px;">🛒</div>No services selected yet.<br>Browse the catalog and click <strong>Select</strong>.</div>`;
         } else {
-            listEl.innerHTML = selectedServices.map(s => `
-                <div class="selected-item">
-                    <div style="flex:1;">
-                        <div class="item-name">${s.icon} ${s.name}</div>
-                        <div class="item-time">⏱️ ${s.time}${s.baRequired ? ' · ⚠️ BA Review' : ''}</div>
+            listEl.innerHTML = selectedServices.map(s => {
+                const tba = isTBATime(s.time);
+                const estLabel = tba
+                    ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+                    : formatHoursDisplay(s.timeHours);
+                return `
+                    <div class="selected-item">
+                        <div style="flex:1;">
+                            <div class="item-name">${s.icon} ${s.name}</div>
+                            <div class="item-time">⏱️ ${s.time} · ${estLabel}${s.baRequired ? ' · ⚠️ BA Review' : ''}</div>
+                        </div>
+                        <button class="remove-btn" onclick="toggleSelect(${s.id})" title="Remove">✕</button>
                     </div>
-                    <button class="remove-btn" onclick="toggleSelect(${s.id})" title="Remove">✕</button>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
     }
 
@@ -1353,9 +1408,13 @@
 
     function openModal() {
         const listEl = document.getElementById('modalServicesList');
-        listEl.innerHTML = selectedServices.map(s => `
-            <div class="modal-service-item">✓ ${s.icon} ${s.name} <span style="color:#6b7280;font-weight:400;margin-left:auto;font-size:0.9em;">⏱️ ${s.time}</span></div>
-        `).join('');
+        listEl.innerHTML = selectedServices.map(s => {
+            const tba = isTBATime(s.time);
+            const estLabel = tba
+                ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+                : formatHoursDisplay(s.timeHours);
+            return `<div class="modal-service-item">✓ ${s.icon} ${s.name} <span style="color:#6b7280;font-weight:400;margin-left:auto;font-size:0.9em;">⏱️ ${s.time} · ${estLabel}</span></div>`;
+        }).join('');
         document.getElementById('reqDescription').value = '';
         document.getElementById('reqNotes').value = '';
         document.getElementById('reqDomain').value = '';
@@ -1395,6 +1454,7 @@
         const urgency = selectedUrgency;
 
         const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const totalHours = selectedServices.reduce((sum, s) => sum + s.timeHours, 0);
 
         let emailBody = `📋 Analytics Service Request\n`;
         emailBody += `Date Submitted: ${today}\n\n`;
@@ -1402,11 +1462,15 @@
 
         emailBody += `📌 Services Requested:\n`;
         selectedServices.forEach(s => {
-            emailBody += `   • ${s.icon} ${s.name} (⏱️ ${s.time})${s.baRequired ? ' [⚠️ BA Review Required]' : ''}${s.tierNote ? ` [${s.tierNote}]` : ''}\n`;
+            const tba = isTBATime(s.time);
+            const estLabel = tba
+                ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+                : formatHoursDisplay(s.timeHours);
+            emailBody += `   • ${s.icon} ${s.name} (⏱️ ${s.time} · ${estLabel})${s.baRequired ? ' [⚠️ BA Review Required]' : ''}${s.tierNote ? ` [${s.tierNote}]` : ''}\n`;
         });
         emailBody += `\n`;
 
-        emailBody += `⏱️ Total Estimated Hours: ${selectedServices.reduce((sum, s) => sum + s.timeHours, 0)} hours\n`;
+        emailBody += `⏱️ Total Estimated Hours: ${formatHoursDisplay(totalHours)}\n`;
         emailBody += `⚠️ BA Review Required: ${selectedServices.some(s => s.baRequired) ? 'Yes' : 'No'}\n`;
         emailBody += `🔶 Urgency Level: ${urgency.charAt(0).toUpperCase() + urgency.slice(1)}\n\n`;
 
