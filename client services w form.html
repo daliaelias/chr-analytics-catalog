@@ -1,0 +1,1532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Service Catalog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%);
+            color: white;
+            padding: 32px 40px;
+            border-bottom: 4px solid #66CC00;
+        }
+        .header-inner { max-width: 1400px; margin: 0 auto; }
+        .header h1 { font-size: 2em; font-weight: 700; margin-bottom: 6px; }
+        .header p { opacity: 0.85; font-size: 1em; }
+
+        .workflow-banner {
+            background: linear-gradient(135deg, #f5f0ff 0%, #ede8f5 100%);
+            border-bottom: 2px solid #7B5EA7;
+            padding: 16px 40px;
+        }
+        .workflow-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #4B286D;
+            white-space: nowrap;
+        }
+        .workflow-step .step-num {
+            background: #4B286D;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+        .workflow-arrow {
+            color: #7B5EA7;
+            font-size: 1.1em;
+            margin: 0 10px;
+        }
+
+        .tier-section {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 28px 40px;
+        }
+        .tier-inner { max-width: 1400px; margin: 0 auto; }
+        .tier-section h2 {
+            font-size: 1.05em;
+            font-weight: 700;
+            color: #2B1B4E;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tier-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .tier-card {
+            border-radius: 12px;
+            padding: 16px 18px;
+            border: 1.5px solid;
+        }
+        .tier-card.t1 { background: #fdf6ff; border-color: #7B5EA7; }
+        .tier-card.t2 { background: #f5f0ff; border-color: #4B286D; }
+        .tier-card.t3 { background: #f0fff0; border-color: #66CC00; }
+        .tier-card.t4 { background: #fdf4ff; border-color: #2B1B4E; }
+
+        .tier-card .tier-name {
+            font-size: 0.82em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+        .tier-card.t1 .tier-name { color: #7B5EA7; }
+        .tier-card.t2 .tier-name { color: #4B286D; }
+        .tier-card.t3 .tier-name { color: #3a7a00; }
+        .tier-card.t4 .tier-name { color: #2B1B4E; }
+
+        .tier-card .tier-desc {
+            font-size: 0.82em;
+            color: #4b5563;
+            line-height: 1.55;
+        }
+        .tier-card .tier-highlight {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+        .tier-card.t1 .tier-highlight { color: #7B5EA7; }
+        .tier-card.t2 .tier-highlight { color: #4B286D; }
+        .tier-card.t3 .tier-highlight { color: #3a7a00; }
+        .tier-card.t4 .tier-highlight { color: #2B1B4E; }
+
+        .tier-note {
+            margin-top: 14px;
+            font-size: 0.8em;
+            color: #6b7280;
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 10px 14px;
+            border-left: 3px solid #4B286D;
+        }
+
+        .main-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+            padding: 24px 20px;
+            align-items: start;
+        }
+
+        .search-filter-bar {
+            background: white;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .search-group {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .search-group label {
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .search-group input {
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95em;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-group input:focus { border-color: #4B286D; }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .filter-group label {
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-pill {
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            font-size: 0.82em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4b5563;
+        }
+        .filter-pill:hover { border-color: #4B286D; color: #4B286D; }
+        .filter-pill.active { background: #4B286D; border-color: #4B286D; color: white; }
+        .filter-pill.quick.active { background: #7B5EA7; border-color: #7B5EA7; }
+        .filter-pill.standard.active { background: #4B286D; border-color: #4B286D; }
+        .filter-pill.complex.active { background: #2B1B4E; border-color: #2B1B4E; }
+        .filter-pill.advanced.active { background: #66CC00; border-color: #66CC00; color: #1a1a1a; }
+        .filter-pill.enterprise.active { background: #3a7a00; border-color: #3a7a00; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+        }
+        .section-header .section-icon { font-size: 1.5em; }
+        .section-header h2 { font-size: 1.15em; font-weight: 700; }
+        .section-header .section-count {
+            margin-left: auto;
+            font-size: 0.78em;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        .section-header .section-desc {
+            font-size: 0.8em;
+            font-weight: 400;
+            opacity: 0.75;
+            margin-left: 4px;
+        }
+
+        .section-quick .section-header { border-color: #7B5EA7; color: #4B286D; }
+        .section-quick .section-header .section-count { background: #f5f0ff; color: #4B286D; }
+        .section-standard .section-header { border-color: #4B286D; color: #2B1B4E; }
+        .section-standard .section-header .section-count { background: #ede8f5; color: #2B1B4E; }
+        .section-complex .section-header { border-color: #2B1B4E; color: #2B1B4E; }
+        .section-complex .section-header .section-count { background: #e8e4f0; color: #2B1B4E; }
+        .section-advanced .section-header { border-color: #66CC00; color: #3a7a00; }
+        .section-advanced .section-header .section-count { background: #f0fff0; color: #3a7a00; }
+        .section-enterprise .section-header { border-color: #3a7a00; color: #2d6600; }
+        .section-enterprise .section-header .section-count { background: #e8ffe8; color: #2d6600; }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 14px;
+            border: 2px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(75,40,109,0.15);
+        }
+        .service-card.selected {
+            border-color: #4B286D;
+            box-shadow: 0 0 0 3px rgba(75,40,109,0.15), 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card-top-bar { height: 5px; }
+        .quick .card-top-bar { background: #7B5EA7; }
+        .standard-svc .card-top-bar { background: #4B286D; }
+        .complex .card-top-bar { background: #2B1B4E; }
+        .advanced-svc .card-top-bar { background: #66CC00; }
+        .enterprise-svc .card-top-bar { background: #3a7a00; }
+
+        .card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+
+        .card-badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-quick { background: #f5f0ff; color: #4B286D; }
+        .badge-standard { background: #ede8f5; color: #2B1B4E; }
+        .badge-complex { background: #e8e4f0; color: #2B1B4E; }
+        .badge-advanced { background: #f0fff0; color: #3a7a00; }
+        .badge-enterprise { background: #e8ffe8; color: #2d6600; border: 1px solid #66CC00; }
+        .badge-pcn { background: #fdf4ff; color: #2B1B4E; border: 1px solid #4B286D; }
+        .badge-ba { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        .badge-time { background: #f3f4f6; color: #374151; }
+
+        .card-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: #2B1B4E;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.85em;
+            color: #6b7280;
+            line-height: 1.55;
+            margin-bottom: 12px;
+            flex: 1;
+        }
+
+        .card-expand-btn {
+            background: none;
+            border: none;
+            color: #4B286D;
+            font-size: 0.8em;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-align: left;
+        }
+        .card-expand-btn:hover { color: #2B1B4E; }
+        .expand-arrow { transition: transform 0.25s; display: inline-block; }
+        .expand-arrow.open { transform: rotate(180deg); }
+
+        .card-details {
+            display: none;
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 0.82em;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        .card-details.show { display: block; }
+        .card-details ul { margin: 6px 0 0 16px; }
+        .card-details li { margin-bottom: 3px; }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            padding: 12px 18px 14px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .btn-select {
+            flex: 1;
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: 2px solid #4B286D;
+            background: white;
+            color: #4B286D;
+            font-weight: 700;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-select:hover { background: #4B286D; color: white; }
+        .btn-select.selected-btn { background: #4B286D; color: white; }
+        .btn-select.selected-btn:hover { background: #dc2626; border-color: #dc2626; }
+
+        .section-callout {
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.85em;
+        }
+        .section-callout .callout-icon { font-size: 1.5em; flex-shrink: 0; margin-top: 2px; }
+        .section-callout strong { display: block; font-size: 1em; margin-bottom: 3px; }
+        .section-callout span { opacity: 0.9; line-height: 1.5; }
+
+        .callout-advanced-section {
+            background: linear-gradient(135deg, #f0fff0 0%, #e8ffe8 100%);
+            border: 2px solid #66CC00;
+            color: #2d6600;
+        }
+        .callout-enterprise-section {
+            background: linear-gradient(135deg, #f0fff0 0%, #d4f5d4 100%);
+            border: 2px solid #3a7a00;
+            color: #2d6600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9ca3af;
+            font-size: 0.95em;
+        }
+
+        .summary-panel {
+            position: sticky;
+            top: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(75,40,109,0.15);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%);
+            color: white;
+            padding: 18px 20px;
+            border-bottom: 3px solid #66CC00;
+        }
+        .panel-header h3 { font-size: 1em; font-weight: 700; margin-bottom: 2px; }
+        .panel-header p { font-size: 0.78em; opacity: 0.8; }
+
+        .panel-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .panel-stat {
+            background: #f9fafb;
+            padding: 12px 16px;
+            text-align: center;
+        }
+        .panel-stat .stat-val { font-size: 1.4em; font-weight: 700; color: #2B1B4E; }
+        .panel-stat .stat-label { font-size: 0.72em; color: #6b7280; font-weight: 600; text-transform: uppercase; }
+
+        .panel-body { padding: 16px; }
+
+        .selected-list {
+            min-height: 80px;
+            max-height: 260px;
+            overflow-y: auto;
+            margin-bottom: 14px;
+        }
+
+        .selected-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 10px;
+            background: #f5f0ff;
+            border: 1px solid #7B5EA7;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.82em;
+        }
+        .selected-item .item-name { flex: 1; font-weight: 600; color: #4B286D; line-height: 1.3; }
+        .selected-item .item-time { color: #6b7280; font-size: 0.9em; margin-top: 2px; }
+        .selected-item .remove-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.1em;
+            padding: 0;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .selected-item .remove-btn:hover { color: #dc2626; }
+
+        .empty-selection {
+            text-align: center;
+            padding: 24px 10px;
+            color: #9ca3af;
+            font-size: 0.82em;
+            border: 2px dashed #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .ba-warning {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 0.8em;
+            color: #991b1b;
+            display: none;
+        }
+        .ba-warning.show { display: block; }
+        .ba-warning strong { display: block; margin-bottom: 2px; }
+
+        .next-steps {
+            background: #f0fff0;
+            border: 1px solid #66CC00;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 0.78em;
+            color: #2d6600;
+        }
+        .next-steps strong { display: block; margin-bottom: 6px; font-size: 1.05em; }
+        .next-steps ol { margin-left: 14px; }
+        .next-steps li { margin-bottom: 3px; line-height: 1.4; }
+
+        .panel-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4B286D 0%, #2B1B4E 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 3px solid #66CC00;
+        }
+        .btn-submit:hover:not(:disabled) { background: linear-gradient(135deg, #2B1B4E 0%, #1a0f2e 100%); transform: translateY(-1px); }
+        .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .btn-clear {
+            width: 100%;
+            padding: 9px;
+            background: white;
+            color: #6b7280;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-clear:hover { border-color: #dc2626; color: #dc2626; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 580px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #66CC00;
+        }
+        .modal-header h2 { font-size: 1.2em; }
+        .modal-close {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover { background: rgba(255,255,255,0.25); }
+        .modal-body { padding: 28px; }
+
+        .modal-services-list {
+            background: #f5f0ff;
+            border: 1px solid #7B5EA7;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+        }
+        .modal-services-list h4 { font-size: 0.85em; color: #4B286D; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+        .modal-service-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88em;
+            color: #2B1B4E;
+            font-weight: 600;
+            padding: 4px 0;
+        }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-group label .required { color: #dc2626; }
+        .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+        .form-group textarea:focus, .form-group select:focus { border-color: #4B286D; }
+        .form-group .hint { font-size: 0.75em; color: #9ca3af; margin-top: 4px; }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .form-group input[type="text"]:focus { border-color: #4B286D; }
+
+        .urgency-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .urgency-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .urgency-option:hover { border-color: #4B286D; }
+        .urgency-option.selected { border-color: #4B286D; background: #f5f0ff; }
+        .urgency-option .urgency-label { font-size: 0.82em; font-weight: 700; color: #374151; display: block; }
+        .urgency-option .urgency-desc { font-size: 0.72em; color: #6b7280; display: block; margin-top: 2px; }
+
+        .modal-footer {
+            padding: 16px 28px 24px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn-modal-cancel {
+            flex: 1;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        .btn-modal-cancel:hover { border-color: #9ca3af; }
+        .btn-modal-submit {
+            flex: 2;
+            padding: 12px;
+            background: linear-gradient(135deg, #4B286D 0%, #2B1B4E 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 3px solid #66CC00;
+        }
+        .btn-modal-submit:hover { background: linear-gradient(135deg, #2B1B4E 0%, #1a0f2e 100%); }
+        .btn-modal-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .success-modal.show { display: flex; }
+        .success-box {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-top: 5px solid #66CC00;
+        }
+        .success-icon { font-size: 3.5em; margin-bottom: 16px; }
+        .success-box h2 { font-size: 1.4em; color: #2B1B4E; margin-bottom: 10px; }
+        .success-box p { color: #6b7280; font-size: 0.9em; line-height: 1.6; margin-bottom: 20px; }
+        .btn-success-close {
+            padding: 12px 28px;
+            background: #4B286D;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.95em;
+            border-bottom: 3px solid #66CC00;
+        }
+
+        .catalog-section { margin-bottom: 8px; }
+
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .summary-panel { position: static; }
+            .header { padding: 24px 20px; }
+            .header h1 { font-size: 1.5em; }
+            .workflow-banner { padding: 12px 20px; }
+            .workflow-step { font-size: 0.75em; }
+            .tier-section { padding: 20px; }
+        }
+        @media (max-width: 600px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .workflow-inner { gap: 6px; }
+            .workflow-arrow { margin: 0 4px; }
+            .tier-cards { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-inner">
+        <h1>📊 Analytics Service Catalog</h1>
+        <p>Browse available services, build your request, and submit to our analytics team</p>
+    </div>
+</div>
+
+<div class="workflow-banner">
+    <div class="workflow-inner">
+        <div class="workflow-step">
+            <span class="step-num">1</span>
+            Browse & Select Services
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">2</span>
+            Submit Your Request
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">3</span>
+            Care Team Reviews & Scopes
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">4</span>
+            BA Review (if complex)
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">5</span>
+            Analytics Team Builds
+        </div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">
+            <span class="step-num">6</span>
+            You Receive Results ✓
+        </div>
+    </div>
+</div>
+
+<div class="tier-section">
+    <div class="tier-inner">
+        <h2>🏷️ Understanding Your Service Package</h2>
+        <div class="tier-cards">
+            <div class="tier-card t1">
+                <div class="tier-name">Analytics Essentials</div>
+                <span class="tier-highlight">Pay-per-service</span>
+                <div class="tier-desc">Each service is scoped and quoted individually by the CARE team based on your request. Pricing is determined after submission.</div>
+            </div>
+            <div class="tier-card t2">
+                <div class="tier-name">Analytics Advanced</div>
+                <span class="tier-highlight">5 included hours/month</span>
+                <div class="tier-desc">Your package includes 5 analyst hours per month. Most services are covered within your allocation. Additional hours beyond your package are quoted by the CARE team.</div>
+            </div>
+            <div class="tier-card t3">
+                <div class="tier-name">Analytics Enterprise</div>
+                <span class="tier-highlight">10 included hours/month</span>
+                <div class="tier-desc">Your package includes 10 analyst hours per month. Most services are covered within your allocation. Additional hours beyond your package are quoted by the CARE team.</div>
+            </div>
+            <div class="tier-card t4">
+                <div class="tier-name">Alberta PCN</div>
+                <span class="tier-highlight">All services included</span>
+                <div class="tier-desc">All analytics services are fully included in your package, including multi-domain reporting across your clinics. No additional charges for standard services.</div>
+            </div>
+        </div>
+        <div class="tier-note">
+            💡 <strong>Not sure which package you're on?</strong> Contact your CARE team at <strong>care.emraccounts@telus.com</strong> — they'll confirm your tier and available hours before your request is scoped.
+        </div>
+    </div>
+</div>
+
+<div class="main-layout">
+
+    <div class="catalog-area">
+        <div class="search-filter-bar">
+            <div class="search-group">
+                <label>🔍 Search Services</label>
+                <input type="text" id="searchInput" placeholder="Dashboard, Training, Bug fix...">
+            </div>
+            <div class="filter-group">
+                <label>Filter by Type</label>
+                <div class="filter-pills">
+                    <button class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">All</button>
+                    <button class="filter-pill quick" data-filter="quick" onclick="setFilter('quick', this)">⚡ Quick Fixes</button>
+                    <button class="filter-pill standard" data-filter="standard" onclick="setFilter('standard', this)">🔧 Core Services</button>
+                    <button class="filter-pill complex" data-filter="complex" onclick="setFilter('complex', this)">⚙️ Complex Projects</button>
+                    <button class="filter-pill advanced" data-filter="advanced" onclick="setFilter('advanced', this)">📦 Advanced Clients</button>
+                    <button class="filter-pill enterprise" data-filter="enterprise" onclick="setFilter('enterprise', this)">🏢 Enterprise & PCN</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="catalogContent"></div>
+    </div>
+
+    <div class="summary-panel">
+        <div class="panel-header">
+            <h3>📋 Your Request</h3>
+            <p>Select services from the catalog</p>
+        </div>
+        <div class="panel-stats">
+            <div class="panel-stat">
+                <div class="stat-val" id="statCount">0</div>
+                <div class="stat-label">Services</div>
+            </div>
+            <div class="panel-stat">
+                <div class="stat-val" id="statHours">0</div>
+                <div class="stat-label">Est. Hours</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div id="selectedList" class="selected-list">
+                <div class="empty-selection">
+                    <div style="font-size:1.8em;margin-bottom:6px;">🛒</div>
+                    No services selected yet.<br>Browse the catalog and click <strong>Select</strong>.
+                </div>
+            </div>
+
+            <div class="ba-warning" id="baWarning">
+                <strong>⚠️ BA Review Required</strong>
+                One or more of your selected services requires a Business Analyst review before scheduling. This may add 1–2 business days to your timeline.
+            </div>
+
+            <div class="next-steps">
+                <strong>📌 What Happens Next</strong>
+                <ol>
+                    <li>Submit your request with details</li>
+                    <li>Care team reviews & determines scope</li>
+                    <li>BA reviews complex items if needed</li>
+                    <li>Analytics team schedules & builds</li>
+                    <li>You receive your deliverable ✓</li>
+                </ol>
+            </div>
+
+            <div class="panel-actions">
+                <button class="btn-submit" id="submitBtn" disabled onclick="openModal()">
+                    Submit Request →
+                </button>
+                <button class="btn-clear" onclick="clearAll()">✕ Clear All</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- REQUEST MODAL -->
+<div class="modal-overlay" id="requestModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>📝 Submit Your Analytics Request</h2>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-services-list">
+                <h4>Selected Services</h4>
+                <div id="modalServicesList"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Customer Domain / URL <span class="required">*</span></label>
+                <input type="text" id="reqDomain" placeholder="e.g., myclinic.teluschr.com">
+            </div>
+
+            <div class="form-group">
+                <label>Client Contact Name & Email <span class="required">*</span></label>
+                <input type="text" id="reqContact" placeholder="Your Name (email@example.com)">
+            </div>
+
+            <div class="form-group">
+                <label>Describe Your Requirements <span class="required">*</span></label>
+                <textarea id="reqDescription" rows="5" placeholder="Please describe what you need in as much detail as possible. Include: what data you want to see, any specific metrics or KPIs, which dashboards are affected, and your desired outcome."></textarea>
+                <div class="hint">Minimum 20 characters. The more detail you provide, the faster we can scope your request.</div>
+            </div>
+
+            <div class="form-group">
+                <label>Link to Screenshot, Mockup, or Existing Dashboard <span style="color:#9ca3af;font-weight:400;">(Optional)</span></label>
+                <input type="text" id="reqVisual" placeholder="Paste link or dashboard ID here">
+            </div>
+
+            <div class="form-group">
+                <label>Urgency Level <span style="color:#9ca3af;font-weight:400;">(Optional)</span></label>
+                <div class="urgency-options">
+                    <div class="urgency-option selected" data-urgency="standard" onclick="selectUrgency(this)">
+                        <span class="urgency-label">📅 Standard</span>
+                        <span class="urgency-desc">2–4 weeks</span>
+                    </div>
+                    <div class="urgency-option" data-urgency="high" onclick="selectUrgency(this)">
+                        <span class="urgency-label">🔶 High</span>
+                        <span class="urgency-desc">1–2 weeks</span>
+                    </div>
+                    <div class="urgency-option" data-urgency="critical" onclick="selectUrgency(this)">
+                        <span class="urgency-label">🔴 Critical</span>
+                        <span class="urgency-desc">ASAP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Notes <span style="color:#9ca3af;font-weight:400;">(Optional)</span></label>
+                <textarea id="reqNotes" rows="2" placeholder="Any other context, constraints, or preferences..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-modal-submit" id="modalSubmitBtn" disabled onclick="submitRequest()">Generate Email to CARE Team →</button>
+        </div>
+    </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-modal" id="successModal">
+    <div class="success-box">
+        <div class="success-icon">✅</div>
+        <h2>Request Submitted!</h2>
+        <p>Your Gmail compose window has opened with your request pre-filled and addressed to the CARE team at <strong>care.emraccounts@telus.com</strong>.</p>
+        <p style="margin-bottom:20px;">Please review the email and click <strong>Send</strong> to complete your submission. The team will review your request and reach out within 1–2 business days.</p>
+        <button class="btn-success-close" onclick="closeSuccess()">Back to Catalog</button>
+    </div>
+</div>
+
+<script>
+    /**
+     * parseTimeToHours(timeStr)
+     * Converts a time string to hours using the average of any range.
+     * - "60–90 min"   → avg(60,90)/60  = 1.25 hrs
+     * - "60–120 min"  → avg(60,120)/60 = 1.5 hrs
+     * - "240–360 min" → avg(240,360)/60 = 5 hrs
+     * - "TBA", "Ongoing", "Varies" → 3 hrs (placeholder)
+     */
+    function parseTimeToHours(timeStr) {
+        if (!timeStr) return 3;
+        const s = timeStr.trim().toLowerCase();
+        if (s === 'tba' || s === 'ongoing' || s === 'varies') return 3;
+
+        // Match range like "60–90 min" or "60-120 min"
+        const rangeMatch = s.match(/(\d+)\s*[–\-]\s*(\d+)\s*min/);
+        if (rangeMatch) {
+            const low = parseInt(rangeMatch[1], 10);
+            const high = parseInt(rangeMatch[2], 10);
+            // Average, converted to hours, rounded to 2 decimal places
+            return Math.round(((low + high) / 2 / 60) * 100) / 100;
+        }
+
+        // Match single value like "90 min"
+        const singleMatch = s.match(/(\d+)\s*min/);
+        if (singleMatch) {
+            return Math.round((parseInt(singleMatch[1], 10) / 60) * 100) / 100;
+        }
+
+        // Match hours like "2 hr" or "2 hours"
+        const hourMatch = s.match(/(\d+(?:\.\d+)?)\s*hr/);
+        if (hourMatch) {
+            return parseFloat(hourMatch[1]);
+        }
+
+        return 3; // fallback placeholder
+    }
+
+    /**
+     * formatHours(totalHours)
+     * Returns a clean string: whole numbers without decimals, decimals otherwise.
+     * Always prefixed with "Est. " for clarity.
+     */
+    function formatHoursDisplay(hours) {
+        const rounded = Math.round(hours * 100) / 100;
+        const numStr = (rounded % 1 === 0)
+            ? String(Math.floor(rounded))
+            : parseFloat(rounded.toFixed(2)).toString();
+        return `Est. ${numStr} hrs`;
+    }
+
+    /**
+     * formatHoursShort(hours)
+     * Just the number, no prefix — used for the stat panel counter.
+     */
+    function formatHoursShort(hours) {
+        if (hours === 0) return '0';
+        const rounded = Math.round(hours * 100) / 100;
+        return (rounded % 1 === 0)
+            ? String(Math.floor(rounded))
+            : parseFloat(rounded.toFixed(2)).toString();
+    }
+
+    // ── Services ──────────────────────────────────────────────────────────────
+    // timeHours is computed automatically from the `time` string via parseTimeToHours
+    const servicesRaw = [
+        {
+            id: 1, category: 'quick', baRequired: false,
+            name: 'Bug or Error', icon: '🐛',
+            time: '60–120 min',
+            shortDesc: 'Report any technical issues or errors encountered in the system.',
+            fullDesc: 'Mark as Bug/Error in the subject line when submitting.',
+            bullets: ['System errors or unexpected behaviour', 'Data discrepancies or missing records', 'Dashboard not loading or crashing', 'Any other technical malfunction']
+        },
+        {
+            id: 2, category: 'quick', baRequired: false,
+            name: 'Dashboard Issues', icon: '📊',
+            time: '60–90 min',
+            shortDesc: 'Fix broken filters, date ranges, or data display issues.',
+            fullDesc: 'Quick resolution of dashboard functionality problems.',
+            bullets: ['Filter not working correctly', 'Date range showing wrong period', 'Data not displaying properly', 'Dashboard loading errors']
+        },
+        {
+            id: 3, category: 'quick', baRequired: false,
+            name: 'Minor Dashboard Updates', icon: '✏️',
+            time: '60–90 min',
+            shortDesc: 'Quick updates to dashboard titles, labels, descriptions, or simple additions.',
+            fullDesc: 'Small cosmetic or minor structural changes to existing dashboards.',
+            bullets: ['Update dashboard title or chart labels', 'Fix typos or update descriptions', 'Simple additions (1 column, 1 filter)', 'Minor layout adjustments']
+        },
+        {
+            id: 5, category: 'standard', baRequired: false,
+            name: 'Consultation Request', icon: '💬',
+            time: '60–90 min',
+            shortDesc: 'In-depth consultation on analytics capabilities and requirements analysis.',
+            fullDesc: "Work with our analytics team to explore what's possible and define your needs.",
+            bullets: ['Understand available analytics capabilities', 'Deep-dive requirements analysis', 'Dashboard requirements and data points', 'Filter and metric recommendations']
+        },
+        {
+            id: 6, category: 'standard', baRequired: false,
+            name: 'New Simple Custom Dashboard', icon: '📈',
+            time: '60–120 min',
+            shortDesc: 'Create a new custom dashboard with up to 9 tiles and one page of requirements.',
+            fullDesc: 'A brand-new dashboard built to your custom specifications.',
+            bullets: ['New dashboard (does not exist currently)', 'Maximum 9 dashboard tiles', 'Maximum 29 dashboard columns', 'One page of requirements']
+        },
+        {
+            id: 7, category: 'standard', baRequired: false,
+            name: 'Modify Existing Dashboard', icon: '🔧',
+            time: '60–120 min',
+            shortDesc: 'Edit and enhance an existing dashboard with new tiles or additional information.',
+            fullDesc: 'Make targeted improvements to a dashboard that already exists.',
+            bullets: ['Edit existing tiles to include more information', 'Add new tiles to an existing dashboard', 'One page of requirements', 'No LookML changes required']
+        },
+        {
+            id: 11, category: 'complex', baRequired: true,
+            name: 'New Complex Custom Dashboard', icon: '🏗️',
+            time: '240–360 min',
+            shortDesc: 'Create a new dashboard with 10+ tiles, 30+ columns, or multiple pages of requirements.',
+            fullDesc: 'A comprehensive, multi-faceted dashboard for complex reporting needs. Requires BA review before scheduling.',
+            bullets: ['10 or more dashboard tiles', '30 or more dashboard columns', 'Multiple pages of requirements', 'May require LookML changes']
+        },
+        {
+            id: 12, category: 'complex', baRequired: true,
+            name: 'Complex Modifications to Existing Dashboard', icon: '⚙️',
+            time: '120–240 min',
+            shortDesc: 'Advanced edits requiring LookML changes or multiple pages of requirements.',
+            fullDesc: 'Deep modifications to existing dashboards that go beyond surface-level changes. Requires BA review.',
+            bullets: ['Edits requiring LookML changes', 'Multiple pages of requirements', 'Complex adjustments to existing tiles', 'Structural changes to data model']
+        },
+        {
+            id: 13, category: 'complex', baRequired: true,
+            name: 'Multi-Domain Reporting', icon: '🌐',
+            time: 'TBA',
+            shortDesc: 'Report across multiple domains and manage dashboards between multiple clients.',
+            fullDesc: 'Cross-clinic or cross-domain reporting for organizations managing multiple sites. Requires BA review.',
+            bullets: ['One user reports for multiple domains', 'Manage dashboards across multiple clients', 'Cross-clinic data aggregation', 'Requires BA scoping before scheduling'],
+            tierNote: 'Alberta PCN clients only'
+        },
+        {
+            id: 30, category: 'advanced', baRequired: false,
+            name: 'Automated Scheduled Reports', icon: '🤖',
+            time: 'TBA',
+            shortDesc: 'Create reports that automatically export on a recurring schedule.',
+            fullDesc: 'Set up automated report delivery to keep your team informed without manual effort.',
+            bullets: ['Scheduled exports to SFTP or email', 'Recurring delivery (daily, weekly, monthly)', 'Custom report format and content', 'Automated alerts and notifications'],
+            tierNote: 'Available for Advanced & Enterprise clients'
+        },
+        {
+            id: 20, category: 'enterprise', baRequired: false,
+            name: 'Looker Training', icon: '📚',
+            time: '60–90 min',
+            shortDesc: 'Training on Looker UI, dashboard management, and folder organization.',
+            fullDesc: 'Get up to speed on using Looker effectively.',
+            bullets: ['Looker UI navigation', 'How to move and manage dashboards', 'Folder organization best practices', 'Dashboard sharing and permissions']
+        },
+        {
+            id: 21, category: 'enterprise', baRequired: false,
+            name: 'CHR Analytics Training', icon: '🎓',
+            time: '60–90 min',
+            shortDesc: 'Training on editing and building dashboards in CHR Analytics.',
+            fullDesc: 'Learn the fundamentals of CHR Analytics to become more self-sufficient.',
+            bullets: ['Basics of editing dashboards', 'Building dashboards from scratch', 'Explores and Dimensions overview', 'Data model overview']
+        },
+        {
+            id: 22, category: 'enterprise', baRequired: false,
+            name: 'Looker Additional User Request', icon: '👤',
+            time: 'Ongoing',
+            shortDesc: 'Add a Looker licensed user beyond your standard allocation.',
+            fullDesc: 'Request an additional Looker user seat for your organization.',
+            bullets: ['Additional user beyond standard allocation', 'Monthly recurring charge applies', 'User receives full Looker access', 'Contact care team for current pricing']
+        },
+        {
+            id: 23, category: 'enterprise', baRequired: false,
+            name: 'Swap Looker Licensed User', icon: '🔄',
+            time: 'Varies',
+            shortDesc: 'Disable one user and transfer their Looker license to a new user.',
+            fullDesc: 'Useful when staff changes require license reallocation.',
+            bullets: ['Disable departing user account', 'Transfer license to new user', 'Manage license allocation', 'No additional cost for like-for-like swap']
+        }
+    ];
+
+    // Automatically compute timeHours from the time string
+    const services = servicesRaw.map(s => ({
+        ...s,
+        timeHours: parseTimeToHours(s.time)
+    }));
+
+    const sections = [
+        {
+            key: 'quick', label: 'Quick Fixes', icon: '⚡',
+            desc: '60–90 min · No BA review required · Typically resolved within 2–5 business days',
+            cssClass: 'section-quick', cardClass: 'quick', badgeClass: 'badge-quick', badgeLabel: 'Quick Fix'
+        },
+        {
+            key: 'standard', label: 'Core Services', icon: '🔧',
+            desc: '60–120 min · May require BA review · 2–5 business day turnaround',
+            cssClass: 'section-standard', cardClass: 'standard-svc', badgeClass: 'badge-standard', badgeLabel: 'Core Service'
+        },
+        {
+            key: 'complex', label: 'Complex Projects', icon: '⚙️',
+            desc: '120+ min · BA review required · 5–10+ business days',
+            cssClass: 'section-complex', cardClass: 'complex', badgeClass: 'badge-complex', badgeLabel: 'Complex'
+        },
+        {
+            key: 'advanced', label: 'Advanced Client Services', icon: '📦',
+            desc: 'Available for Advanced & Enterprise clients · Included in your monthly hours',
+            cssClass: 'section-advanced', cardClass: 'advanced-svc', badgeClass: 'badge-advanced', badgeLabel: 'Advanced',
+            callout: {
+                type: 'advanced',
+                icon: '📦',
+                title: 'Advanced & Enterprise Clients',
+                text: 'The services in this section are available to Analytics Advanced and Enterprise package clients. They are included within your monthly hours allocation. If you are unsure whether these apply to your package, contact your CARE team.'
+            }
+        },
+        {
+            key: 'enterprise', label: 'Enterprise & PCN Services', icon: '🏢',
+            desc: 'Available for Enterprise & Alberta PCN clients · Included in your package',
+            cssClass: 'section-enterprise', cardClass: 'enterprise-svc', badgeClass: 'badge-enterprise', badgeLabel: 'Enterprise',
+            callout: {
+                type: 'enterprise',
+                icon: '🏢',
+                title: 'Enterprise & Alberta PCN Clients Only',
+                text: "The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. These are included in your monthly hours allocation. If you're unsure whether these apply to your package, contact your CARE team."
+            }
+        }
+    ];
+
+    let selectedServices = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let expandedCards = new Set();
+    let selectedUrgency = 'standard';
+
+    function isTBATime(timeStr) {
+        const s = (timeStr || '').trim().toLowerCase();
+        return s === 'tba' || s === 'ongoing' || s === 'varies';
+    }
+
+    function renderCatalog() {
+        const container = document.getElementById('catalogContent');
+        container.innerHTML = '';
+
+        sections.forEach(section => {
+            let sectionServices = services.filter(s => s.category === section.key);
+
+            if (currentFilter !== 'all' && currentFilter !== section.key) return;
+
+            if (currentSearch) {
+                sectionServices = sectionServices.filter(s =>
+                    s.name.toLowerCase().includes(currentSearch) ||
+                    s.shortDesc.toLowerCase().includes(currentSearch) ||
+                    s.fullDesc.toLowerCase().includes(currentSearch) ||
+                    (s.bullets && s.bullets.some(b => b.toLowerCase().includes(currentSearch)))
+                );
+            }
+
+            if (sectionServices.length === 0) return;
+
+            const sectionEl = document.createElement('div');
+            sectionEl.className = `catalog-section ${section.cssClass}`;
+
+            let calloutHtml = '';
+            if (section.callout) {
+                calloutHtml = `
+                    <div class="section-callout callout-${section.callout.type}-section">
+                        <span class="callout-icon">${section.callout.icon}</span>
+                        <div>
+                            <strong>${section.callout.title}</strong>
+                            <span>${section.callout.text}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const cardsHtml = sectionServices.map(s => renderCard(s, section)).join('');
+
+            sectionEl.innerHTML = `
+                <div class="section-header">
+                    <span class="section-icon">${section.icon}</span>
+                    <h2>${section.label} <span class="section-desc">${section.desc}</span></h2>
+                    <span class="section-count">${sectionServices.length} service${sectionServices.length !== 1 ? 's' : ''}</span>
+                </div>
+                ${calloutHtml}
+                <div class="cards-grid">${cardsHtml}</div>
+            `;
+
+            container.appendChild(sectionEl);
+        });
+
+        if (container.innerHTML === '') {
+            container.innerHTML = `<div class="empty-state">🔍 No services match your search. Try different keywords or <button onclick="resetSearch()" style="background:none;border:none;color:#4B286D;cursor:pointer;font-weight:600;">reset filters</button>.</div>`;
+        }
+    }
+
+    function renderCard(s, section) {
+        const isSelected = selectedServices.some(sel => sel.id === s.id);
+        const isExpanded = expandedCards.has(s.id);
+        const tba = isTBATime(s.time);
+
+        // "Est. 1.25 hrs" for ranges/single, "Est. 3 hrs (TBA)" for TBA/Ongoing/Varies
+        const estLabel = tba
+            ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+            : formatHoursDisplay(s.timeHours);
+
+        let tierBadge = '';
+        if (s.tierNote === 'Alberta PCN clients only') {
+            tierBadge = '<span class="badge badge-pcn">🌐 PCN Only</span>';
+        } else if (s.tierNote && s.tierNote.includes('Advanced')) {
+            tierBadge = '<span class="badge badge-advanced">📦 Adv & Ent</span>';
+        }
+
+        return `
+            <div class="service-card ${section.cardClass} ${isSelected ? 'selected' : ''}" id="card-${s.id}">
+                <div class="card-top-bar"></div>
+                <div class="card-body">
+                    <div class="card-badges">
+                        <span class="badge ${section.badgeClass}">${section.badgeLabel}</span>
+                        ${s.baRequired ? '<span class="badge badge-ba">⚠️ BA Review</span>' : ''}
+                        ${tierBadge}
+                        <span class="badge badge-time">⏱️ ${s.time} · ${estLabel}</span>
+                    </div>
+                    <div class="card-title">${s.icon} ${s.name}</div>
+                    <div class="card-desc">${s.shortDesc}</div>
+                    <button class="card-expand-btn" onclick="toggleExpand(${s.id})">
+                        <span class="expand-arrow ${isExpanded ? 'open' : ''}" id="arrow-${s.id}">▼</span>
+                        ${isExpanded ? 'Hide Details' : 'View Full Details'}
+                    </button>
+                    <div class="card-details ${isExpanded ? 'show' : ''}" id="details-${s.id}">
+                        <strong>What's included:</strong>
+                        <ul>${s.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+                        ${s.baRequired ? '<br><strong style="color:#991b1b;">⚠️ Note:</strong> This service requires a Business Analyst review before scheduling. Your care team will coordinate this after submission.' : ''}
+                        ${s.tierNote ? `<br><strong style="color:#3a7a00;">📌 Availability:</strong> ${s.tierNote}.` : ''}
+                        ${tba ? '<br><strong style="color:#6b7280;">ℹ️ Duration:</strong> Exact time is TBA — 3 hrs used as a planning estimate.' : ''}
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-select ${isSelected ? 'selected-btn' : ''}" id="btn-${s.id}" onclick="toggleSelect(${s.id})">
+                        ${isSelected ? '✓ Selected (Click to Remove)' : '+ Select Service'}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function toggleExpand(id) {
+        if (expandedCards.has(id)) {
+            expandedCards.delete(id);
+        } else {
+            expandedCards.add(id);
+        }
+        renderCatalog();
+    }
+
+    function toggleSelect(id) {
+        const service = services.find(s => s.id === id);
+        const idx = selectedServices.findIndex(s => s.id === id);
+        if (idx >= 0) {
+            selectedServices.splice(idx, 1);
+        } else {
+            selectedServices.push(service);
+        }
+        renderCatalog();
+        updatePanel();
+    }
+
+    function updatePanel() {
+        const count = selectedServices.length;
+        // All timeHours are proper numbers computed by parseTimeToHours
+        const totalHours = selectedServices.reduce((sum, s) => sum + s.timeHours, 0);
+        const hasBA = selectedServices.some(s => s.baRequired);
+
+        document.getElementById('statCount').textContent = count;
+        document.getElementById('statHours').textContent = formatHoursShort(totalHours);
+        document.getElementById('submitBtn').disabled = count === 0;
+
+        const baWarn = document.getElementById('baWarning');
+        if (hasBA) baWarn.classList.add('show');
+        else baWarn.classList.remove('show');
+
+        const listEl = document.getElementById('selectedList');
+        if (count === 0) {
+            listEl.innerHTML = `<div class="empty-selection"><div style="font-size:1.8em;margin-bottom:6px;">🛒</div>No services selected yet.<br>Browse the catalog and click <strong>Select</strong>.</div>`;
+        } else {
+            listEl.innerHTML = selectedServices.map(s => {
+                const tba = isTBATime(s.time);
+                const estLabel = tba
+                    ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+                    : formatHoursDisplay(s.timeHours);
+                return `
+                    <div class="selected-item">
+                        <div style="flex:1;">
+                            <div class="item-name">${s.icon} ${s.name}</div>
+                            <div class="item-time">⏱️ ${s.time} · ${estLabel}${s.baRequired ? ' · ⚠️ BA Review' : ''}</div>
+                        </div>
+                        <button class="remove-btn" onclick="toggleSelect(${s.id})" title="Remove">✕</button>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+
+    function setFilter(filter, el) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        renderCatalog();
+    }
+
+    function resetSearch() {
+        currentFilter = 'all';
+        currentSearch = '';
+        document.getElementById('searchInput').value = '';
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        document.querySelector('[data-filter="all"]').classList.add('active');
+        renderCatalog();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+        currentSearch = this.value.toLowerCase().trim();
+        renderCatalog();
+    });
+
+    function clearAll() {
+        selectedServices = [];
+        renderCatalog();
+        updatePanel();
+    }
+
+    function openModal() {
+        const listEl = document.getElementById('modalServicesList');
+        listEl.innerHTML = selectedServices.map(s => {
+            const tba = isTBATime(s.time);
+            const estLabel = tba
+                ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+                : formatHoursDisplay(s.timeHours);
+            return `<div class="modal-service-item">✓ ${s.icon} ${s.name} <span style="color:#6b7280;font-weight:400;margin-left:auto;font-size:0.9em;">⏱️ ${s.time} · ${estLabel}</span></div>`;
+        }).join('');
+        document.getElementById('reqDescription').value = '';
+        document.getElementById('reqNotes').value = '';
+        document.getElementById('reqDomain').value = '';
+        document.getElementById('reqContact').value = '';
+        document.getElementById('reqVisual').value = '';
+        document.getElementById('requestModal').classList.add('show');
+        validateModalForm();
+    }
+
+    function closeModal() {
+        document.getElementById('requestModal').classList.remove('show');
+    }
+
+    function selectUrgency(el) {
+        document.querySelectorAll('.urgency-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedUrgency = el.dataset.urgency;
+    }
+
+    function validateModalForm() {
+        const desc = document.getElementById('reqDescription').value.trim();
+        const domain = document.getElementById('reqDomain').value.trim();
+        const contact = document.getElementById('reqContact').value.trim();
+        document.getElementById('modalSubmitBtn').disabled = desc.length < 20 || domain.length === 0 || contact.length === 0;
+    }
+
+    document.addEventListener('input', function(e) {
+        if (['reqDescription', 'reqDomain', 'reqContact'].includes(e.target.id)) validateModalForm();
+    });
+
+    function submitRequest() {
+        const description = document.getElementById('reqDescription').value;
+        const notes = document.getElementById('reqNotes').value;
+        const domain = document.getElementById('reqDomain').value;
+        const contact = document.getElementById('reqContact').value;
+        const visual = document.getElementById('reqVisual').value;
+        const urgency = selectedUrgency;
+
+        const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const totalHours = selectedServices.reduce((sum, s) => sum + s.timeHours, 0);
+
+        let emailBody = `📋 Analytics Service Request\n`;
+        emailBody += `Date Submitted: ${today}\n\n`;
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+        emailBody += `📌 Services Requested:\n`;
+        selectedServices.forEach(s => {
+            const tba = isTBATime(s.time);
+            const estLabel = tba
+                ? `${formatHoursDisplay(s.timeHours)} (TBA)`
+                : formatHoursDisplay(s.timeHours);
+            emailBody += `   • ${s.icon} ${s.name} (⏱️ ${s.time} · ${estLabel})${s.baRequired ? ' [⚠️ BA Review Required]' : ''}${s.tierNote ? ` [${s.tierNote}]` : ''}\n`;
+        });
+        emailBody += `\n`;
+
+        emailBody += `⏱️ Total Estimated Hours: ${formatHoursDisplay(totalHours)}\n`;
+        emailBody += `⚠️ BA Review Required: ${selectedServices.some(s => s.baRequired) ? 'Yes' : 'No'}\n`;
+        emailBody += `🔶 Urgency Level: ${urgency.charAt(0).toUpperCase() + urgency.slice(1)}\n\n`;
+
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+        emailBody += `🌐 Customer Domain/URL:\n`;
+        emailBody += `   ${domain}\n\n`;
+
+        emailBody += `👤 Client Contact:\n`;
+        emailBody += `   ${contact}\n\n`;
+
+        emailBody += `📝 Request Details:\n`;
+        emailBody += `   ${description.replace(/\n/g, '\n   ')}\n\n`;
+
+        if (visual) {
+            emailBody += `🔗 Visual Reference:\n`;
+            emailBody += `   ${visual}\n\n`;
+        }
+
+        if (notes) {
+            emailBody += `📌 Additional Notes:\n`;
+            emailBody += `   ${notes.replace(/\n/g, '\n   ')}\n\n`;
+        }
+
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        emailBody += `💼 Pricing:\n`;
+        emailBody += `   To be determined by CARE team\n\n`;
+        emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+        emailBody += `\n✨ This request was submitted via the Analytics Service Catalog`;
+
+        const encodedBody = encodeURIComponent(emailBody);
+        const subject = encodeURIComponent('Analytics Service Request');
+
+        const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=care.emraccounts@telus.com&su=${subject}&body=${encodedBody}`;
+        window.open(gmailLink, '_blank');
+
+        closeModal();
+        setTimeout(() => {
+            document.getElementById('successModal').classList.add('show');
+        }, 200);
+    }
+
+    function closeSuccess() {
+        document.getElementById('successModal').classList.remove('show');
+        clearAll();
+    }
+
+    document.getElementById('requestModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    document.getElementById('successModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSuccess();
+    });
+
+    renderCatalog();
+    updatePanel();
+</script>
+</body>
+</html>
