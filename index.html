@@ -2,6 +2,781 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Services Overview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%);
+            color: white;
+            padding: 48px 40px 40px;
+            border-bottom: 4px solid #66CC00;
+        }
+        .page-header-inner { max-width: 1100px; margin: 0 auto; }
+        .page-header .breadcrumb {
+            font-size: 0.78em; opacity: 0.65; margin-bottom: 14px;
+            letter-spacing: 0.04em; text-transform: uppercase;
+        }
+        .page-header h1 { font-size: 2em; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+        .page-header .subtitle { font-size: 0.97em; opacity: 0.85; max-width: 680px; line-height: 1.65; }
+        .page-header .last-updated { margin-top: 14px; font-size: 0.74em; opacity: 0.5; }
+
+        /* CTA BAR */
+        .cta-bar { background: #4B286D; padding: 14px 40px; }
+        .cta-bar-inner {
+            max-width: 1100px; width: 100%; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .cta-bar p { color: #d8b4fe; font-size: 0.88em; }
+        .cta-btn {
+            display: inline-block; background: #66CC00; color: #1a1a1a;
+            font-weight: 700; font-size: 0.88em; padding: 9px 22px;
+            border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .cta-btn:hover { background: #55aa00; transform: translateY(-1px); }
+
+        /* MAIN CONTENT */
+        .page-content { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+
+        /* INTRO */
+        .intro-text {
+            font-size: 0.95em; color: #374151; line-height: 1.75; margin-bottom: 36px;
+            background: white; border: 1px solid #e5e7eb; border-radius: 10px;
+            padding: 22px 26px; border-left: 4px solid #4B286D;
+        }
+        .intro-text p { margin-bottom: 10px; }
+        .intro-text p:last-child { margin-bottom: 0; }
+
+        /* PACKAGE LEGEND */
+        .legend-title {
+            font-size: 0.82em; font-weight: 700; color: #374151;
+            margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .legend-bar {
+            display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;
+        }
+        .legend-item {
+            display: flex; align-items: center; gap: 8px;
+            background: white; border: 1px solid #e5e7eb;
+            border-radius: 8px; padding: 8px 14px;
+            font-size: 0.82em; font-weight: 600;
+        }
+        .legend-dot {
+            width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+        }
+        .dot-essentials { background: #9ca3af; }
+        .dot-advanced { background: #7B5EA7; }
+        .dot-enterprise { background: #2B1B4E; }
+        .dot-pcn { background: #3a7a00; }
+        .dot-ba { background: #dc2626; }
+
+        /* PRICING SUMMARY TABLE */
+        .pricing-summary {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 44px;
+            font-size: 0.875em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .pricing-summary thead tr th {
+            padding: 0;
+        }
+        .pricing-summary thead tr th:first-child {
+            background: #2B1B4E;
+            color: white;
+            padding: 14px 18px;
+            font-size: 0.82em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: left;
+            border-bottom: 3px solid #66CC00;
+        }
+        .pkg-header {
+            padding: 14px 16px;
+            text-align: center;
+            border-bottom: 3px solid;
+            border-left: 1px solid rgba(255,255,255,0.15);
+        }
+        .pkg-header.essentials { background: #6b7280; border-color: #9ca3af; }
+        .pkg-header.advanced { background: #7B5EA7; border-color: #a78bca; }
+        .pkg-header.enterprise { background: #2B1B4E; border-color: #4B286D; }
+        .pkg-header.pcn { background: #3a7a00; border-color: #66CC00; }
+
+        .pkg-header .pkg-name {
+            font-size: 0.8em; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.06em; color: white; display: block; margin-bottom: 2px;
+        }
+        .pkg-header .pkg-price {
+            font-size: 1.1em; font-weight: 700; color: white; display: block;
+        }
+        .pkg-header .pkg-sub {
+            font-size: 0.7em; color: rgba(255,255,255,0.8); display: block; margin-top: 1px;
+        }
+
+        .pricing-summary tbody tr { border-bottom: 1px solid #f3f4f6; }
+        .pricing-summary tbody tr:last-child { border-bottom: none; }
+        .pricing-summary tbody tr:hover { background: #fafafa; }
+
+        .pricing-summary td {
+            padding: 11px 18px;
+            vertical-align: middle;
+            color: #374151;
+            font-size: 0.88em;
+        }
+        .pricing-summary td:first-child {
+            font-weight: 600;
+            color: #2B1B4E;
+            background: #f9fafb;
+            border-right: 1px solid #e5e7eb;
+        }
+        .pricing-summary td:not(:first-child) {
+            text-align: center;
+            border-left: 1px solid #f3f4f6;
+        }
+
+        .check-yes { color: #16a34a; font-size: 1.1em; font-weight: 700; }
+        .check-no { color: #d1d5db; font-size: 1.1em; }
+        .check-extra { color: #7B5EA7; font-size: 0.8em; font-weight: 600; }
+        .check-pcn { color: #3a7a00; font-size: 0.8em; font-weight: 600; }
+
+        /* SECTION GROUP */
+        .service-group { margin-bottom: 44px; }
+
+        .section-heading {
+            font-size: 1.15em; font-weight: 700; color: #2B1B4E;
+            padding-bottom: 10px; border-bottom: 2px solid #4B286D;
+            margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+        }
+        .section-meta { font-size: 0.8em; color: #6b7280; margin-bottom: 14px; }
+
+        /* SECTION CALLOUT */
+        .section-callout {
+            border-radius: 8px; padding: 12px 16px; margin-bottom: 14px;
+            font-size: 0.83em; line-height: 1.55; display: flex;
+            gap: 10px; align-items: flex-start;
+        }
+        .section-callout .ci { font-size: 1.2em; flex-shrink: 0; margin-top: 1px; }
+        .section-callout strong { display: block; margin-bottom: 2px; }
+        .callout-advanced { background: #f5f0ff; border: 1px solid #7B5EA7; color: #4B286D; }
+        .callout-enterprise { background: #f0fff0; border: 1px solid #66CC00; color: #2d6600; }
+
+        /* SERVICES TABLE */
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875em;
+        }
+        .services-table thead { background: #4B286D; }
+        .services-table thead th {
+            padding: 11px 14px;
+            text-align: left;
+            font-size: 0.78em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            border-bottom: 2px solid #66CC00;
+            white-space: nowrap;
+        }
+        .services-table thead th.pkg-col { text-align: center; min-width: 80px; }
+
+        .services-table tbody tr { border-bottom: 1px solid #f3f4f6; }
+        .services-table tbody tr:last-child { border-bottom: none; }
+        .services-table tbody tr:hover { background: #fdf6ff; }
+
+        .services-table td {
+            padding: 13px 14px;
+            vertical-align: top;
+            color: #374151;
+            line-height: 1.55;
+        }
+
+        .td-service {
+            font-weight: 700; color: #2B1B4E;
+            white-space: nowrap; min-width: 180px;
+        }
+        .td-service .svc-icon { margin-right: 6px; }
+
+        .td-desc { color: #4b5563; font-size: 0.92em; }
+        .td-desc ul { margin: 6px 0 0 16px; }
+        .td-desc ul li { margin-bottom: 2px; font-size: 0.95em; color: #6b7280; }
+
+        .td-time { white-space: nowrap; color: #6b7280; font-size: 0.9em; }
+
+        /* PACKAGE CELLS */
+        .pkg-cell {
+            text-align: center;
+            vertical-align: middle !important;
+            border-left: 1px solid #f3f4f6;
+            padding: 10px 8px !important;
+        }
+        .pkg-cell.essentials-col { background: rgba(156,163,175,0.06); }
+        .pkg-cell.advanced-col { background: rgba(123,94,167,0.06); }
+        .pkg-cell.enterprise-col { background: rgba(43,27,78,0.06); }
+        .pkg-cell.pcn-col { background: rgba(58,122,0,0.06); }
+
+        .pkg-icon { font-size: 1.2em; display: block; }
+        .pkg-icon.yes { color: #16a34a; }
+        .pkg-icon.no { color: #e5e7eb; }
+        .pkg-note { font-size: 0.68em; font-weight: 600; display: block; margin-top: 2px; color: #6b7280; }
+        .pkg-note.extra { color: #7B5EA7; }
+        .pkg-note.ba { color: #dc2626; }
+
+        /* COLUMN HEADER COLORS */
+        .services-table thead th.col-essentials { background: #6b7280; }
+        .services-table thead th.col-advanced { background: #7B5EA7; }
+        .services-table thead th.col-enterprise { background: #2B1B4E; }
+        .services-table thead th.col-pcn { background: #3a7a00; }
+
+        /* BOTTOM CTA */
+        .bottom-cta {
+            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 28px 32px; margin-top: 48px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 20px; flex-wrap: wrap; border-left: 4px solid #66CC00;
+        }
+        .bottom-cta-text h3 { font-size: 1.05em; font-weight: 700; color: #2B1B4E; margin-bottom: 4px; }
+        .bottom-cta-text p { font-size: 0.85em; color: #6b7280; line-height: 1.5; }
+        .bottom-cta-btn {
+            display: inline-block; background: #4B286D; color: white;
+            font-weight: 700; font-size: 0.9em; padding: 12px 28px;
+            border-radius: 10px; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .bottom-cta-btn:hover { background: #2B1B4E; transform: translateY(-1px); }
+
+        /* NOTE */
+        .note-box {
+            background: #f9fafb; border-left: 4px solid #4B286D;
+            border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 28px;
+            font-size: 0.82em; color: #6b7280; line-height: 1.6;
+        }
+        .note-box strong { color: #2B1B4E; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .page-header { padding: 32px 20px 28px; }
+            .page-header h1 { font-size: 1.5em; }
+            .cta-bar { padding: 12px 20px; }
+            .services-table { display: block; overflow-x: auto; }
+            .pricing-summary { display: block; overflow-x: auto; }
+            .bottom-cta { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="page-header-inner">
+        <div class="breadcrumb">Analytics · Service Overview</div>
+        <h1>📊 Analytics Services Overview</h1>
+        <p class="subtitle">
+            A complete reference of analytics services available to your clinic — what each service includes, estimated time, and which package it applies to.
+        </p>
+        <div class="last-updated">Last updated: April 2026</div>
+    </div>
+</div>
+
+<!-- TOP CTA BAR -->
+<div class="cta-bar">
+    <div class="cta-bar-inner">
+        <p>Ready to submit a request? Browse the services below, then use our request form.</p>
+        <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="cta-btn">📝 Submit an Analytics Request →</a>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page-content">
+
+    <!-- INTRO -->
+    <div class="intro-text">
+        <p>
+            Our analytics team offers a range of services to help your clinic get the most out of your data — from quick fixes and dashboard updates to complex custom reporting and training.
+        </p>
+        <p>
+            Services are available to all clients, with some services reserved for Advanced, Enterprise, or Alberta PCN packages. Your CARE team will confirm which services are included in your package and determine the scope and any applicable costs after your request is submitted.
+        </p>
+    </div>
+
+    <!-- PACKAGE LEGEND -->
+    <div class="legend-title">🏷️ Package Legend</div>
+    <div class="legend-bar">
+        <div class="legend-item"><span class="legend-dot dot-essentials"></span>Analytics Essentials — Pay-per-service ($150/hr)</div>
+        <div class="legend-item"><span class="legend-dot dot-advanced"></span>Analytics Advanced — 5 hrs/month · $500/mo</div>
+        <div class="legend-item"><span class="legend-dot dot-enterprise"></span>Analytics Enterprise — 10 hrs/month · $3,000/mo</div>
+        <div class="legend-item"><span class="legend-dot dot-pcn"></span>Alberta PCN — All services included · $500/mo</div>
+        <div class="legend-item"><span class="legend-dot dot-ba"></span>⚠️ BA Review Required</div>
+    </div>
+
+    <!-- PACKAGE COMPARISON SUMMARY -->
+    <table class="pricing-summary" style="margin-top:16px;">
+        <thead>
+            <tr>
+                <th style="background:#2B1B4E;color:white;padding:14px 18px;font-size:0.82em;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;text-align:left;border-bottom:3px solid #66CC00;">Feature / Package</th>
+                <th style="padding:0;"><div class="pkg-header essentials"><span class="pkg-name">Essentials</span><span class="pkg-price">$0/mo</span><span class="pkg-sub">Pay-per-service</span></div></th>
+                <th style="padding:0;"><div class="pkg-header advanced"><span class="pkg-name">Advanced</span><span class="pkg-price">$500/mo</span><span class="pkg-sub">5 hrs included</span></div></th>
+                <th style="padding:0;"><div class="pkg-header enterprise"><span class="pkg-name">Enterprise</span><span class="pkg-price">$3,000/mo</span><span class="pkg-sub">10 hrs included</span></div></th>
+                <th style="padding:0;"><div class="pkg-header pcn"><span class="pkg-name">Alberta PCN</span><span class="pkg-price">$500/mo</span><span class="pkg-sub">All included</span></div></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>One-Time Setup Fee</td>
+                <td style="text-align:center;">$0</td>
+                <td style="text-align:center;">$500</td>
+                <td style="text-align:center;">$10,000</td>
+                <td style="text-align:center;">$0</td>
+            </tr>
+            <tr>
+                <td>Included Analyst Hours/Month</td>
+                <td style="text-align:center;color:#9ca3af;">—</td>
+                <td style="text-align:center;font-weight:700;color:#7B5EA7;">5 hrs</td>
+                <td style="text-align:center;font-weight:700;color:#2B1B4E;">10 hrs</td>
+                <td style="text-align:center;font-weight:700;color:#3a7a00;">Unlimited</td>
+            </tr>
+            <tr>
+                <td>Pre-built Dashboards & Filters</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+            </tr>
+            <tr>
+                <td>Bug Fixes, Quick Fixes & Core Services</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+            </tr>
+            <tr>
+                <td>Automated Scheduled Reports</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+            </tr>
+            <tr>
+                <td>Looker Access & Training</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+            </tr>
+            <tr>
+                <td>Looker User Management</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+            </tr>
+            <tr>
+                <td>Multi-Domain / Cross-Clinic Reporting</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;color:#d1d5db;">—</td>
+                <td style="text-align:center;" class="check-yes">✓</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ⚡ QUICK FIXES -->
+    <div class="service-group">
+        <div class="section-heading">⚡ Quick Fixes</div>
+        <div class="section-meta">Typically 60–90 min &nbsp;·&nbsp; No BA review required &nbsp;·&nbsp; Resolved within 5 business days</div>
+
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Est. Time</th>
+                    <th class="pkg-col col-essentials">Essentials</th>
+                    <th class="pkg-col col-advanced">Advanced</th>
+                    <th class="pkg-col col-enterprise">Enterprise</th>
+                    <th class="pkg-col col-pcn">PCN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🐛</span>Bug or Error</td>
+                    <td class="td-desc">
+                        Report technical issues or errors. Mark as <strong>Bug/Error</strong> in your subject line.
+                        <ul>
+                            <li>System errors or unexpected behaviour</li>
+                            <li>Data discrepancies or missing records</li>
+                            <li>Dashboard not loading or crashing</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–120 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">📊</span>Dashboard Issues</td>
+                    <td class="td-desc">
+                        Quick resolution of dashboard functionality problems.
+                        <ul>
+                            <li>Filter not working correctly</li>
+                            <li>Date range showing wrong period</li>
+                            <li>Data not displaying properly</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–90 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">✏️</span>Minor Dashboard Updates</td>
+                    <td class="td-desc">
+                        Small cosmetic or minor structural changes to existing dashboards.
+                        <ul>
+                            <li>Update dashboard title or chart labels</li>
+                            <li>Fix typos or update descriptions</li>
+                            <li>Simple additions (1 column, 1 filter)</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–90 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 🔧 CORE SERVICES -->
+    <div class="service-group">
+        <div class="section-heading">🔧 Core Services</div>
+        <div class="section-meta">Typically 60–120 min &nbsp;·&nbsp; 5–10 business day turnaround</div>
+
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Est. Time</th>
+                    <th class="pkg-col col-essentials">Essentials</th>
+                    <th class="pkg-col col-advanced">Advanced</th>
+                    <th class="pkg-col col-enterprise">Enterprise</th>
+                    <th class="pkg-col col-pcn">PCN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">💬</span>Consultation Request</td>
+                    <td class="td-desc">
+                        In-depth session to explore analytics capabilities and define your reporting needs.
+                        <ul>
+                            <li>Understand available analytics capabilities</li>
+                            <li>Dashboard requirements and data points</li>
+                            <li>Filter and metric recommendations</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–90 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">📈</span>New Simple Custom Dashboard</td>
+                    <td class="td-desc">
+                        A brand-new dashboard built to your specifications.
+                        <ul>
+                            <li>Maximum 9 dashboard tiles</li>
+                            <li>Maximum 29 dashboard columns</li>
+                            <li>One page of requirements</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–120 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🔧</span>Modify Existing Dashboard</td>
+                    <td class="td-desc">
+                        Targeted improvements to a dashboard that already exists.
+                        <ul>
+                            <li>Edit existing tiles to include more information</li>
+                            <li>Add new tiles to an existing dashboard</li>
+                            <li>One page of requirements</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–120 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ⚙️ COMPLEX PROJECTS -->
+    <div class="service-group">
+        <div class="section-heading">⚙️ Complex Projects</div>
+        <div class="section-meta">120+ min &nbsp;·&nbsp; BA review required &nbsp;·&nbsp; 10+ business days</div>
+
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Est. Time</th>
+                    <th class="pkg-col col-essentials">Essentials</th>
+                    <th class="pkg-col col-advanced">Advanced</th>
+                    <th class="pkg-col col-enterprise">Enterprise</th>
+                    <th class="pkg-col col-pcn">PCN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🏗️</span>New Complex Custom Dashboard</td>
+                    <td class="td-desc">
+                        Comprehensive dashboard for complex reporting needs. BA review required.
+                        <ul>
+                            <li>10 or more dashboard tiles</li>
+                            <li>30 or more dashboard columns</li>
+                            <li>Multiple pages of requirements</li>
+                            <li>May require LookML changes</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">240–360 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">⚙️</span>Complex Modifications to Existing Dashboard</td>
+                    <td class="td-desc">
+                        Deep modifications involving structural changes or multiple pages of requirements.
+                        <ul>
+                            <li>Edits requiring LookML changes</li>
+                            <li>Multiple pages of requirements</li>
+                            <li>Complex adjustments to existing tiles</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">120–240 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🌐</span>Multi-Domain Reporting</td>
+                    <td class="td-desc">
+                        Cross-clinic reporting across multiple domains. Requires BA scoping.
+                        <ul>
+                            <li>One user reports for multiple domains</li>
+                            <li>Cross-clinic data aggregation</li>
+                            <li>Requires BA scoping before scheduling</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">TBA</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span><span class="pkg-note ba">⚠️ BA Review</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 📦 ADVANCED CLIENT SERVICES -->
+    <div class="service-group">
+        <div class="section-heading">📦 Advanced Client Services</div>
+        <div class="section-meta">Available for Advanced & Enterprise clients · Included in your monthly hours allocation</div>
+
+        <div class="section-callout callout-advanced">
+            <span class="ci">📦</span>
+            <div>
+                <strong>Analytics Advanced & Enterprise Clients</strong>
+                The services in this section are available to Analytics Advanced and Enterprise package clients and are included within your monthly hours allocation. If you are unsure whether these apply to your package, contact your CARE team at <strong>care.emraccounts@telus.com</strong>.
+            </div>
+        </div>
+
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Est. Time</th>
+                    <th class="pkg-col col-essentials">Essentials</th>
+                    <th class="pkg-col col-advanced">Advanced</th>
+                    <th class="pkg-col col-enterprise">Enterprise</th>
+                    <th class="pkg-col col-pcn">PCN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🤖</span>Automated Scheduled Reports</td>
+                    <td class="td-desc">
+                        Set up automated report delivery on a recurring schedule.
+                        <ul>
+                            <li>Scheduled exports to SFTP or email</li>
+                            <li>Recurring delivery (daily, weekly, monthly)</li>
+                            <li>Custom report format and content</li>
+                            <li>Automated alerts and notifications</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">TBA</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 🏢 ENTERPRISE & PCN SERVICES -->
+    <div class="service-group">
+        <div class="section-heading">🏢 Enterprise & PCN Services</div>
+        <div class="section-meta">Available for Enterprise & Alberta PCN clients only · Included in your package</div>
+
+        <div class="section-callout callout-enterprise">
+            <span class="ci">🏢</span>
+            <div>
+                <strong>Analytics Enterprise & Alberta PCN Clients Only</strong>
+                The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. These are fully included in your package. If you are unsure whether these apply to your package, contact your CARE team at <strong>care.emraccounts@telus.com</strong>.
+            </div>
+        </div>
+
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Est. Time</th>
+                    <th class="pkg-col col-essentials">Essentials</th>
+                    <th class="pkg-col col-advanced">Advanced</th>
+                    <th class="pkg-col col-enterprise">Enterprise</th>
+                    <th class="pkg-col col-pcn">PCN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">📚</span>Looker Training</td>
+                    <td class="td-desc">
+                        Training on Looker UI, dashboard management, and folder organization.
+                        <ul>
+                            <li>Looker UI navigation</li>
+                            <li>How to move and manage dashboards</li>
+                            <li>Folder organization best practices</li>
+                            <li>Dashboard sharing and permissions</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–90 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🎓</span>CHR Analytics Training</td>
+                    <td class="td-desc">
+                        Training on editing and building dashboards in CHR Analytics.
+                        <ul>
+                            <li>Basics of editing dashboards</li>
+                            <li>Building dashboards from scratch</li>
+                            <li>Explores and Dimensions overview</li>
+                            <li>Data model overview</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">60–90 min</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">👤</span>Looker Additional User Request</td>
+                    <td class="td-desc">
+                        Add a Looker licensed user beyond your standard allocation.
+                        <ul>
+                            <li>Additional user beyond standard allocation</li>
+                            <li>Monthly recurring charge applies</li>
+                            <li>User receives full Looker access</li>
+                            <li>Contact CARE team for current pricing</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">Ongoing</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+                <tr>
+                    <td class="td-service"><span class="svc-icon">🔄</span>Swap Looker Licensed User</td>
+                    <td class="td-desc">
+                        Disable one user and transfer their Looker license to a new user.
+                        <ul>
+                            <li>Disable departing user account</li>
+                            <li>Transfer license to new user</li>
+                            <li>Manage license allocation</li>
+                            <li>No additional cost for like-for-like swap</li>
+                        </ul>
+                    </td>
+                    <td class="td-time">Varies</td>
+                    <td class="pkg-cell essentials-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell advanced-col"><span class="pkg-icon no">—</span></td>
+                    <td class="pkg-cell enterprise-col"><span class="pkg-icon yes">✓</span></td>
+                    <td class="pkg-cell pcn-col"><span class="pkg-icon yes">✓</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NOTE BOX -->
+    <div class="note-box">
+        <strong>📌 Note:</strong> All service times are estimates and may vary depending on complexity and scope. Your CARE team will confirm the final scope, timeline, and any applicable costs after your request is submitted. For questions about your package or service availability, contact <strong>care.emraccounts@telus.com</strong>.
+    </div>
+
+    <!-- BOTTOM CTA -->
+    <div class="bottom-cta">
+        <div class="bottom-cta-text">
+            <h3>Ready to submit a request?</h3>
+            <p>Browse the services above, then use our request form to get started. The CARE team will review your submission and reach out within 1–2 business days.</p>
+        </div>
+        <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="bottom-cta-btn">📝 Submit an Analytics Request →</a>
+    </div>
+
+</div>
+
+</body>
+</html>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics Service Catalog</title>
