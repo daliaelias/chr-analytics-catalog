@@ -38,13 +38,27 @@
             display: flex; align-items: center; justify-content: space-between;
             flex-wrap: wrap; gap: 10px;
         }
-        .cta-bar p { color: #d8b4fe; font-size: 0.88em; }
+        .cta-bar-text { color: #d8b4fe; font-size: 0.88em; }
+        .cta-bar-text small { display: block; color: rgba(216,180,254,0.65); font-size: 0.85em; margin-top: 2px; }
+        .cta-btn-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
         .cta-btn {
             display: inline-block; background: #66CC00; color: #1a1a1a;
             font-weight: 700; font-size: 0.88em; padding: 9px 22px;
-            border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+            border-radius: 8px; text-decoration: none; transition: all 0.2s;
+            white-space: nowrap; border: none; cursor: pointer; font-family: inherit;
         }
         .cta-btn:hover { background: #55aa00; transform: translateY(-1px); }
+
+        .cta-btn-outline {
+            display: inline-block; background: transparent; color: #d8b4fe;
+            font-weight: 600; font-size: 0.82em; padding: 9px 16px;
+            border-radius: 8px; text-decoration: none; transition: all 0.2s;
+            white-space: nowrap; border: 1px solid rgba(216,180,254,0.4);
+            cursor: pointer; font-family: inherit;
+        }
+        .cta-btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .cta-btn-outline.copied { background: #66CC00; color: #1a1a1a; border-color: #66CC00; }
 
         /* MAIN CONTENT */
         .page-content { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
@@ -67,10 +81,10 @@
         .steps-row { display: flex; gap: 0; flex-wrap: wrap; }
         .step-item {
             display: flex; align-items: flex-start; gap: 10px;
-            flex: 1; min-width: 160px; padding-right: 16px; position: relative;
+            flex: 1; min-width: 150px; padding-right: 20px; position: relative;
         }
         .step-item:not(:last-child)::after {
-            content: '→'; position: absolute; right: 2px; top: 6px;
+            content: '→'; position: absolute; right: 4px; top: 5px;
             color: #66CC00; font-weight: 700; font-size: 1.1em;
         }
         .step-num {
@@ -96,14 +110,23 @@
             margin-bottom: 20px; overflow: hidden;
         }
         .service-entry-header {
-            background: #f9fafb; padding: 14px 20px;
+            background: #f9fafb; padding: 12px 20px;
             border-bottom: 1px solid #e5e7eb;
-            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
         }
-        .service-entry-title {
-            font-size: 1em; font-weight: 700; color: #2B1B4E; flex: 1;
-        }
+        .service-entry-title-block { flex: 1; min-width: 200px; }
+        .service-entry-title { font-size: 1em; font-weight: 700; color: #2B1B4E; }
+        .service-entry-desc { font-size: 0.8em; color: #9ca3af; margin-top: 2px; line-height: 1.4; }
         .service-entry-meta { font-size: 0.78em; color: #6b7280; }
+
+        /* GMAIL BUTTON on service entry */
+        .gmail-btn {
+            display: inline-block; background: #66CC00; color: #1a1a1a;
+            font-weight: 700; font-size: 0.78em; padding: 5px 14px;
+            border-radius: 6px; text-decoration: none; transition: all 0.2s;
+            white-space: nowrap; border: none; cursor: pointer; font-family: inherit;
+        }
+        .gmail-btn:hover { background: #55aa00; }
 
         /* TIER BADGES */
         .tier-badge {
@@ -161,24 +184,8 @@
             padding: 14px 16px; font-size: 0.8em; color: #374151;
             font-family: 'Courier New', monospace; line-height: 1.7;
             white-space: pre-wrap; word-break: break-word;
-            max-height: 280px; overflow-y: auto;
+            max-height: 300px; overflow-y: auto;
         }
-
-        /* SCREENSHOT PLACEHOLDER */
-        .screenshot-block {
-            margin-top: 16px; padding-top: 16px; border-top: 1px solid #f3f4f6;
-        }
-        .screenshot-block h4 {
-            font-size: 0.82em; font-weight: 700; color: #2B1B4E;
-            text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;
-        }
-        .screenshot-placeholder {
-            background: #f3f4f6; border: 2px dashed #d1d5db; border-radius: 10px;
-            padding: 28px 20px; text-align: center; color: #9ca3af;
-        }
-        .screenshot-placeholder .ph-icon { font-size: 2em; margin-bottom: 8px; }
-        .screenshot-placeholder p { font-size: 0.82em; line-height: 1.5; }
-        .screenshot-placeholder strong { color: #6b7280; }
 
         /* SECTION CALLOUT */
         .section-callout {
@@ -201,12 +208,23 @@
         }
         .bottom-cta-text h3 { font-size: 1.05em; font-weight: 700; color: #2B1B4E; margin-bottom: 4px; }
         .bottom-cta-text p { font-size: 0.85em; color: #6b7280; line-height: 1.5; }
+        .bottom-cta-text small { font-size: 0.78em; color: #9ca3af; display: block; margin-top: 4px; }
+        .bottom-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
         .bottom-cta-btn {
             display: inline-block; background: #4B286D; color: white;
             font-weight: 700; font-size: 0.9em; padding: 12px 28px;
-            border-radius: 10px; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+            border-radius: 10px; text-decoration: none; transition: all 0.2s;
+            white-space: nowrap; border: none; cursor: pointer; font-family: inherit;
         }
         .bottom-cta-btn:hover { background: #2B1B4E; transform: translateY(-1px); }
+        .bottom-cta-btn-outline {
+            display: inline-block; background: white; color: #4B286D;
+            font-weight: 700; font-size: 0.9em; padding: 12px 28px;
+            border-radius: 10px; text-decoration: none; transition: all 0.2s;
+            white-space: nowrap; border: 2px solid #4B286D; cursor: pointer; font-family: inherit;
+        }
+        .bottom-cta-btn-outline:hover { background: #f5f0ff; }
+        .bottom-cta-btn-outline.copied { background: #66CC00; color: #1a1a1a; border-color: #66CC00; }
 
         /* NOTE */
         .note-box {
@@ -223,6 +241,7 @@
             .bottom-cta { flex-direction: column; }
             .steps-row { flex-direction: column; gap: 12px; }
             .step-item::after { display: none; }
+            .step-item { padding-right: 0; }
         }
     </style>
 </head>
@@ -234,7 +253,7 @@
         <div class="breadcrumb">Analytics · Request Submission Guide</div>
         <h1>📋 How to Submit Your Analytics Request</h1>
         <p class="subtitle">
-            A service-by-service guide on what information to include when emailing the CARE team — with checklists, example emails, and visual references for each request type.
+            A service-by-service guide on what information to include when emailing the CARE team — with checklists and copyable example emails for each request type.
         </p>
         <div class="last-updated">Last updated: April 2026</div>
     </div>
@@ -243,8 +262,14 @@
 <!-- TOP CTA BAR -->
 <div class="cta-bar">
     <div class="cta-bar-inner">
-        <p>Ready? Find your service below, prepare your details, then email the CARE team.</p>
-        <a href="mailto:care.emraccounts@telus.com?subject=Analytics Service Request" class="cta-btn">📧 Email CARE Team →</a>
+        <div class="cta-bar-text">
+            Ready? Find your service below, copy the example, then email the CARE team.
+            <small>If the email button doesn't open, use the Copy Email button and paste the address manually.</small>
+        </div>
+        <div class="cta-btn-group">
+            <button class="cta-btn" onclick="openGmail('Analytics Service Request')">📧 Email CARE Team</button>
+            <button class="cta-btn-outline" id="topCopyBtn" onclick="copyEmail(this)">📋 Copy Email Address</button>
+        </div>
     </div>
 </div>
 
@@ -254,7 +279,7 @@
     <!-- INTRO -->
     <div class="intro-text">
         <p>
-            To get the fastest turnaround on your analytics request, it's important to include the right information when you email the CARE team. This guide walks you through exactly what to include for each type of request — with a checklist, a copyable example email, and a visual reference.
+            To get the fastest turnaround on your analytics request, it's important to include the right information when you email the CARE team. This guide walks you through exactly what to include for each type of request — with a checklist and a copyable example email.
         </p>
         <p>
             Find your service type below, review the checklist, copy the example email, fill in your details, and send it to <strong>care.emraccounts@telus.com</strong>. The more detail you provide upfront, the faster your request can be scoped and scheduled.
@@ -296,9 +321,13 @@
         <!-- Bug or Error -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🐛 Bug or Error</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🐛 Bug or Error</div>
+                    <div class="service-entry-desc">Use this when something that was working correctly has stopped working or is behaving unexpectedly.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="service-entry-meta">Est. 60–120 min</span>
+                <button class="gmail-btn" onclick="openGmail('Bug/Error – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -311,7 +340,7 @@
                             <li>Description of the error or unexpected behaviour</li>
                             <li>Steps to reproduce the issue (what did you click/do?)</li>
                             <li>When the issue started (date/time if known)</li>
-                            <li>Screenshot or screen recording of the error</li>
+                            <li>Screenshot or screen recording of the error (attach to email)</li>
                             <li>Expected vs. actual behaviour</li>
                             <li>Mark subject line as: <strong>Bug/Error</strong></li>
                         </ul>
@@ -343,17 +372,8 @@ Actual: Data from October 2025
 
 I've attached a screenshot showing the issue.
 
-Please let me know if you need any additional information.
-
 Thank you,
 Jane Smith</div>
-                    </div>
-                </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing an example of a bug report — e.g., a dashboard with an error message, wrong data, or broken filter.</p>
                     </div>
                 </div>
             </div>
@@ -362,9 +382,13 @@ Jane Smith</div>
         <!-- Dashboard Issues -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">📊 Dashboard Issues</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">📊 Dashboard Issues</div>
+                    <div class="service-entry-desc">Use this when a specific dashboard element (filter, tile, chart) is broken or not displaying correctly.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="service-entry-meta">Est. 60–90 min</span>
+                <button class="gmail-btn" onclick="openGmail('Dashboard Issue – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -377,7 +401,7 @@ Jane Smith</div>
                             <li>What was working before vs. what is broken now</li>
                             <li>Which specific element is not working (filter, tile, chart, date range)</li>
                             <li>When the issue started</li>
-                            <li>Screenshot showing the problem</li>
+                            <li>Screenshot showing the problem (attach to email)</li>
                         </ul>
                     </div>
                     <div class="example-block">
@@ -403,22 +427,19 @@ Thank you,
 John Doe</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing a dashboard with a broken filter, missing data, or display issue.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Minor Dashboard Updates -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">✏️ Minor Dashboard Updates</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">✏️ Minor Dashboard Updates</div>
+                    <div class="service-entry-desc">Use this for small cosmetic changes — updating labels, fixing typos, or adding a single column or filter.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="service-entry-meta">Est. 60–90 min</span>
+                <button class="gmail-btn" onclick="openGmail('Minor Dashboard Update – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -457,13 +478,6 @@ Thank you,
 Sarah Lee</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing a dashboard with annotations marking what needs to be changed (e.g., circled typo, highlighted title).</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -476,9 +490,13 @@ Sarah Lee</div>
         <!-- Consultation Request -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">💬 Consultation Request</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">💬 Consultation Request</div>
+                    <div class="service-entry-desc">Use this to book a session with the analytics team to explore what's possible before requesting a new dashboard.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="service-entry-meta">Est. 60–90 min</span>
+                <button class="gmail-btn" onclick="openGmail('Consultation Request – Analytics')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -524,22 +542,19 @@ Thank you,
 Dr. Maria Chen</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing an example of a consultation agenda or a rough sketch/mockup of what the client wants to discuss.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- New Simple Custom Dashboard -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">📈 New Simple Custom Dashboard</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">📈 New Simple Custom Dashboard</div>
+                    <div class="service-entry-desc">Use this to request a brand-new dashboard with up to 9 tiles and one page of requirements.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; Max 9 tiles, 29 columns</span>
+                <button class="gmail-btn" onclick="openGmail('New Simple Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="section-callout callout-info" style="margin-bottom:16px;">
@@ -563,12 +578,12 @@ Dr. Maria Chen</div>
                             <li>Number of tiles needed (max 9)</li>
                             <li>For each tile: name, type (table, chart, count, etc.), and metrics/fields to show</li>
                             <li>Any filters the dashboard should have (e.g., by provider, date, status)</li>
-                            <li>Reference dashboard or mockup (if available)</li>
+                            <li>Reference dashboard or mockup (attach to email if available)</li>
                         </ul>
                     </div>
                     <div class="example-block">
                         <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'simple-dash-example')">Copy</button></h4>
-                        <div class="example-email" id="simple-dash-example">Subject: New Simple Custom Dashboard – [Dashboard Name]
+                        <div class="example-email" id="simple-dash-example">Subject: New Simple Custom Dashboard – Patient Symptom Tracking
 
 Hi CARE Team,
 
@@ -614,22 +629,19 @@ Thank you,
 Lisa Park</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing an example of a simple custom dashboard — e.g., a 3-tile dashboard with a scorecard, bar chart, and patient table. Annotate what each tile represents.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Modify Existing Dashboard -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🔧 Modify Existing Dashboard</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🔧 Modify Existing Dashboard</div>
+                    <div class="service-entry-desc">Use this to add tiles, edit existing ones, or adjust data display on a dashboard that already exists.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; One page of requirements</span>
+                <button class="gmail-btn" onclick="openGmail('Modify Existing Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -648,7 +660,7 @@ Lisa Park</div>
                     </div>
                     <div class="example-block">
                         <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'modify-dash-example')">Copy</button></h4>
-                        <div class="example-email" id="modify-dash-example">Subject: Modify Existing Dashboard – [Dashboard Name]
+                        <div class="example-email" id="modify-dash-example">Subject: Modify Existing Dashboard – Appointment Summary 2026
 
 Hi CARE Team,
 
@@ -681,13 +693,6 @@ Thank you,
 Tom Rivera</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing an existing dashboard with annotations (arrows, circles, text boxes) marking what needs to be changed or added.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -708,10 +713,14 @@ Tom Rivera</div>
         <!-- New Complex Custom Dashboard -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🏗️ New Complex Custom Dashboard</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🏗️ New Complex Custom Dashboard</div>
+                    <div class="service-entry-desc">Use this for dashboards with 10 or more tiles, 30+ columns, multiple data sources, or requirements that span more than one page.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="tier-badge tier-ba">⚠️ BA Review</span>
-                <span class="service-entry-meta">Est. 240–360 min &nbsp;·&nbsp; 10+ tiles or 30+ columns</span>
+                <span class="service-entry-meta">Est. 240–360 min</span>
+                <button class="gmail-btn" onclick="openGmail('New Complex Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -734,7 +743,7 @@ Tom Rivera</div>
                     </div>
                     <div class="example-block">
                         <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'complex-dash-example')">Copy</button></h4>
-                        <div class="example-email" id="complex-dash-example">Subject: New Complex Custom Dashboard – [Dashboard Name]
+                        <div class="example-email" id="complex-dash-example">Subject: New Complex Custom Dashboard – PCN Chronic Disease Report
 
 Hi CARE Team,
 
@@ -746,7 +755,7 @@ Clinic: Northern Alberta PCN
 Dashboard Name: PCN Chronic Disease Management Report 2026
 
 Goal:
-Comprehensive reporting on chronic disease management across all 5 clinics in our PCN — tracking patient panels, encounter frequency, medication adherence, and outcome scores.
+Comprehensive reporting on chronic disease management across all 5 clinics — tracking patient panels, encounter frequency, medication adherence, and outcome scores.
 
 Data Sources:
 1. Demographics – Patient name, DOB, gender, status, assigned provider, clinic location
@@ -756,9 +765,6 @@ Data Sources:
 5. Questionnaire Responses – "Chronic Disease Outcomes Questionnaire" – Pre/Post scores
 
 Tiles needed (12 total):
-[See attached requirements document for full tile specifications]
-
-Summary of tiles:
 - 3 scorecards (total patients, avg encounters/patient, avg outcome score)
 - 4 bar charts (by provider, by clinic, by disease type, by risk level)
 - 2 line graphs (encounter trend over time, outcome score trend)
@@ -779,23 +785,20 @@ Thank you,
 Dr. Aisha Patel</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing an example of a complex multi-tile dashboard — e.g., a PCN dashboard with multiple charts, tables, and scorecards. Show how tiles are organized across the layout.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Complex Modifications -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">⚙️ Complex Modifications to Existing Dashboard</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">⚙️ Complex Modifications to Existing Dashboard</div>
+                    <div class="service-entry-desc">Use this when changes require LookML updates, new data sources, or more than one page of requirements.</div>
+                </div>
                 <span class="tier-badge tier-all">All Clients</span>
                 <span class="tier-badge tier-ba">⚠️ BA Review</span>
-                <span class="service-entry-meta">Est. 120–240 min &nbsp;·&nbsp; LookML changes may apply</span>
+                <span class="service-entry-meta">Est. 120–240 min</span>
+                <button class="gmail-btn" onclick="openGmail('Complex Dashboard Modification – [Dashboard Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -809,13 +812,13 @@ Dr. Aisha Patel</div>
                             <li>For each change: current state and desired state</li>
                             <li>Any new data sources or fields not currently in the dashboard</li>
                             <li>Whether custom calculations or LookML changes are needed</li>
-                            <li>Annotated screenshot of current dashboard</li>
+                            <li>Annotated screenshot of current dashboard (attach to email)</li>
                             <li>Mockup or wireframe of desired outcome</li>
                         </ul>
                     </div>
                     <div class="example-block">
                         <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'complex-mod-example')">Copy</button></h4>
-                        <div class="example-email" id="complex-mod-example">Subject: Complex Dashboard Modification – [Dashboard Name]
+                        <div class="example-email" id="complex-mod-example">Subject: Complex Dashboard Modification – Billing & Revenue Summary
 
 Hi CARE Team,
 
@@ -851,23 +854,20 @@ Thank you,
 James Wu</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing a before/after comparison of a dashboard modification — annotate what changed, what was added, and what was restructured.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Multi-Domain Reporting -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🌐 Multi-Domain Reporting</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🌐 Multi-Domain Reporting</div>
+                    <div class="service-entry-desc">Use this to set up cross-clinic reporting so one user can view and report across multiple clinic domains within your PCN.</div>
+                </div>
                 <span class="tier-badge tier-pcn">🌐 Alberta PCN Only</span>
                 <span class="tier-badge tier-ba">⚠️ BA Review</span>
                 <span class="service-entry-meta">Est. TBA &nbsp;·&nbsp; BA scoping required</span>
+                <button class="gmail-btn" onclick="openGmail('Multi-Domain Reporting Request – [PCN Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -886,7 +886,7 @@ James Wu</div>
                     </div>
                     <div class="example-block">
                         <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'multi-domain-example')">Copy</button></h4>
-                        <div class="example-email" id="multi-domain-example">Subject: Multi-Domain Reporting Request – [PCN Name]
+                        <div class="example-email" id="multi-domain-example">Subject: Multi-Domain Reporting Request – Northern Alberta PCN
 
 Hi CARE Team,
 
@@ -921,13 +921,6 @@ Thank you,
 Rachel Thompson</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing an example of a multi-domain dashboard — e.g., a PCN overview showing data aggregated from multiple clinic domains with a clinic selector filter.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -948,10 +941,14 @@ Rachel Thompson</div>
         <!-- Automated Scheduled Reports -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🤖 Automated Scheduled Reports</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🤖 Automated Scheduled Reports</div>
+                    <div class="service-entry-desc">Use this to set up recurring report delivery to your inbox or SFTP — so your team receives updates automatically without manual effort.</div>
+                </div>
                 <span class="tier-badge tier-advanced">📦 Advanced+</span>
                 <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
                 <span class="service-entry-meta">Est. TBA</span>
+                <button class="gmail-btn" onclick="openGmail('Automated Scheduled Report Request – [Report Name]')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -965,13 +962,13 @@ Rachel Thompson</div>
                             <li>Recipient email address(es)</li>
                             <li>Schedule frequency: daily, weekly, monthly</li>
                             <li>Preferred delivery day and time</li>
-                            <li>File format: PDF, CSV, Excel</li>
+                            <li>File format: PDF, CSV, or Excel</li>
                             <li>Any filters to apply at delivery time (e.g., specific date range)</li>
                         </ul>
                     </div>
                     <div class="example-block">
                         <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'auto-report-example')">Copy</button></h4>
-                        <div class="example-email" id="auto-report-example">Subject: Automated Scheduled Report Request – [Report Name]
+                        <div class="example-email" id="auto-report-example">Subject: Automated Scheduled Report Request – Monthly Billing Summary
 
 Hi CARE Team,
 
@@ -1000,13 +997,6 @@ Thank you,
 Kim Nguyen</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing the Looker schedule delivery settings panel — highlighting the frequency, recipient, and format options.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -1027,10 +1017,14 @@ Kim Nguyen</div>
         <!-- Looker Training -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">📚 Looker Training</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">📚 Looker Training</div>
+                    <div class="service-entry-desc">Use this to book a training session on Looker — covering navigation, dashboard management, folder organization, and sharing settings.</div>
+                </div>
                 <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
                 <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
                 <span class="service-entry-meta">Est. 60–90 min</span>
+                <button class="gmail-btn" onclick="openGmail('Looker Training Request')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -1075,23 +1069,20 @@ Thank you,
 Priya Singh</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing the Looker interface — e.g., the folder navigation panel, dashboard sharing settings, or the "Move to Folder" dialog.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- CHR Analytics Training -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🎓 CHR Analytics Training</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🎓 CHR Analytics Training</div>
+                    <div class="service-entry-desc">Use this to book a training session on building and editing dashboards directly within CHR Analytics.</div>
+                </div>
                 <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
                 <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
                 <span class="service-entry-meta">Est. 60–90 min</span>
+                <button class="gmail-btn" onclick="openGmail('CHR Analytics Training Request')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -1137,23 +1128,20 @@ Thank you,
 Marcus Lee</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing the CHR Analytics Explore interface — e.g., the field picker panel with Dimensions and Measures, and a dashboard in edit mode.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Looker Additional User -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">👤 Looker Additional User Request</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">👤 Looker Additional User Request</div>
+                    <div class="service-entry-desc">Use this to add a new Looker licensed user beyond your standard allocation. Note: a monthly recurring charge applies.</div>
+                </div>
                 <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
                 <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
                 <span class="service-entry-meta">Ongoing monthly charge applies</span>
+                <button class="gmail-btn" onclick="openGmail('Looker Additional User Request')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -1193,23 +1181,20 @@ Thank you,
 Sandra Kim</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing the Looker Admin user management panel — highlighting where users are listed and what access levels look like.</p>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Swap Looker User -->
         <div class="service-entry">
             <div class="service-entry-header">
-                <div class="service-entry-title">🔄 Swap Looker Licensed User</div>
+                <div class="service-entry-title-block">
+                    <div class="service-entry-title">🔄 Swap Looker Licensed User</div>
+                    <div class="service-entry-desc">Use this when a staff member leaves and you need to transfer their Looker license to a new user at no additional cost.</div>
+                </div>
                 <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
                 <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
                 <span class="service-entry-meta">No additional cost for like-for-like swap</span>
+                <button class="gmail-btn" onclick="openGmail('Swap Looker Licensed User')">📧 Email CARE Team</button>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
@@ -1254,13 +1239,6 @@ Thank you,
 Sandra Kim</div>
                     </div>
                 </div>
-                <div class="screenshot-block">
-                    <h4>🖼️ Visual Reference</h4>
-                    <div class="screenshot-placeholder">
-                        <div class="ph-icon">🖼️</div>
-                        <p><strong>Screenshot placeholder</strong><br>Add a screenshot here showing the user management workflow — e.g., the "Disable User" and "Transfer Ownership" options in the Looker Admin panel.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -1275,13 +1253,51 @@ Sandra Kim</div>
         <div class="bottom-cta-text">
             <h3>Ready to submit your request?</h3>
             <p>Find your service above, copy the example email, fill in your details, and send it to the CARE team. They'll review your submission and reach out within 1–2 business days.</p>
+            <small>If the email button doesn't open your email client, use the Copy button and paste the address manually.</small>
         </div>
-        <a href="mailto:care.emraccounts@telus.com?subject=Analytics Service Request" class="bottom-cta-btn">📧 Email CARE Team →</a>
+        <div class="bottom-cta-actions">
+            <button class="bottom-cta-btn" onclick="openGmail('Analytics Service Request')">📧 Email CARE Team</button>
+            <button class="bottom-cta-btn-outline" id="bottomCopyBtn" onclick="copyEmail(this)">📋 Copy Email Address</button>
+        </div>
     </div>
 
 </div>
 
 <script>
+    const CARE_EMAIL = 'care.emraccounts@telus.com';
+
+    function openGmail(subject) {
+        const encodedSubject = encodeURIComponent(subject);
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CARE_EMAIL)}&su=${encodedSubject}`;
+        window.open(gmailUrl, '_blank');
+    }
+
+    function copyEmail(btn) {
+        navigator.clipboard.writeText(CARE_EMAIL).then(() => {
+            const original = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = original;
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            const textArea = document.createElement('textarea');
+            textArea.value = CARE_EMAIL;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            const original = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = original;
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
     function copyText(btn, elementId) {
         const el = document.getElementById(elementId);
         const text = el.innerText;
@@ -1293,7 +1309,6 @@ Sandra Kim</div>
                 btn.classList.remove('copied');
             }, 2000);
         }).catch(() => {
-            // Fallback
             const range = document.createRange();
             range.selectNode(el);
             window.getSelection().removeAllRanges();
