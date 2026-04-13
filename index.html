@@ -72,6 +72,25 @@
         .intro-text p { margin-bottom: 10px; }
         .intro-text p:last-child { margin-bottom: 0; }
 
+        /* STANDARD FIELDS BOX */
+        .standard-fields-box {
+            background: #f5f0ff; border: 1px solid #7B5EA7; border-radius: 10px;
+            padding: 18px 24px; margin-bottom: 36px;
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .standard-fields-box .sf-icon { font-size: 1.4em; flex-shrink: 0; margin-top: 2px; }
+        .standard-fields-box .sf-content h3 {
+            font-size: 0.9em; font-weight: 700; color: #2B1B4E; margin-bottom: 8px;
+        }
+        .standard-fields-box .sf-content ul { list-style: none; }
+        .standard-fields-box .sf-content ul li {
+            font-size: 0.84em; color: #4B286D; padding: 3px 0;
+            display: flex; gap: 8px; align-items: center;
+        }
+        .standard-fields-box .sf-content ul li::before {
+            content: '•'; color: #66CC00; font-weight: 700; font-size: 1.2em;
+        }
+
         /* HOW IT WORKS */
         .how-it-works {
             background: white; border: 1px solid #e5e7eb; border-radius: 10px;
@@ -119,7 +138,6 @@
         .service-entry-desc { font-size: 0.8em; color: #9ca3af; margin-top: 2px; line-height: 1.4; }
         .service-entry-meta { font-size: 0.78em; color: #6b7280; }
 
-        /* GMAIL BUTTON on service entry */
         .gmail-btn {
             display: inline-block; background: #66CC00; color: #1a1a1a;
             font-weight: 700; font-size: 0.78em; padding: 5px 14px;
@@ -150,27 +168,16 @@
             .two-col-layout { grid-template-columns: 1fr; }
         }
 
-        /* CHECKLIST */
-        .checklist-block h4 {
-            font-size: 0.82em; font-weight: 700; color: #2B1B4E;
-            text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;
+        /* COLUMN HEADERS */
+        .col-header {
+            font-size: 0.75em; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 4px 8px; border-radius: 4px;
+            margin-bottom: 6px; display: inline-block;
         }
-        .checklist-block ul { list-style: none; }
-        .checklist-block ul li {
-            font-size: 0.85em; color: #374151; padding: 5px 0;
-            border-bottom: 1px solid #f3f4f6; display: flex; gap: 8px; align-items: flex-start;
-        }
-        .checklist-block ul li:last-child { border-bottom: none; }
-        .checklist-block ul li::before {
-            content: '☐'; color: #4B286D; font-size: 1em; flex-shrink: 0; margin-top: 1px;
-        }
+        .col-header-example { background: #e5e7eb; color: #374151; }
+        .col-header-template { background: #fed7aa; color: #92400e; }
 
-        /* EXAMPLE EMAIL */
-        .example-block h4 {
-            font-size: 0.82em; font-weight: 700; color: #2B1B4E;
-            text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
+        /* COPY BUTTON */
         .copy-btn {
             background: #4B286D; color: white; border: none; border-radius: 6px;
             padding: 3px 10px; font-size: 0.75em; font-weight: 600; cursor: pointer;
@@ -179,12 +186,31 @@
         .copy-btn:hover { background: #2B1B4E; }
         .copy-btn.copied { background: #66CC00; color: #1a1a1a; }
 
+        .col-title-row {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .col-title-row h4 {
+            font-size: 0.82em; font-weight: 700; color: #2B1B4E;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+
+        /* EXAMPLE EMAIL */
         .example-email {
             background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px;
             padding: 14px 16px; font-size: 0.8em; color: #374151;
             font-family: 'Courier New', monospace; line-height: 1.7;
             white-space: pre-wrap; word-break: break-word;
-            max-height: 300px; overflow-y: auto;
+            max-height: 360px; overflow-y: auto;
+        }
+
+        /* BLANK TEMPLATE */
+        .template-email {
+            background: #fff8f0; border: 1px solid #fed7aa; border-radius: 8px;
+            padding: 14px 16px; font-size: 0.8em; color: #374151;
+            font-family: 'Courier New', monospace; line-height: 1.7;
+            white-space: pre-wrap; word-break: break-word;
+            max-height: 360px; overflow-y: auto;
         }
 
         /* SECTION CALLOUT */
@@ -253,7 +279,7 @@
         <div class="breadcrumb">Analytics · Request Submission Guide</div>
         <h1>📋 How to Submit Your Analytics Request</h1>
         <p class="subtitle">
-            A service-by-service guide on what information to include when emailing the CARE team — with checklists and copyable example emails for each request type.
+            A service-by-service guide on what information to include when emailing the CARE team — featuring a filled example on the left and a blank copy-paste template on the right for each request type.
         </p>
         <div class="last-updated">Last updated: April 2026</div>
     </div>
@@ -263,7 +289,7 @@
 <div class="cta-bar">
     <div class="cta-bar-inner">
         <div class="cta-bar-text">
-            Ready? Find your service below, copy the example, then email the CARE team.
+            Ready? Find your service below, copy the blank template, fill in your details, and email the CARE team.
             <small>If the email button doesn't open, use the Copy Email button and paste the address manually.</small>
         </div>
         <div class="cta-btn-group">
@@ -279,11 +305,23 @@
     <!-- INTRO -->
     <div class="intro-text">
         <p>
-            To get the fastest turnaround on your analytics request, it's important to include the right information when you email the CARE team. This guide walks you through exactly what to include for each type of request — with a checklist and a copyable example email.
+            To get the fastest turnaround on your analytics request, it's important to include the right information when you email the CARE team. This guide walks you through exactly what to include for each type of request.
         </p>
         <p>
-            Find your service type below, review the checklist, copy the example email, fill in your details, and send it to <strong>care.emraccounts@telus.com</strong>. The more detail you provide upfront, the faster your request can be scoped and scheduled.
+            Each service below has two columns: a <strong>filled example</strong> on the left so you can see what a complete request looks like, and a <strong>blank template</strong> on the right that you can copy, paste into your email, and fill in. Send your completed email to <strong>care.emraccounts@telus.com</strong>.
         </p>
+    </div>
+
+    <!-- STANDARD FIELDS -->
+    <div class="standard-fields-box">
+        <div class="sf-icon">📌</div>
+        <div class="sf-content">
+            <h3>These two fields are included in every request template below — don't forget them!</h3>
+            <ul>
+                <li>Your clinic domain / URL (e.g., myclinic.teluschr.com)</li>
+                <li>Your name and email address</li>
+            </ul>
+        </div>
     </div>
 
     <!-- HOW IT WORKS -->
@@ -296,15 +334,15 @@
             </div>
             <div class="step-item">
                 <span class="step-num">2</span>
-                <div class="step-text"><strong>Review checklist</strong>See exactly what info the CARE team needs</div>
+                <div class="step-text"><strong>Review the example</strong>See what a complete request looks like on the left</div>
             </div>
             <div class="step-item">
                 <span class="step-num">3</span>
-                <div class="step-text"><strong>Copy the example</strong>Use the template as a starting point for your email</div>
+                <div class="step-text"><strong>Copy the template</strong>Use the blank template on the right as your starting point</div>
             </div>
             <div class="step-item">
                 <span class="step-num">4</span>
-                <div class="step-text"><strong>Fill in your details</strong>Replace the placeholders with your specific information</div>
+                <div class="step-text"><strong>Fill in your details</strong>Type your information directly into the blank fields</div>
             </div>
             <div class="step-item" style="padding-right:0;">
                 <span class="step-num">5</span>
@@ -331,23 +369,13 @@
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL (e.g., myclinic.teluschr.com)</li>
-                            <li>Your name and email address</li>
-                            <li>Name of the affected dashboard or report</li>
-                            <li>Description of the error or unexpected behaviour</li>
-                            <li>Steps to reproduce the issue (what did you click/do?)</li>
-                            <li>When the issue started (date/time if known)</li>
-                            <li>Screenshot or screen recording of the error (attach to email)</li>
-                            <li>Expected vs. actual behaviour</li>
-                            <li>Mark subject line as: <strong>Bug/Error</strong></li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'bug-example')">Copy</button></h4>
-                        <div class="example-email" id="bug-example">Subject: Bug/Error – [Dashboard Name]
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'bug-example')">Copy</button>
+                        </div>
+                        <div class="example-email" id="bug-example">Subject: Bug/Error – Patient Appointments Overview
 
 Hi CARE Team,
 
@@ -360,20 +388,34 @@ Dashboard: Patient Appointments Overview
 Issue Description:
 The date range filter is not working correctly. When I select "Last 30 Days," the dashboard shows data from 6 months ago instead of the current period.
 
-Steps to Reproduce:
-1. Open the Patient Appointments Overview dashboard
-2. Click the date filter dropdown
-3. Select "Last 30 Days"
-4. Dashboard refreshes but shows incorrect date range
-
-When it started: Noticed on April 10, 2026
-Expected: Data from March 11 – April 10, 2026
-Actual: Data from October 2025
-
 I've attached a screenshot showing the issue.
 
 Thank you,
 Jane Smith</div>
+                    </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'bug-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="bug-template">Subject: Bug/Error – 
+
+Hi CARE Team,
+
+I'm writing to report a bug on our analytics dashboard.
+
+Domain: 
+Contact: 
+Dashboard: 
+
+Issue Description:
+
+
+I've attached a screenshot showing the issue.
+
+Thank you,
+</div>
                     </div>
                 </div>
             </div>
@@ -392,21 +434,13 @@ Jane Smith</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Name of the affected dashboard</li>
-                            <li>What was working before vs. what is broken now</li>
-                            <li>Which specific element is not working (filter, tile, chart, date range)</li>
-                            <li>When the issue started</li>
-                            <li>Screenshot showing the problem (attach to email)</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'dashboard-issue-example')">Copy</button></h4>
-                        <div class="example-email" id="dashboard-issue-example">Subject: Dashboard Issue – [Dashboard Name]
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'dashboard-issue-example')">Copy</button>
+                        </div>
+                        <div class="example-email" id="dashboard-issue-example">Subject: Dashboard Issue – Monthly Billing Summary
 
 Hi CARE Team,
 
@@ -426,6 +460,30 @@ I've attached a screenshot for reference.
 Thank you,
 John Doe</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'dashboard-issue-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="dashboard-issue-template">Subject: Dashboard Issue – 
+
+Hi CARE Team,
+
+I'm experiencing an issue with one of our dashboards.
+
+Domain: 
+Contact: 
+Dashboard: 
+
+Issue:
+
+
+I've attached a screenshot for reference.
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -443,21 +501,13 @@ John Doe</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Name of the dashboard to be updated</li>
-                            <li>Specific change(s) requested (title, label, description, typo fix)</li>
-                            <li>Current text/value and what it should be changed to</li>
-                            <li>If adding a column or filter: name and data source</li>
-                            <li>Screenshot of the current dashboard (optional but helpful)</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'minor-update-example')">Copy</button></h4>
-                        <div class="example-email" id="minor-update-example">Subject: Minor Dashboard Update – [Dashboard Name]
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'minor-update-example')">Copy</button>
+                        </div>
+                        <div class="example-email" id="minor-update-example">Subject: Minor Dashboard Update – Appointment Summary
 
 Hi CARE Team,
 
@@ -472,10 +522,32 @@ Requested Changes:
 2. Fix typo in tile label: "Appoinment Count" → "Appointment Count"
 3. Add a simple filter for "Appointment Type" (data comes from the Appointments section in CHR)
 
-No structural changes needed — just these three small updates.
-
 Thank you,
 Sarah Lee</div>
+                    </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'minor-update-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="minor-update-template">Subject: Minor Dashboard Update – 
+
+Hi CARE Team,
+
+I'd like to request a few small updates to an existing dashboard.
+
+Domain: 
+Contact: 
+Dashboard: 
+
+Requested Changes:
+1. 
+2. 
+3. 
+
+Thank you,
+</div>
                     </div>
                 </div>
             </div>
@@ -500,21 +572,12 @@ Sarah Lee</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Clinic or program name</li>
-                            <li>What you're trying to achieve or measure</li>
-                            <li>What data you think you have in CHR (even if unsure)</li>
-                            <li>Any existing dashboards you're working from</li>
-                            <li>Preferred date/time for the consultation call</li>
-                            <li>Any specific questions you'd like answered</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'consult-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'consult-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="consult-example">Subject: Consultation Request – Analytics
 
 Hi CARE Team,
@@ -541,6 +604,38 @@ Preferred times: Any morning next week (April 14–18, 2026)
 Thank you,
 Dr. Maria Chen</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'consult-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="consult-template">Subject: Consultation Request – Analytics
+
+Hi CARE Team,
+
+I'd like to book a consultation with the analytics team to explore what's possible for our clinic reporting.
+
+Domain: 
+Contact: 
+Clinic: 
+
+What we're trying to achieve:
+
+
+Current state:
+
+
+Questions for the consultation:
+- 
+- 
+- 
+
+Preferred times: 
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -565,24 +660,12 @@ Dr. Maria Chen</div>
                     </div>
                 </div>
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Clinic or program name</li>
-                            <li>Dashboard name / title</li>
-                            <li>Goal: what question should this dashboard answer?</li>
-                            <li>Data source: which CHR section(s) your data comes from (e.g., Appointments, Questionnaires, Demographics)</li>
-                            <li>For each data source: specific field names, filters, and date range</li>
-                            <li>Number of tiles needed (max 9)</li>
-                            <li>For each tile: name, type (table, chart, count, etc.), and metrics/fields to show</li>
-                            <li>Any filters the dashboard should have (e.g., by provider, date, status)</li>
-                            <li>Reference dashboard or mockup (attach to email if available)</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'simple-dash-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'simple-dash-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="simple-dash-example">Subject: New Simple Custom Dashboard – Patient Symptom Tracking
 
 Hi CARE Team,
@@ -599,7 +682,7 @@ Track patient symptom severity scores before and after treatment to measure prog
 
 Data Source:
 - CHR Section: Questionnaire Responses
-- Questionnaire Name: "Menopause Clinic Symptom Severity Questionnaire" (exact name in CHR)
+- Questionnaire Name: "Menopause Clinic Symptom Severity Questionnaire"
 - Fields needed: Patient name, DOB, Pre-treatment score, Post-treatment score, Date completed
 - Date range: All responses from Jan 1, 2025 onward
 - Filter: Active patients only
@@ -628,6 +711,55 @@ Reference: I've attached an Excel mockup showing the layout I have in mind.
 Thank you,
 Lisa Park</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'simple-dash-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="simple-dash-template">Subject: New Simple Custom Dashboard – 
+
+Hi CARE Team,
+
+I'd like to request a new custom dashboard for our clinic.
+
+Domain: 
+Contact: 
+Clinic: 
+Dashboard Name: 
+
+Goal:
+
+
+Data Source:
+- CHR Section: 
+- Fields needed: 
+- Date range: 
+- Filter: 
+
+Dashboard Tiles (    tiles total):
+
+Tile 1: 
+- Type: 
+- Metric: 
+
+Tile 2: 
+- Type: 
+- Metric: 
+
+Tile 3: 
+- Type: 
+- Metric: 
+
+Filters needed:
+- 
+- 
+
+Reference: 
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -645,21 +777,12 @@ Lisa Park</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Exact name of the dashboard to be modified</li>
-                            <li>List of specific changes requested (be as precise as possible)</li>
-                            <li>For new tiles: name, type, metrics, and data source</li>
-                            <li>For edits to existing tiles: current state and desired state</li>
-                            <li>Any new filters to add</li>
-                            <li>Screenshot of the current dashboard with annotations (recommended)</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'modify-dash-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'modify-dash-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="modify-dash-example">Subject: Modify Existing Dashboard – Appointment Summary 2026
 
 Hi CARE Team,
@@ -682,7 +805,6 @@ Name: Cancellation Rate by Provider
 Type: Bar Chart
 Metric: % of appointments cancelled, grouped by provider
 Data: Appointments section in CHR, filter: Status = Cancelled
-Date range: Same as rest of dashboard
 
 Change 3 – Add filter:
 Add a "Location" filter to the dashboard (data from Appointments > Location field)
@@ -691,6 +813,38 @@ I've attached a screenshot of the current dashboard with my annotations.
 
 Thank you,
 Tom Rivera</div>
+                    </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'modify-dash-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="modify-dash-template">Subject: Modify Existing Dashboard – 
+
+Hi CARE Team,
+
+I'd like to request modifications to an existing dashboard.
+
+Domain: 
+Contact: 
+Dashboard: 
+
+Requested Changes:
+
+Change 1 – 
+
+
+Change 2 – 
+
+
+Change 3 – 
+
+
+I've attached a screenshot of the current dashboard with my annotations.
+
+Thank you,
+</div>
                     </div>
                 </div>
             </div>
@@ -724,25 +878,12 @@ Tom Rivera</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Clinic or program name</li>
-                            <li>Dashboard name and overall goal</li>
-                            <li>All data sources (CHR sections, field names, filters, date ranges)</li>
-                            <li>Number of tiles (10+) with details for each</li>
-                            <li>For each tile: name, type, metrics, groupings, filters</li>
-                            <li>Any calculated fields or custom logic needed</li>
-                            <li>Whether LookML changes may be required</li>
-                            <li>Dashboard-level filters needed</li>
-                            <li>Mockup, wireframe, or Excel example (strongly recommended)</li>
-                            <li>Timeline or deadline (if applicable)</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'complex-dash-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'complex-dash-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="complex-dash-example">Subject: New Complex Custom Dashboard – PCN Chronic Disease Report
 
 Hi CARE Team,
@@ -761,8 +902,7 @@ Data Sources:
 1. Demographics – Patient name, DOB, gender, status, assigned provider, clinic location
 2. Encounters – Encounter type, date, provider, reason (filter: chronic disease encounters only)
 3. Prescriptions – Medication name, status, prescriber (filter: active medications for diabetes/hypertension)
-4. Custom Patient Data – Category: Chronic Disease, Property: Risk Score, Field: Diabetes Risk Level
-5. Questionnaire Responses – "Chronic Disease Outcomes Questionnaire" – Pre/Post scores
+4. Questionnaire Responses – "Chronic Disease Outcomes Questionnaire" – Pre/Post scores
 
 Tiles needed (12 total):
 - 3 scorecards (total patients, avg encounters/patient, avg outcome score)
@@ -784,6 +924,49 @@ Timeline: Needed before our PCN board meeting on May 15, 2026.
 Thank you,
 Dr. Aisha Patel</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'complex-dash-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="complex-dash-template">Subject: New Complex Custom Dashboard – 
+
+Hi CARE Team,
+
+I'd like to request a new complex dashboard for our reporting.
+
+Domain: 
+Contact: 
+Clinic: 
+Dashboard Name: 
+
+Goal:
+
+
+Data Sources:
+1. 
+2. 
+3. 
+
+Tiles needed (    total):
+- 
+- 
+- 
+
+Dashboard filters: 
+
+Custom logic needed:
+- 
+- 
+
+I've attached a detailed requirements document and mockup.
+
+Timeline: 
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -802,22 +985,12 @@ Dr. Aisha Patel</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Exact name of the dashboard to be modified</li>
-                            <li>Full list of changes (multiple pages of requirements expected)</li>
-                            <li>For each change: current state and desired state</li>
-                            <li>Any new data sources or fields not currently in the dashboard</li>
-                            <li>Whether custom calculations or LookML changes are needed</li>
-                            <li>Annotated screenshot of current dashboard (attach to email)</li>
-                            <li>Mockup or wireframe of desired outcome</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'complex-mod-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'complex-mod-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="complex-mod-example">Subject: Complex Dashboard Modification – Billing & Revenue Summary
 
 Hi CARE Team,
@@ -829,7 +1002,7 @@ Contact: James Wu (j.wu@myclinic.com)
 Dashboard: Billing & Revenue Summary 2025
 
 Overview of changes:
-This dashboard needs to be substantially restructured to support our new reporting requirements. The changes involve adding new data sources, restructuring existing tiles, and adding calculated fields.
+This dashboard needs to be substantially restructured to support our new reporting requirements — adding new data sources, restructuring existing tiles, and adding calculated fields.
 
 Changes requested:
 
@@ -840,18 +1013,56 @@ Changes requested:
 2. Restructure "Revenue by Provider" tile:
    - Current: Simple bar chart showing total billed
    - New: Grouped bar chart showing Billed vs. Paid side by side, by provider
-   - Add: Trend line overlay showing monthly collection rate
 
 3. Add 3 new tiles (see attached requirements doc for full specs)
 
 4. Add dashboard-level filters: Payer Type, Claim Status, Billing Period
 
-Note: Some of these changes may require LookML modifications as the Insured Billing data model may need to be extended.
+Note: Some of these changes may require LookML modifications.
 
 I've attached a detailed requirements document with annotated screenshots.
 
 Thank you,
 James Wu</div>
+                    </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'complex-mod-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="complex-mod-template">Subject: Complex Dashboard Modification – 
+
+Hi CARE Team,
+
+I'd like to request significant modifications to an existing dashboard.
+
+Domain: 
+Contact: 
+Dashboard: 
+
+Overview of changes:
+
+
+Changes requested:
+
+1. 
+
+
+2. 
+
+
+3. 
+
+
+4. 
+
+Note: 
+
+I've attached a detailed requirements document with annotated screenshots.
+
+Thank you,
+</div>
                     </div>
                 </div>
             </div>
@@ -871,21 +1082,12 @@ James Wu</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your PCN name and all clinic domains to be included</li>
-                            <li>Your name and email address</li>
-                            <li>Number of clinics/domains to aggregate</li>
-                            <li>Which user(s) will have cross-domain access</li>
-                            <li>What data needs to be reported across all domains</li>
-                            <li>Whether you need a new dashboard or modifications to existing ones</li>
-                            <li>Any clinic-specific vs. aggregate-level reporting needs</li>
-                            <li>Timeline or reporting deadline</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'multi-domain-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'multi-domain-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="multi-domain-example">Subject: Multi-Domain Reporting Request – Northern Alberta PCN
 
 Hi CARE Team,
@@ -911,7 +1113,6 @@ Reporting needs:
 - Comparison view: clinic vs. clinic performance
 
 New dashboard needed: Yes – "PCN Network Overview Dashboard"
-(Separate consultation request will follow for dashboard specs)
 
 Timeline: Setup needed by May 1, 2026 ahead of our Q2 board reporting.
 
@@ -919,6 +1120,43 @@ Please let me know what additional information is needed for the BA scoping call
 
 Thank you,
 Rachel Thompson</div>
+                    </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'multi-domain-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="multi-domain-template">Subject: Multi-Domain Reporting Request – 
+
+Hi CARE Team,
+
+I'd like to request multi-domain reporting setup for our PCN.
+
+PCN Name: 
+Contact: 
+
+Clinics to include:
+1. 
+2. 
+3. 
+
+Cross-domain user: 
+
+
+Reporting needs:
+- 
+- 
+- 
+
+New dashboard needed: 
+
+Timeline: 
+
+Please let me know what additional information is needed for the BA scoping call.
+
+Thank you,
+</div>
                     </div>
                 </div>
             </div>
@@ -952,22 +1190,12 @@ Rachel Thompson</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Name of the dashboard or report to be scheduled</li>
-                            <li>Delivery method: email or SFTP</li>
-                            <li>Recipient email address(es)</li>
-                            <li>Schedule frequency: daily, weekly, monthly</li>
-                            <li>Preferred delivery day and time</li>
-                            <li>File format: PDF, CSV, or Excel</li>
-                            <li>Any filters to apply at delivery time (e.g., specific date range)</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'auto-report-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'auto-report-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="auto-report-example">Subject: Automated Scheduled Report Request – Monthly Billing Summary
 
 Hi CARE Team,
@@ -991,10 +1219,42 @@ Filters at delivery:
 - Date range: Previous full month (auto-calculated)
 - Provider: All providers
 
-Please confirm once this is set up and let me know if any additional access is needed.
+Please confirm once this is set up.
 
 Thank you,
 Kim Nguyen</div>
+                    </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'auto-report-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="auto-report-template">Subject: Automated Scheduled Report Request – 
+
+Hi CARE Team,
+
+I'd like to set up an automated scheduled report delivery.
+
+Domain: 
+Contact: 
+
+Report to schedule: 
+
+Delivery details:
+- Method: 
+- Recipients: 
+- Frequency: 
+- Delivery day: 
+- Delivery time: 
+- File format: 
+
+Filters at delivery:
+- Date range: 
+- 
+
+Thank you,
+</div>
                     </div>
                 </div>
             </div>
@@ -1028,20 +1288,12 @@ Kim Nguyen</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Names and emails of all attendees</li>
-                            <li>Current Looker experience level (beginner, some experience)</li>
-                            <li>Topics you'd like covered (or leave open for standard curriculum)</li>
-                            <li>Preferred date and time for the training session</li>
-                            <li>Any specific dashboards or folders you'd like to focus on</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'looker-training-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'looker-training-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="looker-training-example">Subject: Looker Training Request
 
 Hi CARE Team,
@@ -1068,6 +1320,37 @@ Preferred times: Any afternoon the week of April 21, 2026
 Thank you,
 Priya Singh</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'looker-training-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="looker-training-template">Subject: Looker Training Request
+
+Hi CARE Team,
+
+I'd like to book a Looker training session for our team.
+
+Domain: 
+Contact: 
+
+Attendees:
+- 
+- 
+
+Experience level: 
+
+Topics we'd like covered:
+- 
+- 
+- 
+
+Preferred times: 
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1086,20 +1369,12 @@ Priya Singh</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Names and emails of all attendees</li>
-                            <li>Current CHR Analytics experience level</li>
-                            <li>Topics to cover: editing dashboards, building from scratch, Explores, data model</li>
-                            <li>Any specific dashboards you'd like to learn to edit</li>
-                            <li>Preferred date and time</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'chr-training-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'chr-training-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="chr-training-example">Subject: CHR Analytics Training Request
 
 Hi CARE Team,
@@ -1127,6 +1402,38 @@ Preferred times: Any morning next week
 Thank you,
 Marcus Lee</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'chr-training-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="chr-training-template">Subject: CHR Analytics Training Request
+
+Hi CARE Team,
+
+I'd like to book a CHR Analytics training session.
+
+Domain: 
+Contact: 
+
+Attendees:
+- 
+
+Experience level: 
+
+Topics I'd like to cover:
+- 
+- 
+- 
+
+Specific dashboard to focus on: 
+
+Preferred times: 
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1145,20 +1452,12 @@ Marcus Lee</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>New user's full name</li>
-                            <li>New user's email address</li>
-                            <li>New user's role (e.g., admin, viewer, editor)</li>
-                            <li>Confirmation that you understand a monthly charge applies</li>
-                            <li>Preferred start date for access</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'add-user-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'add-user-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="add-user-example">Subject: Looker Additional User Request
 
 Hi CARE Team,
@@ -1180,6 +1479,33 @@ Preferred start date: May 1, 2026
 Thank you,
 Sandra Kim</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'add-user-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="add-user-template">Subject: Looker Additional User Request
+
+Hi CARE Team,
+
+I'd like to request an additional Looker licensed user for our clinic.
+
+Domain: 
+Contact: 
+
+New user details:
+- Name: 
+- Email: 
+- Role requested: 
+
+I understand that an additional monthly charge applies for this user seat. Please confirm the current pricing before activating.
+
+Preferred start date: 
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1198,21 +1524,12 @@ Sandra Kim</div>
             </div>
             <div class="service-entry-body">
                 <div class="two-col-layout">
-                    <div class="checklist-block">
-                        <h4>✅ What to Include in Your Email</h4>
-                        <ul>
-                            <li>Your clinic domain / URL</li>
-                            <li>Your name and email address</li>
-                            <li>Departing user's full name and email</li>
-                            <li>New user's full name and email</li>
-                            <li>New user's desired access level/role</li>
-                            <li>Date to disable departing user's account</li>
-                            <li>Date to activate new user's account</li>
-                            <li>Any folders or dashboards to transfer ownership of</li>
-                        </ul>
-                    </div>
-                    <div class="example-block">
-                        <h4>📧 Example Email <button class="copy-btn" onclick="copyText(this, 'swap-user-example')">Copy</button></h4>
+                    <div>
+                        <div class="col-header col-header-example">📧 Filled Example</div>
+                        <div class="col-title-row">
+                            <h4>See what a complete request looks like</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'swap-user-example')">Copy</button>
+                        </div>
                         <div class="example-email" id="swap-user-example">Subject: Swap Looker Licensed User
 
 Hi CARE Team,
@@ -1238,6 +1555,37 @@ Please transfer ownership of any dashboards or folders owned by Michael to Fatim
 Thank you,
 Sandra Kim</div>
                     </div>
+                    <div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                        <div class="col-title-row">
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'swap-user-template')">Copy</button>
+                        </div>
+                        <div class="template-email" id="swap-user-template">Subject: Swap Looker Licensed User
+
+Hi CARE Team,
+
+I'd like to request a Looker user license swap due to a staff change.
+
+Domain: 
+Contact: 
+
+Departing user:
+- Name: 
+- Email: 
+- Disable date: 
+
+New user:
+- Name: 
+- Email: 
+- Access level: 
+- Activate date: 
+
+Please transfer ownership of any dashboards or folders owned by [departing user] to [new user] before disabling their account.
+
+Thank you,
+</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1252,7 +1600,7 @@ Sandra Kim</div>
     <div class="bottom-cta">
         <div class="bottom-cta-text">
             <h3>Ready to submit your request?</h3>
-            <p>Find your service above, copy the example email, fill in your details, and send it to the CARE team. They'll review your submission and reach out within 1–2 business days.</p>
+            <p>Find your service above, copy the blank template, fill in your details, and send it to the CARE team. They'll review your submission and reach out within 1–2 business days.</p>
             <small>If the email button doesn't open your email client, use the Copy button and paste the address manually.</small>
         </div>
         <div class="bottom-cta-actions">
