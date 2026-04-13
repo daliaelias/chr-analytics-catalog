@@ -7,316 +7,130 @@
     <title>Analytics Request Submission Guide</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1f2937; line-height: 1.6; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8fafc;
-            color: #1f2937;
-            line-height: 1.6;
-        }
-
-        /* HEADER */
-        .page-header {
-            background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%);
-            color: white;
-            padding: 48px 40px 40px;
-            border-bottom: 4px solid #66CC00;
-        }
+        .page-header { background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%); color: white; padding: 48px 40px 40px; border-bottom: 4px solid #66CC00; }
         .page-header-inner { max-width: 960px; margin: 0 auto; }
-        .page-header .breadcrumb {
-            font-size: 0.78em; opacity: 0.65; margin-bottom: 14px;
-            letter-spacing: 0.04em; text-transform: uppercase;
-        }
+        .page-header .breadcrumb { font-size: 0.78em; opacity: 0.65; margin-bottom: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
         .page-header h1 { font-size: 2em; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
         .page-header .subtitle { font-size: 0.97em; opacity: 0.85; max-width: 680px; line-height: 1.65; }
         .page-header .last-updated { margin-top: 14px; font-size: 0.74em; opacity: 0.5; }
 
-        /* CTA BAR */
         .cta-bar { background: #4B286D; padding: 14px 40px; }
-        .cta-bar-inner {
-            max-width: 960px; width: 100%; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between;
-            flex-wrap: nowrap; gap: 16px;
-        }
+        .cta-bar-inner { max-width: 960px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 16px; }
         .cta-bar-text { color: #d8b4fe; font-size: 0.82em; flex: 1; min-width: 0; }
         .cta-bar-text small { display: block; color: rgba(216,180,254,0.65); font-size: 0.85em; margin-top: 2px; }
         .cta-btn-group { display: flex; gap: 8px; flex-wrap: nowrap; align-items: center; flex-shrink: 0; }
-
-        .cta-btn {
-            display: inline-block; background: #66CC00; color: #1a1a1a;
-            font-weight: 700; font-size: 0.85em; padding: 9px 18px;
-            border-radius: 8px; text-decoration: none; transition: all 0.2s;
-            white-space: nowrap; border: none; cursor: pointer; font-family: inherit;
-        }
+        .cta-btn { display: inline-block; background: #66CC00; color: #1a1a1a; font-weight: 700; font-size: 0.85em; padding: 9px 18px; border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; font-family: inherit; }
         .cta-btn:hover { background: #55aa00; transform: translateY(-1px); }
-
-        .cta-btn-outline {
-            display: inline-block; background: transparent; color: #d8b4fe;
-            font-weight: 600; font-size: 0.8em; padding: 9px 14px;
-            border-radius: 8px; text-decoration: none; transition: all 0.2s;
-            white-space: nowrap; border: 1px solid rgba(216,180,254,0.4);
-            cursor: pointer; font-family: inherit;
-        }
+        .cta-btn-outline { display: inline-block; background: transparent; color: #d8b4fe; font-weight: 600; font-size: 0.8em; padding: 9px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: 1px solid rgba(216,180,254,0.4); cursor: pointer; font-family: inherit; }
         .cta-btn-outline:hover { background: rgba(255,255,255,0.1); }
         .cta-btn-outline.copied { background: #66CC00; color: #1a1a1a; border-color: #66CC00; }
 
-        /* MAIN CONTENT */
         .page-content { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
 
-        /* INTRO */
-        .intro-text {
-            font-size: 0.95em; color: #374151; line-height: 1.75; margin-bottom: 24px;
-            background: white; border: 1px solid #e5e7eb; border-radius: 10px;
-            padding: 22px 26px; border-left: 4px solid #4B286D;
-        }
+        .intro-text { font-size: 0.95em; color: #374151; line-height: 1.75; margin-bottom: 24px; background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 22px 26px; border-left: 4px solid #4B286D; }
 
-        /* JUMP TO SECTION */
-        .jump-nav {
-            background: white; border: 1px solid #e5e7eb; border-radius: 10px;
-            padding: 18px 24px; margin-bottom: 24px;
-        }
-        .jump-nav h3 {
-            font-size: 0.82em; font-weight: 700; color: #2B1B4E;
-            text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
-        }
+        .jump-nav { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 22px; margin-bottom: 24px; }
+        .jump-nav h3 { font-size: 0.82em; font-weight: 700; color: #2B1B4E; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
         .jump-nav-links { display: flex; flex-wrap: wrap; gap: 8px; }
-        .jump-nav-links a {
-            display: inline-block; background: #f5f0ff; color: #4B286D;
-            font-size: 0.82em; font-weight: 600; padding: 6px 14px;
-            border-radius: 20px; text-decoration: none; border: 1px solid #d8b4fe;
-            transition: all 0.2s; white-space: nowrap;
-        }
+        .jump-nav-links a { display: inline-block; background: #f5f0ff; color: #4B286D; font-size: 0.82em; font-weight: 600; padding: 6px 14px; border-radius: 20px; text-decoration: none; border: 1px solid #d8b4fe; transition: all 0.2s; white-space: nowrap; }
         .jump-nav-links a:hover { background: #4B286D; color: white; border-color: #4B286D; }
 
-        /* STANDARD FIELDS BOX */
-        .standard-fields-box {
-            background: #f5f0ff; border: 1px solid #7B5EA7; border-radius: 10px;
-            padding: 16px 22px; margin-bottom: 24px;
-            display: flex; gap: 14px; align-items: flex-start;
-        }
-        .standard-fields-box .sf-icon { font-size: 1.3em; flex-shrink: 0; margin-top: 2px; }
-        .standard-fields-box .sf-content h3 {
-            font-size: 0.88em; font-weight: 700; color: #2B1B4E; margin-bottom: 6px;
-        }
-        .standard-fields-box .sf-content ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; }
-        .standard-fields-box .sf-content ul li {
-            font-size: 0.83em; color: #4B286D;
-            display: flex; gap: 6px; align-items: center;
-        }
-        .standard-fields-box .sf-content ul li::before {
-            content: '•'; color: #66CC00; font-weight: 700; font-size: 1.2em;
-        }
+        .standard-fields-box { background: #f5f0ff; border: 1px solid #7B5EA7; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; display: flex; gap: 12px; align-items: flex-start; }
+        .standard-fields-box .sf-icon { font-size: 1.2em; flex-shrink: 0; margin-top: 2px; }
+        .standard-fields-box .sf-content h3 { font-size: 0.86em; font-weight: 700; color: #2B1B4E; margin-bottom: 5px; }
+        .standard-fields-box .sf-content ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+        .standard-fields-box .sf-content ul li { font-size: 0.82em; color: #4B286D; display: flex; gap: 6px; align-items: center; }
+        .standard-fields-box .sf-content ul li::before { content: '•'; color: #66CC00; font-weight: 700; font-size: 1.2em; }
 
-        /* HOW IT WORKS */
-        .how-it-works {
-            background: white; border: 1px solid #e5e7eb; border-radius: 10px;
-            padding: 20px 24px; margin-bottom: 36px;
-        }
-        .how-it-works h2 { font-size: 0.95em; font-weight: 700; color: #2B1B4E; margin-bottom: 14px; }
+        .how-it-works { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 22px; margin-bottom: 36px; }
+        .how-it-works h2 { font-size: 0.92em; font-weight: 700; color: #2B1B4E; margin-bottom: 12px; }
         .steps-row { display: flex; gap: 0; flex-wrap: wrap; }
-        .step-item {
-            display: flex; align-items: flex-start; gap: 8px;
-            flex: 1; min-width: 140px; padding-right: 18px; position: relative;
-        }
-        .step-item:not(:last-child)::after {
-            content: '→'; position: absolute; right: 2px; top: 4px;
-            color: #66CC00; font-weight: 700; font-size: 1em;
-        }
-        .step-num {
-            background: #4B286D; color: white; border-radius: 50%;
-            width: 24px; height: 24px; display: flex; align-items: center;
-            justify-content: center; font-size: 0.75em; font-weight: 700; flex-shrink: 0;
-        }
-        .step-text { font-size: 0.8em; color: #374151; line-height: 1.4; }
-        .step-text strong { display: block; color: #2B1B4E; margin-bottom: 2px; }
+        .step-item { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 130px; padding-right: 16px; position: relative; }
+        .step-item:not(:last-child)::after { content: '→'; position: absolute; right: 1px; top: 4px; color: #66CC00; font-weight: 700; font-size: 1em; }
+        .step-num { background: #4B286D; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.72em; font-weight: 700; flex-shrink: 0; }
+        .step-text { font-size: 0.78em; color: #374151; line-height: 1.4; }
+        .step-text strong { display: block; color: #2B1B4E; margin-bottom: 1px; }
 
-        /* SECTION GROUP */
-        .service-group { margin-bottom: 48px; }
-        .section-heading {
-            font-size: 1.12em; font-weight: 700; color: #2B1B4E;
-            padding-bottom: 10px; border-bottom: 2px solid #4B286D;
-            margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
-        }
-        .section-meta { font-size: 0.8em; color: #6b7280; margin-bottom: 18px; }
+        .service-group { margin-bottom: 44px; }
+        .section-heading { font-size: 1.1em; font-weight: 700; color: #2B1B4E; padding-bottom: 8px; border-bottom: 2px solid #4B286D; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .section-meta { font-size: 0.78em; color: #6b7280; margin-bottom: 16px; }
+        .section-anchor { scroll-margin-top: 20px; }
 
-        /* CATEGORY EXAMPLE BOX */
-        .category-example-box {
-            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
-            margin-bottom: 24px; overflow: hidden;
-        }
-        .category-example-header {
-            background: #2B1B4E; padding: 12px 20px;
-            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-        }
-        .category-example-header span {
-            color: white; font-size: 0.85em; font-weight: 700;
-        }
-        .category-example-header small {
-            color: rgba(255,255,255,0.65); font-size: 0.78em; margin-left: auto;
-        }
-        .category-example-body { padding: 20px; }
+        /* CATEGORY BLOCK — example + template side by side */
+        .category-block { background: white; border: 1px solid #e5e7eb; border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+        .category-block-header { background: #2B1B4E; padding: 10px 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .category-block-header span { color: white; font-size: 0.83em; font-weight: 700; }
+        .category-block-header small { color: rgba(255,255,255,0.6); font-size: 0.76em; margin-left: auto; }
+        .category-block-body { padding: 18px; }
 
-        /* SERVICE ENTRY */
-        .service-entry {
-            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
-            margin-bottom: 16px; overflow: hidden;
-        }
-        .service-entry-header {
-            background: #f9fafb; padding: 12px 20px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-        }
-        .service-entry-title-block { flex: 1; min-width: 200px; }
-        .service-entry-title { font-size: 1em; font-weight: 700; color: #2B1B4E; }
-        .service-entry-desc { font-size: 0.8em; color: #9ca3af; margin-top: 2px; line-height: 1.4; }
-        .service-entry-meta { font-size: 0.78em; color: #6b7280; }
+        .two-col-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 700px) { .two-col-layout { grid-template-columns: 1fr; } }
 
-        .gmail-btn {
-            display: inline-block; background: #66CC00; color: #1a1a1a;
-            font-weight: 700; font-size: 0.78em; padding: 5px 14px;
-            border-radius: 6px; text-decoration: none; transition: all 0.2s;
-            white-space: nowrap; border: none; cursor: pointer; font-family: inherit;
-        }
+        .col-header { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 4px; margin-bottom: 5px; display: inline-block; }
+        .col-header-example { background: #e5e7eb; color: #374151; }
+        .col-header-template { background: #fed7aa; color: #92400e; }
+
+        .copy-btn { background: #4B286D; color: white; border: none; border-radius: 5px; padding: 3px 9px; font-size: 0.72em; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .copy-btn:hover { background: #2B1B4E; }
+        .copy-btn.copied { background: #66CC00; color: #1a1a1a; }
+
+        .col-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+        .col-title-row h4 { font-size: 0.78em; font-weight: 700; color: #2B1B4E; text-transform: uppercase; letter-spacing: 0.04em; }
+
+        .example-email { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 7px; padding: 12px 14px; font-size: 0.77em; color: #374151; font-family: 'Courier New', monospace; line-height: 1.55; white-space: pre-wrap; word-break: break-word; max-height: 320px; overflow-y: auto; }
+        .template-email { background: #fff8f0; border: 1px solid #fed7aa; border-radius: 7px; padding: 12px 14px; font-size: 0.77em; color: #374151; font-family: 'Courier New', monospace; line-height: 1.55; white-space: pre-wrap; word-break: break-word; max-height: 320px; overflow-y: auto; }
+
+        /* SERVICE LIST */
+        .services-list { margin-top: 16px; }
+        .services-list-label { font-size: 0.78em; color: #6b7280; margin-bottom: 10px; font-style: italic; }
+
+        .service-entry { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+        .service-entry-header { padding: 10px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .service-entry-title-block { flex: 1; min-width: 180px; }
+        .service-entry-title { font-size: 0.92em; font-weight: 700; color: #2B1B4E; }
+        .service-entry-desc { font-size: 0.77em; color: #9ca3af; margin-top: 2px; line-height: 1.35; }
+        .service-entry-meta { font-size: 0.74em; color: #6b7280; }
+
+        .gmail-btn { display: inline-block; background: #66CC00; color: #1a1a1a; font-weight: 700; font-size: 0.74em; padding: 4px 11px; border-radius: 6px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; font-family: inherit; }
         .gmail-btn:hover { background: #55aa00; }
 
-        /* TIER BADGES */
-        .tier-badge {
-            display: inline-block; font-size: 0.68em; font-weight: 700;
-            padding: 2px 8px; border-radius: 8px; text-transform: uppercase;
-            letter-spacing: 0.04em; white-space: nowrap;
-        }
+        .tier-badge { display: inline-block; font-size: 0.64em; font-weight: 700; padding: 2px 7px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
         .tier-all { background: #f3f4f6; color: #374151; }
         .tier-advanced { background: #f5f0ff; color: #4B286D; border: 1px solid #7B5EA7; }
         .tier-enterprise { background: #f0fff0; color: #2d6600; border: 1px solid #66CC00; }
         .tier-pcn { background: #fdf4ff; color: #2B1B4E; border: 1px solid #4B286D; }
         .tier-ba { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
 
-        .service-entry-body { padding: 16px 20px; }
-
-        /* TWO COLUMN LAYOUT */
-        .two-col-layout {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-        }
-        @media (max-width: 700px) {
-            .two-col-layout { grid-template-columns: 1fr; }
-        }
-
-        /* COLUMN HEADERS */
-        .col-header {
-            font-size: 0.72em; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 0.05em; padding: 3px 8px; border-radius: 4px;
-            margin-bottom: 6px; display: inline-block;
-        }
-        .col-header-example { background: #e5e7eb; color: #374151; }
-        .col-header-template { background: #fed7aa; color: #92400e; }
-
-        /* COPY BUTTON */
-        .copy-btn {
-            background: #4B286D; color: white; border: none; border-radius: 6px;
-            padding: 3px 10px; font-size: 0.73em; font-weight: 600; cursor: pointer;
-            transition: all 0.2s; font-family: inherit;
-        }
-        .copy-btn:hover { background: #2B1B4E; }
-        .copy-btn.copied { background: #66CC00; color: #1a1a1a; }
-
-        .col-title-row {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        .col-title-row h4 {
-            font-size: 0.8em; font-weight: 700; color: #2B1B4E;
-            text-transform: uppercase; letter-spacing: 0.04em;
-        }
-
-        /* EXAMPLE EMAIL */
-        .example-email {
-            background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px;
-            padding: 14px 16px; font-size: 0.79em; color: #374151;
-            font-family: 'Courier New', monospace; line-height: 1.7;
-            white-space: pre-wrap; word-break: break-word;
-            max-height: 360px; overflow-y: auto;
-        }
-
-        /* BLANK TEMPLATE */
-        .template-email {
-            background: #fff8f0; border: 1px solid #fed7aa; border-radius: 8px;
-            padding: 14px 16px; font-size: 0.79em; color: #374151;
-            font-family: 'Courier New', monospace; line-height: 1.7;
-            white-space: pre-wrap; word-break: break-word;
-            max-height: 360px; overflow-y: auto;
-        }
-
-        /* SERVICE TEMPLATE ONLY (no example) */
-        .service-template-only {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-        }
-        @media (max-width: 700px) {
-            .service-template-only { grid-template-columns: 1fr; }
-        }
-
-        /* SECTION CALLOUT */
-        .section-callout {
-            border-radius: 8px; padding: 12px 16px; margin-bottom: 18px;
-            font-size: 0.83em; line-height: 1.55; display: flex;
-            gap: 10px; align-items: flex-start;
-        }
-        .section-callout .ci { font-size: 1.2em; flex-shrink: 0; margin-top: 1px; }
+        .section-callout { border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 0.82em; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+        .section-callout .ci { font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
         .section-callout strong { display: block; margin-bottom: 2px; }
         .callout-advanced { background: #f5f0ff; border: 1px solid #7B5EA7; color: #4B286D; }
         .callout-enterprise { background: #f0fff0; border: 1px solid #66CC00; color: #2d6600; }
         .callout-info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
 
-        /* BOTTOM CTA */
-        .bottom-cta {
-            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
-            padding: 28px 32px; margin-top: 48px;
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 20px; flex-wrap: wrap; border-left: 4px solid #66CC00;
-        }
-        .bottom-cta-text h3 { font-size: 1.05em; font-weight: 700; color: #2B1B4E; margin-bottom: 4px; }
-        .bottom-cta-text p { font-size: 0.85em; color: #6b7280; line-height: 1.5; }
-        .bottom-cta-text small { font-size: 0.78em; color: #9ca3af; display: block; margin-top: 4px; }
+        .bottom-cta { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px 28px; margin-top: 44px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-left: 4px solid #66CC00; }
+        .bottom-cta-text h3 { font-size: 1em; font-weight: 700; color: #2B1B4E; margin-bottom: 4px; }
+        .bottom-cta-text p { font-size: 0.83em; color: #6b7280; line-height: 1.5; }
+        .bottom-cta-text small { font-size: 0.76em; color: #9ca3af; display: block; margin-top: 4px; }
         .bottom-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-        .bottom-cta-btn {
-            display: inline-block; background: #4B286D; color: white;
-            font-weight: 700; font-size: 0.9em; padding: 12px 28px;
-            border-radius: 10px; text-decoration: none; transition: all 0.2s;
-            white-space: nowrap; border: none; cursor: pointer; font-family: inherit;
-        }
+        .bottom-cta-btn { display: inline-block; background: #4B286D; color: white; font-weight: 700; font-size: 0.88em; padding: 11px 24px; border-radius: 10px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; font-family: inherit; }
         .bottom-cta-btn:hover { background: #2B1B4E; transform: translateY(-1px); }
-        .bottom-cta-btn-outline {
-            display: inline-block; background: white; color: #4B286D;
-            font-weight: 700; font-size: 0.9em; padding: 12px 28px;
-            border-radius: 10px; text-decoration: none; transition: all 0.2s;
-            white-space: nowrap; border: 2px solid #4B286D; cursor: pointer; font-family: inherit;
-        }
+        .bottom-cta-btn-outline { display: inline-block; background: white; color: #4B286D; font-weight: 700; font-size: 0.88em; padding: 11px 24px; border-radius: 10px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: 2px solid #4B286D; cursor: pointer; font-family: inherit; }
         .bottom-cta-btn-outline:hover { background: #f5f0ff; }
         .bottom-cta-btn-outline.copied { background: #66CC00; color: #1a1a1a; border-color: #66CC00; }
 
-        /* NOTE */
-        .note-box {
-            background: #f9fafb; border-left: 4px solid #4B286D;
-            border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 28px;
-            font-size: 0.82em; color: #6b7280; line-height: 1.6;
-        }
+        .note-box { background: #f9fafb; border-left: 4px solid #4B286D; border-radius: 0 8px 8px 0; padding: 11px 15px; margin-top: 24px; font-size: 0.8em; color: #6b7280; line-height: 1.6; }
         .note-box strong { color: #2B1B4E; }
 
-        /* SECTION ANCHOR */
-        .section-anchor { scroll-margin-top: 20px; }
-
-        /* SERVICE LIST LABEL */
-        .services-in-section {
-            font-size: 0.8em; color: #6b7280; margin-bottom: 12px;
-            font-style: italic;
-        }
-
         @media (max-width: 768px) {
-            .page-header { padding: 32px 20px 28px; }
+            .page-header { padding: 30px 20px 26px; }
             .page-header h1 { font-size: 1.5em; }
             .cta-bar { padding: 12px 20px; }
             .cta-bar-inner { flex-wrap: wrap; }
             .bottom-cta { flex-direction: column; }
-            .steps-row { flex-direction: column; gap: 12px; }
+            .steps-row { flex-direction: column; gap: 10px; }
             .step-item::after { display: none; }
             .step-item { padding-right: 0; }
             .jump-nav-links { gap: 6px; }
@@ -325,23 +139,19 @@
 </head>
 <body>
 
-<!-- PAGE HEADER -->
 <div class="page-header">
     <div class="page-header-inner">
         <div class="breadcrumb">Analytics · Request Submission Guide</div>
         <h1>📋 How to Submit Your Analytics Request</h1>
-        <p class="subtitle">
-            A service-by-service guide on what to include when emailing the CARE team — with a shared example per section and a blank copy-paste template for each service.
-        </p>
+        <p class="subtitle">A service-by-service guide on what to include when emailing the CARE team — with a filled example and one blank copy-paste template per section.</p>
         <div class="last-updated">Last updated: April 2026</div>
     </div>
 </div>
 
-<!-- TOP CTA BAR -->
 <div class="cta-bar">
     <div class="cta-bar-inner">
         <div class="cta-bar-text">
-            Find your service below, copy the blank template, fill in your details, and send.
+            Find your section below, copy the blank template, fill in your details, and send.
             <small>If the email button doesn't open, copy the address manually.</small>
         </div>
         <div class="cta-btn-group">
@@ -351,15 +161,12 @@
     </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="page-content">
 
-    <!-- INTRO -->
     <div class="intro-text">
-        To get the fastest turnaround on your analytics request, include the right information when you email the CARE team. Each section below has a <strong>shared example</strong> showing what a complete request looks like, followed by a <strong>blank template</strong> for each service. Copy the template, fill it in, and send it to <strong>care.emraccounts@telus.com</strong>.
+        To get the fastest turnaround on your analytics request, include the right information when you email the CARE team. Each section below has a <strong>filled example</strong> on the left and one <strong>blank copy-paste template</strong> on the right. Copy the template, fill it in, and send it to <strong>care.emraccounts@telus.com</strong>.
     </div>
 
-    <!-- JUMP TO SECTION -->
     <div class="jump-nav">
         <h3>Jump to a section</h3>
         <div class="jump-nav-links">
@@ -367,11 +174,10 @@
             <a href="#core-services">🔧 Core Services</a>
             <a href="#complex-projects">⚙️ Complex Projects</a>
             <a href="#advanced-services">📦 Advanced Client Services</a>
-            <a href="#enterprise-services">🏢 Enterprise & PCN Services</a>
+            <a href="#enterprise-services">🏢 Enterprise &amp; PCN Services</a>
         </div>
     </div>
 
-    <!-- STANDARD FIELDS -->
     <div class="standard-fields-box">
         <div class="sf-icon">📌</div>
         <div class="sf-content">
@@ -383,7 +189,6 @@
         </div>
     </div>
 
-    <!-- HOW IT WORKS -->
     <div class="how-it-works">
         <h2>📌 How It Works</h2>
         <div class="steps-row">
@@ -397,15 +202,15 @@
             </div>
             <div class="step-item">
                 <span class="step-num">3</span>
-                <div class="step-text"><strong>Find your service</strong>Pick the specific service below the example</div>
+                <div class="step-text"><strong>Copy the template</strong>Use the one blank template for that section</div>
             </div>
             <div class="step-item">
                 <span class="step-num">4</span>
-                <div class="step-text"><strong>Copy the template</strong>Use the blank template for that service</div>
+                <div class="step-text"><strong>Fill in your details</strong>Type your information into the blank fields</div>
             </div>
             <div class="step-item" style="padding-right:0;">
                 <span class="step-num">5</span>
-                <div class="step-text"><strong>Fill & send</strong>Type your info and email care.emraccounts@telus.com</div>
+                <div class="step-text"><strong>Fill &amp; send</strong>Email care.emraccounts@telus.com</div>
             </div>
         </div>
     </div>
@@ -415,13 +220,12 @@
         <div class="section-heading">⚡ Quick Fixes</div>
         <div class="section-meta">Available to all clients &nbsp;·&nbsp; No BA review required &nbsp;·&nbsp; Resolved within 5 business days</div>
 
-        <!-- SHARED EXAMPLE FOR QUICK FIXES -->
-        <div class="category-example-box">
-            <div class="category-example-header">
-                <span>📧 Example — What a Quick Fix request looks like</span>
-                <small>Use this as a reference for any Quick Fix service below</small>
+        <div class="category-block">
+            <div class="category-block-header">
+                <span>📧 Quick Fixes — Example &amp; Copy-Paste Template</span>
+                <small>Use for: Bug or Error · Dashboard Issues · Minor Updates</small>
             </div>
-            <div class="category-example-body">
+            <div class="category-block-body">
                 <div class="two-col-layout">
                     <div>
                         <div class="col-header col-header-example">Filled Example</div>
@@ -440,7 +244,7 @@ Contact: Jane Smith (jane.smith@myclinic.com)
 Dashboard: Patient Appointments Overview
 
 Issue Description:
-The date range filter is not working correctly. When I select "Last 30 Days," the dashboard shows data from 6 months ago instead of the current period.
+The date range filter is not working correctly. When I select "Last 30 Days," the dashboard shows data from 6 months ago.
 
 I've attached a screenshot showing the issue.
 
@@ -448,150 +252,66 @@ Thank you,
 Jane Smith</div>
                     </div>
                     <div>
-                        <div class="col-header col-header-template">Generic Blank Template</div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
                         <div class="col-title-row">
-                            <h4>Copy this structure as a starting point</h4>
-                            <button class="copy-btn" onclick="copyText(this, 'qf-generic-template')">Copy</button>
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'qf-template')">Copy</button>
                         </div>
-                        <div class="template-email" id="qf-generic-template">Subject: [Service Type] – [Dashboard or Topic]
+                        <div class="template-email" id="qf-template">Subject: [Bug/Error / Dashboard Issue / Minor Update] –
 
 Hi CARE Team,
 
-I'm writing to report an issue / request a change.
+Domain:
+Contact:
+Dashboard:
 
-Domain: 
-Contact: 
-Dashboard: 
-
-Description:
-
-
+Issue / Change Description:
 
 I've attached a screenshot if applicable.
 
-Thank you,
-</div>
+Thank you,</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <p class="services-in-section">Choose the specific service below and copy its blank template:</p>
+        <div class="services-list">
+            <div class="services-list-label">Services included in this section — use the template above for any of these:</div>
 
-        <!-- Bug or Error -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🐛 Bug or Error</div>
-                    <div class="service-entry-desc">Something that was working has stopped working or is behaving unexpectedly.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="service-entry-meta">Est. 60–120 min</span>
-                <button class="gmail-btn" onclick="openGmail('Bug/Error – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🐛 Bug or Error</div>
+                        <div class="service-entry-desc">Something that was working has stopped working or is behaving unexpectedly.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'bug-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="service-entry-meta">Est. 60–120 min</span>
+                    <button class="gmail-btn" onclick="openGmail('Bug/Error – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="bug-template">Subject: Bug/Error – 
-
-Hi CARE Team,
-
-I'm writing to report a bug on our analytics dashboard.
-
-Domain: 
-Contact: 
-Dashboard: 
-
-Issue Description:
-
-
-I've attached a screenshot showing the issue.
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Dashboard Issues -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">📊 Dashboard Issues</div>
-                    <div class="service-entry-desc">A specific dashboard element (filter, tile, chart) is broken or not displaying correctly.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="service-entry-meta">Est. 60–90 min</span>
-                <button class="gmail-btn" onclick="openGmail('Dashboard Issue – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">📊 Dashboard Issues</div>
+                        <div class="service-entry-desc">A specific dashboard element (filter, tile, chart) is broken or not displaying correctly.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'dashboard-issue-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="service-entry-meta">Est. 60–90 min</span>
+                    <button class="gmail-btn" onclick="openGmail('Dashboard Issue – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="dashboard-issue-template">Subject: Dashboard Issue – 
-
-Hi CARE Team,
-
-I'm experiencing an issue with one of our dashboards.
-
-Domain: 
-Contact: 
-Dashboard: 
-
-Issue:
-
-
-I've attached a screenshot for reference.
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Minor Dashboard Updates -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">✏️ Minor Dashboard Updates</div>
-                    <div class="service-entry-desc">Small cosmetic changes — updating labels, fixing typos, or adding a single column or filter.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="service-entry-meta">Est. 60–90 min</span>
-                <button class="gmail-btn" onclick="openGmail('Minor Dashboard Update – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">✏️ Minor Dashboard Updates</div>
+                        <div class="service-entry-desc">Small changes — updating labels, fixing typos, or adding a single column or filter.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'minor-update-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="service-entry-meta">Est. 60–90 min</span>
+                    <button class="gmail-btn" onclick="openGmail('Minor Dashboard Update – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="minor-update-template">Subject: Minor Dashboard Update – 
-
-Hi CARE Team,
-
-I'd like to request a few small updates to an existing dashboard.
-
-Domain: 
-Contact: 
-Dashboard: 
-
-Requested Changes:
-1. 
-2. 
-3. 
-
-Thank you,
-</div>
             </div>
         </div>
     </div>
@@ -601,13 +321,12 @@ Thank you,
         <div class="section-heading">🔧 Core Services</div>
         <div class="section-meta">Available to all clients &nbsp;·&nbsp; 5–10 business day turnaround</div>
 
-        <!-- SHARED EXAMPLE FOR CORE SERVICES -->
-        <div class="category-example-box">
-            <div class="category-example-header">
-                <span>📧 Example — What a Core Service request looks like</span>
-                <small>Use this as a reference for any Core Service below</small>
+        <div class="category-block">
+            <div class="category-block-header">
+                <span>📧 Core Services — Example &amp; Copy-Paste Template</span>
+                <small>Use for: Consultation · New Dashboard · Modify Dashboard</small>
             </div>
-            <div class="category-example-body">
+            <div class="category-block-body">
                 <div class="two-col-layout">
                     <div>
                         <div class="col-header col-header-example">Filled Example</div>
@@ -619,244 +338,107 @@ Thank you,
 
 Hi CARE Team,
 
-I'd like to request a new custom dashboard for our clinic.
-
 Domain: myclinic.teluschr.com
 Contact: Lisa Park (l.park@myclinic.com)
 Clinic: Menopause Wellness Clinic
 Dashboard Name: Patient Symptom Tracking – Pre/Post
 
 Goal:
-Track patient symptom severity scores before and after treatment to measure program effectiveness.
+Track symptom severity scores before and after treatment.
 
 Data Source:
 - CHR Section: Questionnaire Responses
-- Fields needed: Patient name, DOB, Pre-treatment score, Post-treatment score, Date completed
-- Date range: All responses from Jan 1, 2025 onward
+- Fields: Patient name, DOB, Pre-score, Post-score, Date completed
+- Date range: Jan 1, 2025 onward
 - Filter: Active patients only
 
-Dashboard Tiles (3 tiles total):
+Tiles (3 total):
+1. Total Patients with Pre & Post Scores | Type: Scorecard | Metric: Count of patients with both responses
+2. Average Score Comparison | Type: Bar Chart | Metric: Avg pre vs. post score
+3. Patient Detail Table | Type: Table | Columns: Name, DOB, Pre, Post, Change, Provider
 
-Tile 1: Total Patients with Pre & Post Scores
-- Type: Single Count / Scorecard
-- Metric: Count of patients who have both a pre and post questionnaire response
+Filters: Date range, Provider
 
-Tile 2: Average Score Comparison
-- Type: Bar Chart
-- Metric: Average pre-treatment score vs. average post-treatment score
-
-Tile 3: Patient Detail Table
-- Type: Table
-- Columns: Patient Name, DOB, Pre Score, Post Score, Score Change, Provider
-
-Filters needed:
-- Date range filter
-- Provider filter
-
-Reference: I've attached an Excel mockup.
+Reference: Excel mockup attached.
 
 Thank you,
 Lisa Park</div>
                     </div>
                     <div>
-                        <div class="col-header col-header-template">Generic Blank Template</div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
                         <div class="col-title-row">
-                            <h4>Copy this structure as a starting point</h4>
-                            <button class="copy-btn" onclick="copyText(this, 'core-generic-template')">Copy</button>
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'core-template')">Copy</button>
                         </div>
-                        <div class="template-email" id="core-generic-template">Subject: [Service Type] – [Dashboard or Topic]
+                        <div class="template-email" id="core-template">Subject: [Consultation / New Dashboard / Modify Dashboard] –
 
 Hi CARE Team,
 
-I'd like to submit a request for our clinic.
-
-Domain: 
-Contact: 
-Clinic: 
-Dashboard Name: 
+Domain:
+Contact:
+Clinic:
+Dashboard Name:
 
 Goal:
 
-
 Data Source:
-- CHR Section: 
-- Fields needed: 
-- Date range: 
-- Filter: 
+- CHR Section:
+- Fields:
+- Date range:
+- Filter:
 
-Details / Changes Requested:
+Tiles / Changes:
+1.
+2.
+3.
 
+Filters:
 
-Filters needed:
-- 
-- 
+Reference:
 
-Reference: 
-
-Thank you,
-</div>
+Thank you,</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <p class="services-in-section">Choose the specific service below and copy its blank template:</p>
+        <div class="services-list">
+            <div class="services-list-label">Services included in this section — use the template above for any of these:</div>
 
-        <!-- Consultation Request -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">💬 Consultation Request</div>
-                    <div class="service-entry-desc">Book a session with the analytics team to explore what's possible before requesting a new dashboard.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="service-entry-meta">Est. 60–90 min</span>
-                <button class="gmail-btn" onclick="openGmail('Consultation Request – Analytics')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">💬 Consultation Request</div>
+                        <div class="service-entry-desc">Book a session with the analytics team to explore what's possible before requesting a new dashboard.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'consult-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="service-entry-meta">Est. 60–90 min</span>
+                    <button class="gmail-btn" onclick="openGmail('Consultation Request – Analytics')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="consult-template">Subject: Consultation Request – Analytics
-
-Hi CARE Team,
-
-I'd like to book a consultation with the analytics team.
-
-Domain: 
-Contact: 
-Clinic: 
-
-What we're trying to achieve:
-
-
-Current state:
-
-
-Questions for the consultation:
-- 
-- 
-- 
-
-Preferred times: 
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- New Simple Custom Dashboard -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">📈 New Simple Custom Dashboard</div>
-                    <div class="service-entry-desc">Request a brand-new dashboard with up to 9 tiles and one page of requirements.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; Max 9 tiles, 29 columns</span>
-                <button class="gmail-btn" onclick="openGmail('New Simple Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">📈 New Simple Custom Dashboard</div>
+                        <div class="service-entry-desc">Request a brand-new dashboard with up to 9 tiles and one page of requirements.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'simple-dash-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; Max 9 tiles, 29 columns</span>
+                    <button class="gmail-btn" onclick="openGmail('New Simple Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="simple-dash-template">Subject: New Simple Custom Dashboard – 
-
-Hi CARE Team,
-
-I'd like to request a new custom dashboard for our clinic.
-
-Domain: 
-Contact: 
-Clinic: 
-Dashboard Name: 
-
-Goal:
-
-
-Data Source:
-- CHR Section: 
-- Fields needed: 
-- Date range: 
-- Filter: 
-
-Dashboard Tiles (    tiles total):
-
-Tile 1: 
-- Type: 
-- Metric: 
-
-Tile 2: 
-- Type: 
-- Metric: 
-
-Tile 3: 
-- Type: 
-- Metric: 
-
-Filters needed:
-- 
-- 
-
-Reference: 
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Modify Existing Dashboard -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🔧 Modify Existing Dashboard</div>
-                    <div class="service-entry-desc">Add tiles, edit existing ones, or adjust data display on a dashboard that already exists.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; One page of requirements</span>
-                <button class="gmail-btn" onclick="openGmail('Modify Existing Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🔧 Modify Existing Dashboard</div>
+                        <div class="service-entry-desc">Add tiles, edit existing ones, or adjust data display on a dashboard that already exists.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'modify-dash-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; One page of requirements</span>
+                    <button class="gmail-btn" onclick="openGmail('Modify Existing Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="modify-dash-template">Subject: Modify Existing Dashboard – 
-
-Hi CARE Team,
-
-I'd like to request modifications to an existing dashboard.
-
-Domain: 
-Contact: 
-Dashboard: 
-
-Requested Changes:
-
-Change 1 – 
-
-
-Change 2 – 
-
-
-Change 3 – 
-
-
-I've attached a screenshot of the current dashboard with my annotations.
-
-Thank you,
-</div>
             </div>
         </div>
     </div>
@@ -874,13 +456,12 @@ Thank you,
             </div>
         </div>
 
-        <!-- SHARED EXAMPLE FOR COMPLEX PROJECTS -->
-        <div class="category-example-box">
-            <div class="category-example-header">
-                <span>📧 Example — What a Complex Project request looks like</span>
-                <small>Use this as a reference for any Complex Project below</small>
+        <div class="category-block">
+            <div class="category-block-header">
+                <span>📧 Complex Projects — Example &amp; Copy-Paste Template</span>
+                <small>Use for: Complex Dashboard · Complex Modifications · Multi-Domain Reporting</small>
             </div>
-            <div class="category-example-body">
+            <div class="category-block-body">
                 <div class="two-col-layout">
                     <div>
                         <div class="col-header col-header-example">Filled Example</div>
@@ -892,255 +473,117 @@ Thank you,
 
 Hi CARE Team,
 
-I'd like to request a new complex dashboard for our PCN reporting.
-
 Domain: pcnclinic.teluschr.com
 Contact: Dr. Aisha Patel (a.patel@pcnclinic.com)
 Clinic: Northern Alberta PCN
 Dashboard Name: PCN Chronic Disease Management Report 2026
 
 Goal:
-Comprehensive reporting on chronic disease management across all 5 clinics — tracking patient panels, encounter frequency, medication adherence, and outcome scores.
+Comprehensive reporting on chronic disease management across 5 clinics — tracking patient panels, encounter frequency, medication adherence, and outcome scores.
 
 Data Sources:
-1. Demographics – Patient name, DOB, gender, status, assigned provider, clinic location
-2. Encounters – Encounter type, date, provider, reason (filter: chronic disease encounters only)
-3. Prescriptions – Medication name, status, prescriber
-4. Questionnaire Responses – "Chronic Disease Outcomes Questionnaire" – Pre/Post scores
+1. Demographics – Name, DOB, gender, status, provider, location
+2. Encounters – Type, date, provider, reason (filter: chronic disease only)
+3. Prescriptions – Medication, status, prescriber
+4. Questionnaire Responses – "Chronic Disease Outcomes" – Pre/Post scores
 
-Tiles needed (12 total):
-- 3 scorecards (total patients, avg encounters/patient, avg outcome score)
-- 4 bar charts (by provider, by clinic, by disease type, by risk level)
-- 2 line graphs (encounter trend over time, outcome score trend)
-- 2 tables (patient detail list, provider summary)
-- 1 pie chart (disease type distribution)
+Tiles (12 total):
+- 3 scorecards | 4 bar charts | 2 line graphs | 2 tables | 1 pie chart
 
-Dashboard filters: Date range, Clinic/Location, Provider, Disease Type, Risk Level
+Filters: Date range, Clinic/Location, Provider, Disease Type, Risk Level
 
-Custom logic needed:
-- Calculate "Encounter Frequency" = total encounters / months since enrollment
+Custom logic:
+- Encounter Frequency = total encounters / months since enrollment
 - Flag patients with no encounter in last 90 days
 
-I've attached a detailed requirements document and an Excel mockup.
-
-Timeline: Needed before our PCN board meeting on May 15, 2026.
+Requirements doc + Excel mockup attached.
+Timeline: May 15, 2026.
 
 Thank you,
 Dr. Aisha Patel</div>
                     </div>
                     <div>
-                        <div class="col-header col-header-template">Generic Blank Template</div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
                         <div class="col-title-row">
-                            <h4>Copy this structure as a starting point</h4>
-                            <button class="copy-btn" onclick="copyText(this, 'complex-generic-template')">Copy</button>
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'complex-template')">Copy</button>
                         </div>
-                        <div class="template-email" id="complex-generic-template">Subject: [Service Type] – [Dashboard or Topic]
+                        <div class="template-email" id="complex-template">Subject: [Complex Dashboard / Complex Modification / Multi-Domain] –
 
 Hi CARE Team,
 
-I'd like to submit a complex project request.
-
-Domain: 
-Contact: 
-Clinic: 
-Dashboard Name: 
+Domain:
+Contact:
+Clinic:
+Dashboard Name:
 
 Goal:
 
-
 Data Sources:
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
-Tiles / Changes needed:
-- 
-- 
-- 
+Tiles / Changes (   total):
+-
+-
+-
 
-Dashboard filters: 
+Filters:
 
-Custom logic needed:
-- 
-- 
+Custom logic:
+-
+-
 
-I've attached a detailed requirements document and mockup.
+Requirements doc + mockup attached.
+Timeline:
 
-Timeline: 
-
-Thank you,
-</div>
+Thank you,</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <p class="services-in-section">Choose the specific service below and copy its blank template:</p>
+        <div class="services-list">
+            <div class="services-list-label">Services included in this section — use the template above for any of these:</div>
 
-        <!-- New Complex Custom Dashboard -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🏗️ New Complex Custom Dashboard</div>
-                    <div class="service-entry-desc">Dashboards with 10 or more tiles, 30+ columns, multiple data sources, or multi-page requirements.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="tier-badge tier-ba">⚠️ BA Review</span>
-                <span class="service-entry-meta">Est. 240–360 min</span>
-                <button class="gmail-btn" onclick="openGmail('New Complex Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🏗️ New Complex Custom Dashboard</div>
+                        <div class="service-entry-desc">Dashboards with 10+ tiles, 30+ columns, multiple data sources, or multi-page requirements.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'complex-dash-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="tier-badge tier-ba">⚠️ BA Review</span>
+                    <span class="service-entry-meta">Est. 240–360 min</span>
+                    <button class="gmail-btn" onclick="openGmail('New Complex Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="complex-dash-template">Subject: New Complex Custom Dashboard – 
-
-Hi CARE Team,
-
-I'd like to request a new complex dashboard for our reporting.
-
-Domain: 
-Contact: 
-Clinic: 
-Dashboard Name: 
-
-Goal:
-
-
-Data Sources:
-1. 
-2. 
-3. 
-
-Tiles needed (    total):
-- 
-- 
-- 
-
-Dashboard filters: 
-
-Custom logic needed:
-- 
-- 
-
-I've attached a detailed requirements document and mockup.
-
-Timeline: 
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Complex Modifications -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">⚙️ Complex Modifications to Existing Dashboard</div>
-                    <div class="service-entry-desc">Changes that require LookML updates, new data sources, or more than one page of requirements.</div>
-                </div>
-                <span class="tier-badge tier-all">All Clients</span>
-                <span class="tier-badge tier-ba">⚠️ BA Review</span>
-                <span class="service-entry-meta">Est. 120–240 min</span>
-                <button class="gmail-btn" onclick="openGmail('Complex Dashboard Modification – [Dashboard Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">⚙️ Complex Modifications to Existing Dashboard</div>
+                        <div class="service-entry-desc">Changes requiring LookML updates, new data sources, or more than one page of requirements.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'complex-mod-template')">Copy</button>
+                    <span class="tier-badge tier-all">All Clients</span>
+                    <span class="tier-badge tier-ba">⚠️ BA Review</span>
+                    <span class="service-entry-meta">Est. 120–240 min</span>
+                    <button class="gmail-btn" onclick="openGmail('Complex Dashboard Modification – [Dashboard Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="complex-mod-template">Subject: Complex Dashboard Modification – 
-
-Hi CARE Team,
-
-I'd like to request significant modifications to an existing dashboard.
-
-Domain: 
-Contact: 
-Dashboard: 
-
-Overview of changes:
-
-
-Changes requested:
-
-1. 
-
-
-2. 
-
-
-3. 
-
-
-4. 
-
-Note: 
-
-I've attached a detailed requirements document with annotated screenshots.
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Multi-Domain Reporting -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🌐 Multi-Domain Reporting</div>
-                    <div class="service-entry-desc">Set up cross-clinic reporting so one user can view and report across multiple clinic domains within your PCN.</div>
-                </div>
-                <span class="tier-badge tier-pcn">🌐 Alberta PCN Only</span>
-                <span class="tier-badge tier-ba">⚠️ BA Review</span>
-                <span class="service-entry-meta">Est. TBA &nbsp;·&nbsp; BA scoping required</span>
-                <button class="gmail-btn" onclick="openGmail('Multi-Domain Reporting Request – [PCN Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🌐 Multi-Domain Reporting</div>
+                        <div class="service-entry-desc">Set up cross-clinic reporting so one user can view and report across multiple clinic domains within your PCN.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'multi-domain-template')">Copy</button>
+                    <span class="tier-badge tier-pcn">🌐 Alberta PCN Only</span>
+                    <span class="tier-badge tier-ba">⚠️ BA Review</span>
+                    <span class="service-entry-meta">Est. TBA &nbsp;·&nbsp; BA scoping required</span>
+                    <button class="gmail-btn" onclick="openGmail('Multi-Domain Reporting Request – [PCN Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="multi-domain-template">Subject: Multi-Domain Reporting Request – 
-
-Hi CARE Team,
-
-I'd like to request multi-domain reporting setup for our PCN.
-
-PCN Name: 
-Contact: 
-
-Clinics to include:
-1. 
-2. 
-3. 
-
-Cross-domain user: 
-
-
-Reporting needs:
-- 
-- 
-- 
-
-New dashboard needed: 
-
-Timeline: 
-
-Please let me know what additional information is needed for the BA scoping call.
-
-Thank you,
-</div>
             </div>
         </div>
     </div>
@@ -1148,23 +591,22 @@ Thank you,
     <!-- 📦 ADVANCED CLIENT SERVICES -->
     <div class="service-group section-anchor" id="advanced-services">
         <div class="section-heading">📦 Advanced Client Services</div>
-        <div class="section-meta">Available for Advanced & Enterprise clients &nbsp;·&nbsp; Included in your monthly hours allocation</div>
+        <div class="section-meta">Available for Advanced &amp; Enterprise clients &nbsp;·&nbsp; Included in your monthly hours allocation</div>
 
         <div class="section-callout callout-advanced">
             <span class="ci">📦</span>
             <div>
-                <strong>Analytics Advanced & Enterprise Clients</strong>
+                <strong>Analytics Advanced &amp; Enterprise Clients</strong>
                 The services in this section are available to Analytics Advanced and Enterprise package clients. If you are unsure whether these apply to your package, contact your CARE team at <strong>care.emraccounts@telus.com</strong>.
             </div>
         </div>
 
-        <!-- SHARED EXAMPLE FOR ADVANCED SERVICES -->
-        <div class="category-example-box">
-            <div class="category-example-header">
-                <span>📧 Example — What an Advanced Service request looks like</span>
-                <small>Use this as a reference for any Advanced Service below</small>
+        <div class="category-block">
+            <div class="category-block-header">
+                <span>📧 Advanced Services — Example &amp; Copy-Paste Template</span>
+                <small>Use for: Automated Scheduled Reports</small>
             </div>
-            <div class="category-example-body">
+            <div class="category-block-body">
                 <div class="two-col-layout">
                     <div>
                         <div class="col-header col-header-example">Filled Example</div>
@@ -1176,8 +618,6 @@ Thank you,
 
 Hi CARE Team,
 
-I'd like to set up an automated scheduled report delivery.
-
 Domain: myclinic.teluschr.com
 Contact: Kim Nguyen (k.nguyen@myclinic.com)
 
@@ -1186,125 +626,86 @@ Report to schedule: Monthly Billing Summary Dashboard
 Delivery details:
 - Method: Email
 - Recipients: k.nguyen@myclinic.com, admin@myclinic.com
-- Frequency: Monthly
-- Delivery day: 1st of each month
-- Delivery time: 8:00 AM Mountain Time
-- File format: PDF
+- Frequency: Monthly | Day: 1st | Time: 8:00 AM MT
+- Format: PDF
 
 Filters at delivery:
-- Date range: Previous full month (auto-calculated)
-- Provider: All providers
+- Date range: Previous full month
+- Provider: All
 
-Please confirm once this is set up.
+Please confirm once set up.
 
 Thank you,
 Kim Nguyen</div>
                     </div>
                     <div>
-                        <div class="col-header col-header-template">Generic Blank Template</div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
                         <div class="col-title-row">
-                            <h4>Copy this structure as a starting point</h4>
-                            <button class="copy-btn" onclick="copyText(this, 'advanced-generic-template')">Copy</button>
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'advanced-template')">Copy</button>
                         </div>
-                        <div class="template-email" id="advanced-generic-template">Subject: [Service Type] – [Report or Topic]
+                        <div class="template-email" id="advanced-template">Subject: Automated Scheduled Report Request –
 
 Hi CARE Team,
 
-I'd like to submit an Advanced Service request.
+Domain:
+Contact:
 
-Domain: 
-Contact: 
+Report to schedule:
 
-Request details:
+Delivery details:
+- Method:
+- Recipients:
+- Frequency: | Day: | Time:
+- Format:
 
+Filters at delivery:
+- Date range:
+-
 
-Delivery / Setup details:
-- 
-- 
-- 
-
-Filters or preferences:
-- 
-- 
-
-Thank you,
-</div>
+Thank you,</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <p class="services-in-section">Choose the specific service below and copy its blank template:</p>
+        <div class="services-list">
+            <div class="services-list-label">Services included in this section — use the template above for any of these:</div>
 
-        <!-- Automated Scheduled Reports -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🤖 Automated Scheduled Reports</div>
-                    <div class="service-entry-desc">Set up recurring report delivery to your inbox or SFTP — automatically, without manual effort.</div>
-                </div>
-                <span class="tier-badge tier-advanced">📦 Advanced+</span>
-                <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
-                <span class="service-entry-meta">Est. TBA</span>
-                <button class="gmail-btn" onclick="openGmail('Automated Scheduled Report Request – [Report Name]')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🤖 Automated Scheduled Reports</div>
+                        <div class="service-entry-desc">Set up recurring report delivery to your inbox or SFTP — automatically, without manual effort.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'auto-report-template')">Copy</button>
+                    <span class="tier-badge tier-advanced">📦 Advanced+</span>
+                    <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                    <span class="service-entry-meta">Est. TBA</span>
+                    <button class="gmail-btn" onclick="openGmail('Automated Scheduled Report Request – [Report Name]')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="auto-report-template">Subject: Automated Scheduled Report Request – 
-
-Hi CARE Team,
-
-I'd like to set up an automated scheduled report delivery.
-
-Domain: 
-Contact: 
-
-Report to schedule: 
-
-Delivery details:
-- Method: 
-- Recipients: 
-- Frequency: 
-- Delivery day: 
-- Delivery time: 
-- File format: 
-
-Filters at delivery:
-- Date range: 
-- 
-
-Thank you,
-</div>
             </div>
         </div>
     </div>
 
     <!-- 🏢 ENTERPRISE & PCN SERVICES -->
     <div class="service-group section-anchor" id="enterprise-services">
-        <div class="section-heading">🏢 Enterprise & PCN Services</div>
-        <div class="section-meta">Available for Enterprise & Alberta PCN clients only &nbsp;·&nbsp; Included in your package</div>
+        <div class="section-heading">🏢 Enterprise &amp; PCN Services</div>
+        <div class="section-meta">Available for Enterprise &amp; Alberta PCN clients only &nbsp;·&nbsp; Included in your package</div>
 
         <div class="section-callout callout-enterprise">
             <span class="ci">🏢</span>
             <div>
-                <strong>Analytics Enterprise & Alberta PCN Clients Only</strong>
+                <strong>Analytics Enterprise &amp; Alberta PCN Clients Only</strong>
                 The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. If you are unsure whether these apply to your package, contact your CARE team at <strong>care.emraccounts@telus.com</strong>.
             </div>
         </div>
 
-        <!-- SHARED EXAMPLE FOR ENTERPRISE SERVICES -->
-        <div class="category-example-box">
-            <div class="category-example-header">
-                <span>📧 Example — What an Enterprise / PCN request looks like</span>
-                <small>Use this as a reference for any Enterprise or PCN service below</small>
+        <div class="category-block">
+            <div class="category-block-header">
+                <span>📧 Enterprise &amp; PCN Services — Example &amp; Copy-Paste Template</span>
+                <small>Use for: Looker Training · CHR Analytics Training · User Management</small>
             </div>
-            <div class="category-example-body">
+            <div class="category-block-body">
                 <div class="two-col-layout">
                     <div>
                         <div class="col-header col-header-example">Filled Example</div>
@@ -1316,8 +717,6 @@ Thank you,
 
 Hi CARE Team,
 
-I'd like to book a Looker training session for our team.
-
 Domain: myclinic.teluschr.com
 Contact: Priya Singh (p.singh@myclinic.com)
 
@@ -1325,13 +724,12 @@ Attendees:
 - Priya Singh (p.singh@myclinic.com) – Clinic Manager
 - Ben Carter (b.carter@myclinic.com) – Admin Coordinator
 
-Experience level: Beginner — we've used Looker to view dashboards but haven't managed folders or sharing settings.
+Experience level: Beginner — we've viewed dashboards but haven't managed folders or sharing.
 
-Topics we'd like covered:
-- How to navigate the Looker interface
-- How to move and organize dashboards into folders
-- How to share dashboards with other team members
-- How to set up dashboard permissions
+Topics to cover:
+- Navigate the Looker interface
+- Move and organize dashboards into folders
+- Share dashboards and set permissions
 
 Preferred times: Any afternoon the week of April 21, 2026
 
@@ -1339,238 +737,102 @@ Thank you,
 Priya Singh</div>
                     </div>
                     <div>
-                        <div class="col-header col-header-template">Generic Blank Template</div>
+                        <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
                         <div class="col-title-row">
-                            <h4>Copy this structure as a starting point</h4>
-                            <button class="copy-btn" onclick="copyText(this, 'enterprise-generic-template')">Copy</button>
+                            <h4>Copy this, fill in your details, and send</h4>
+                            <button class="copy-btn" onclick="copyText(this, 'enterprise-template')">Copy</button>
                         </div>
-                        <div class="template-email" id="enterprise-generic-template">Subject: [Service Type]
+                        <div class="template-email" id="enterprise-template">Subject: [Looker Training / CHR Analytics Training / User Request] –
 
 Hi CARE Team,
 
-I'd like to submit an Enterprise / PCN service request.
-
-Domain: 
-Contact: 
-
-Request details:
-
+Domain:
+Contact:
 
 Attendees (if applicable):
-- 
-- 
+-
+-
 
-Preferences / requirements:
-- 
-- 
+Experience level / context:
 
-Preferred times (if applicable): 
+Topics to cover / Request details:
+-
+-
+-
 
-Thank you,
-</div>
+Preferred times:
+
+Thank you,</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <p class="services-in-section">Choose the specific service below and copy its blank template:</p>
+        <div class="services-list">
+            <div class="services-list-label">Services included in this section — use the template above for any of these:</div>
 
-        <!-- Looker Training -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">📚 Looker Training</div>
-                    <div class="service-entry-desc">Book a training session on Looker — navigation, dashboard management, folder organization, and sharing settings.</div>
-                </div>
-                <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
-                <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
-                <span class="service-entry-meta">Est. 60–90 min</span>
-                <button class="gmail-btn" onclick="openGmail('Looker Training Request')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">📚 Looker Training</div>
+                        <div class="service-entry-desc">Book a training session on Looker — navigation, dashboard management, folder organization, and sharing settings.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'looker-training-template')">Copy</button>
+                    <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                    <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                    <span class="service-entry-meta">Est. 60–90 min</span>
+                    <button class="gmail-btn" onclick="openGmail('Looker Training Request')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="looker-training-template">Subject: Looker Training Request
-
-Hi CARE Team,
-
-I'd like to book a Looker training session for our team.
-
-Domain: 
-Contact: 
-
-Attendees:
-- 
-- 
-
-Experience level: 
-
-Topics we'd like covered:
-- 
-- 
-- 
-
-Preferred times: 
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- CHR Analytics Training -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🎓 CHR Analytics Training</div>
-                    <div class="service-entry-desc">Book a training session on building and editing dashboards directly within CHR Analytics.</div>
-                </div>
-                <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
-                <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
-                <span class="service-entry-meta">Est. 60–90 min</span>
-                <button class="gmail-btn" onclick="openGmail('CHR Analytics Training Request')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🎓 CHR Analytics Training</div>
+                        <div class="service-entry-desc">Book a training session on building and editing dashboards directly within CHR Analytics.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'chr-training-template')">Copy</button>
+                    <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                    <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                    <span class="service-entry-meta">Est. 60–90 min</span>
+                    <button class="gmail-btn" onclick="openGmail('CHR Analytics Training Request')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="chr-training-template">Subject: CHR Analytics Training Request
-
-Hi CARE Team,
-
-I'd like to book a CHR Analytics training session.
-
-Domain: 
-Contact: 
-
-Attendees:
-- 
-
-Experience level: 
-
-Topics I'd like to cover:
-- 
-- 
-- 
-
-Specific dashboard to focus on: 
-
-Preferred times: 
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Looker Additional User -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">👤 Looker Additional User Request</div>
-                    <div class="service-entry-desc">Add a new Looker licensed user beyond your standard allocation. Note: a monthly recurring charge applies.</div>
-                </div>
-                <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
-                <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
-                <span class="service-entry-meta">Ongoing monthly charge applies</span>
-                <button class="gmail-btn" onclick="openGmail('Looker Additional User Request')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">👤 Looker Additional User Request</div>
+                        <div class="service-entry-desc">Add a new Looker licensed user beyond your standard allocation. Note: a monthly recurring charge applies.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'add-user-template')">Copy</button>
+                    <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                    <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                    <span class="service-entry-meta">Ongoing monthly charge applies</span>
+                    <button class="gmail-btn" onclick="openGmail('Looker Additional User Request')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="add-user-template">Subject: Looker Additional User Request
-
-Hi CARE Team,
-
-I'd like to request an additional Looker licensed user for our clinic.
-
-Domain: 
-Contact: 
-
-New user details:
-- Name: 
-- Email: 
-- Role requested: 
-
-I understand that an additional monthly charge applies for this user seat. Please confirm the current pricing before activating.
-
-Preferred start date: 
-
-Thank you,
-</div>
             </div>
-        </div>
 
-        <!-- Swap Looker User -->
-        <div class="service-entry">
-            <div class="service-entry-header">
-                <div class="service-entry-title-block">
-                    <div class="service-entry-title">🔄 Swap Looker Licensed User</div>
-                    <div class="service-entry-desc">Transfer a Looker license from a departing staff member to a new user at no additional cost.</div>
-                </div>
-                <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
-                <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
-                <span class="service-entry-meta">No additional cost for like-for-like swap</span>
-                <button class="gmail-btn" onclick="openGmail('Swap Looker Licensed User')">📧 Email CARE Team</button>
-            </div>
-            <div class="service-entry-body">
-                <div class="col-title-row">
-                    <div>
-                        <div class="col-header col-header-template">📋 Copy & Paste Template</div>
-                        <h4 style="font-size:0.8em;font-weight:700;color:#2B1B4E;text-transform:uppercase;letter-spacing:0.04em;margin-top:4px;">Copy this, fill in your details, and send</h4>
+            <div class="service-entry">
+                <div class="service-entry-header">
+                    <div class="service-entry-title-block">
+                        <div class="service-entry-title">🔄 Swap Looker Licensed User</div>
+                        <div class="service-entry-desc">Transfer a Looker license from a departing staff member to a new user at no additional cost.</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText(this, 'swap-user-template')">Copy</button>
+                    <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                    <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                    <span class="service-entry-meta">No additional cost for like-for-like swap</span>
+                    <button class="gmail-btn" onclick="openGmail('Swap Looker Licensed User')">📧 Email CARE Team</button>
                 </div>
-                <div class="template-email" id="swap-user-template">Subject: Swap Looker Licensed User
-
-Hi CARE Team,
-
-I'd like to request a Looker user license swap due to a staff change.
-
-Domain: 
-Contact: 
-
-Departing user:
-- Name: 
-- Email: 
-- Disable date: 
-
-New user:
-- Name: 
-- Email: 
-- Access level: 
-- Activate date: 
-
-Please transfer ownership of any dashboards or folders before disabling the departing user's account.
-
-Thank you,
-</div>
             </div>
         </div>
     </div>
 
-    <!-- NOTE BOX -->
     <div class="note-box">
         <strong>📌 Note:</strong> All service times are estimates and may vary depending on complexity and scope. Your CARE team will confirm the final scope, timeline, and any applicable costs after your request is submitted. For questions about your package or service availability, contact <strong>care.emraccounts@telus.com</strong>.
     </div>
 
-    <!-- BOTTOM CTA -->
     <div class="bottom-cta">
         <div class="bottom-cta-text">
             <h3>Ready to submit your request?</h3>
-            <p>Find your service above, copy the blank template, fill in your details, and send it to the CARE team. They'll review your submission and reach out within 1–2 business days.</p>
+            <p>Find your section above, copy the blank template, fill in your details, and send it to the CARE team. They'll review your submission and reach out within 1–2 business days.</p>
             <small>If the email button doesn't open your email client, use the Copy button and paste the address manually.</small>
         </div>
         <div class="bottom-cta-actions">
@@ -1595,10 +857,7 @@ Thank you,
             const original = btn.textContent;
             btn.textContent = '✓ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => {
-                btn.textContent = original;
-                btn.classList.remove('copied');
-            }, 2000);
+            setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
         }).catch(() => {
             const textArea = document.createElement('textarea');
             textArea.value = CARE_EMAIL;
@@ -1609,10 +868,7 @@ Thank you,
             const original = btn.textContent;
             btn.textContent = '✓ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => {
-                btn.textContent = original;
-                btn.classList.remove('copied');
-            }, 2000);
+            setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
         });
     }
 
@@ -1622,10 +878,7 @@ Thank you,
         navigator.clipboard.writeText(text).then(() => {
             btn.textContent = '✓ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => {
-                btn.textContent = 'Copy';
-                btn.classList.remove('copied');
-            }, 2000);
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
         }).catch(() => {
             const range = document.createRange();
             range.selectNode(el);
@@ -1635,10 +888,7 @@ Thank you,
             window.getSelection().removeAllRanges();
             btn.textContent = '✓ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => {
-                btn.textContent = 'Copy';
-                btn.classList.remove('copied');
-            }, 2000);
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
         });
     }
 </script>
