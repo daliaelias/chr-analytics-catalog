@@ -1,0 +1,1130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Request Submission Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1f2937; line-height: 1.6; }
+
+        .page-header { background: linear-gradient(135deg, #2B1B4E 0%, #4B286D 100%); color: white; padding: 48px 40px 40px; border-bottom: 4px solid #66CC00; }
+        .page-header-inner { max-width: 960px; margin: 0 auto; }
+        .page-header .breadcrumb { font-size: 0.78em; opacity: 0.65; margin-bottom: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+        .page-header h1 { font-size: 2em; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+        .page-header .subtitle { font-size: 0.97em; opacity: 0.85; max-width: 680px; line-height: 1.65; }
+        .page-header .last-updated { margin-top: 14px; font-size: 0.74em; opacity: 0.5; }
+
+        .cta-bar { background: #4B286D; padding: 14px 40px; }
+        .cta-bar-inner { max-width: 960px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 16px; }
+        .cta-bar-text { color: #d8b4fe; font-size: 0.82em; flex: 1; min-width: 0; }
+        .cta-bar-text small { display: block; color: rgba(216,180,254,0.65); font-size: 0.85em; margin-top: 2px; }
+        .cta-btn-group { display: flex; gap: 8px; flex-wrap: nowrap; align-items: center; flex-shrink: 0; }
+        .cta-btn { display: inline-block; background: #66CC00; color: #1a1a1a; font-weight: 700; font-size: 0.85em; padding: 9px 18px; border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; font-family: inherit; }
+        .cta-btn:hover { background: #55aa00; transform: translateY(-1px); }
+        .cta-btn-outline { display: inline-block; background: transparent; color: #d8b4fe; font-weight: 600; font-size: 0.8em; padding: 9px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: 1px solid rgba(216,180,254,0.4); cursor: pointer; font-family: inherit; }
+        .cta-btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .cta-btn-outline.copied { background: #66CC00; color: #1a1a1a; border-color: #66CC00; }
+
+        .page-content { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+
+        .intro-text { font-size: 0.95em; color: #374151; line-height: 1.75; margin-bottom: 24px; background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 22px 26px; border-left: 4px solid #4B286D; }
+
+        .jump-nav { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 22px; margin-bottom: 24px; }
+        .jump-nav h3 { font-size: 0.82em; font-weight: 700; color: #2B1B4E; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+        .jump-nav-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .jump-nav-links a { display: inline-block; background: #f5f0ff; color: #4B286D; font-size: 0.82em; font-weight: 600; padding: 6px 14px; border-radius: 20px; text-decoration: none; border: 1px solid #d8b4fe; transition: all 0.2s; white-space: nowrap; }
+        .jump-nav-links a:hover { background: #4B286D; color: white; border-color: #4B286D; }
+
+        .standard-fields-box { background: #f5f0ff; border: 1px solid #7B5EA7; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; display: flex; gap: 12px; align-items: flex-start; }
+        .standard-fields-box .sf-icon { font-size: 1.2em; flex-shrink: 0; margin-top: 2px; }
+        .standard-fields-box .sf-content h3 { font-size: 0.86em; font-weight: 700; color: #2B1B4E; margin-bottom: 5px; }
+        .standard-fields-box .sf-content ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+        .standard-fields-box .sf-content ul li { font-size: 0.82em; color: #4B286D; display: flex; gap: 6px; align-items: center; }
+        .standard-fields-box .sf-content ul li::before { content: '•'; color: #66CC00; font-weight: 700; font-size: 1.2em; }
+
+        .how-it-works { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 22px; margin-bottom: 36px; }
+        .how-it-works h2 { font-size: 0.92em; font-weight: 700; color: #2B1B4E; margin-bottom: 12px; }
+        .steps-row { display: flex; gap: 0; flex-wrap: wrap; }
+        .step-item { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 130px; padding-right: 16px; position: relative; }
+        .step-item:not(:last-child)::after { content: '→'; position: absolute; right: 1px; top: 4px; color: #66CC00; font-weight: 700; font-size: 1em; }
+        .step-num { background: #4B286D; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.72em; font-weight: 700; flex-shrink: 0; }
+        .step-text { font-size: 0.78em; color: #374151; line-height: 1.4; }
+        .step-text strong { display: block; color: #2B1B4E; margin-bottom: 1px; }
+
+        /* ACCORDION STYLES */
+        .accordion-group { margin-bottom: 16px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        .accordion-group.open { border-color: #4B286D; box-shadow: 0 2px 12px rgba(75,40,109,0.12); }
+
+        .accordion-header {
+            background: white;
+            padding: 0;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            font-family: inherit;
+        }
+        .accordion-header:hover { background: #faf8ff; }
+        .accordion-group.open .accordion-header { background: #2B1B4E; }
+
+        .accordion-header-inner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            flex-wrap: wrap;
+        }
+
+        .accordion-icon { font-size: 1.3em; flex-shrink: 0; }
+        .accordion-title-block { flex: 1; min-width: 0; }
+        .accordion-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: #2B1B4E;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .accordion-group.open .accordion-title { color: white; }
+
+        .accordion-meta { font-size: 0.76em; color: #6b7280; margin-top: 3px; }
+        .accordion-group.open .accordion-meta { color: rgba(255,255,255,0.6); }
+
+        .accordion-services-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 6px;
+        }
+        .preview-pill {
+            display: inline-block;
+            background: #f5f0ff;
+            color: #4B286D;
+            font-size: 0.72em;
+            font-weight: 600;
+            padding: 2px 9px;
+            border-radius: 10px;
+            border: 1px solid #d8b4fe;
+            white-space: nowrap;
+        }
+        .accordion-group.open .preview-pill {
+            background: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.85);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .accordion-chevron {
+            font-size: 1em;
+            color: #4B286D;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+        .accordion-group.open .accordion-chevron { transform: rotate(180deg); color: white; }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+        .accordion-body-inner { padding: 20px 20px 24px; }
+
+        /* Collapse all button */
+        .accordion-controls { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+        .collapse-all-btn {
+            background: transparent;
+            color: #4B286D;
+            border: 1px solid #d8b4fe;
+            border-radius: 8px;
+            padding: 5px 14px;
+            font-size: 0.78em;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .collapse-all-btn:hover { background: #f5f0ff; }
+
+        .section-anchor { scroll-margin-top: 20px; }
+
+        /* CATEGORY BLOCK — example + template side by side */
+        .category-block { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; margin-top: 20px; overflow: hidden; }
+        .category-block-header { background: #2B1B4E; padding: 10px 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .category-block-header span { color: white; font-size: 0.83em; font-weight: 700; }
+        .category-block-header small { color: rgba(255,255,255,0.6); font-size: 0.76em; margin-left: auto; }
+        .category-block-body { padding: 18px; }
+
+        .two-col-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 700px) { .two-col-layout { grid-template-columns: 1fr; } }
+
+        .col-header { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 4px; margin-bottom: 5px; display: inline-block; }
+        .col-header-example { background: #e5e7eb; color: #374151; }
+        .col-header-template { background: #fed7aa; color: #92400e; }
+
+        .copy-btn { background: #4B286D; color: white; border: none; border-radius: 5px; padding: 3px 9px; font-size: 0.72em; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .copy-btn:hover { background: #2B1B4E; }
+        .copy-btn.copied { background: #66CC00; color: #1a1a1a; }
+
+        .col-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+        .col-title-row h4 { font-size: 0.78em; font-weight: 700; color: #2B1B4E; text-transform: uppercase; letter-spacing: 0.04em; }
+
+        .example-email { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 7px; padding: 12px 14px; font-size: 0.77em; color: #374151; font-family: 'Courier New', monospace; line-height: 1.55; white-space: pre-wrap; word-break: break-word; max-height: 320px; overflow-y: auto; }
+        .template-email { background: #fff8f0; border: 1px solid #fed7aa; border-radius: 7px; padding: 12px 14px; font-size: 0.77em; color: #374151; font-family: 'Courier New', monospace; line-height: 1.55; white-space: pre-wrap; word-break: break-word; max-height: 320px; overflow-y: auto; }
+
+        /* SERVICE LIST */
+        .services-list { margin-top: 0; }
+        .services-list-label { font-size: 0.78em; color: #6b7280; margin-bottom: 10px; font-style: italic; }
+
+        .service-entry { background: white; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+        .service-entry-header { padding: 10px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .service-entry-title-block { flex: 1; min-width: 180px; }
+        .service-entry-title { font-size: 0.92em; font-weight: 700; color: #2B1B4E; }
+        .service-entry-desc { font-size: 0.77em; color: #9ca3af; margin-top: 2px; line-height: 1.35; }
+        .service-entry-meta { font-size: 0.74em; color: #6b7280; }
+
+        .gmail-btn { display: inline-block; background: #66CC00; color: #1a1a1a; font-weight: 700; font-size: 0.74em; padding: 4px 11px; border-radius: 6px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; font-family: inherit; }
+        .gmail-btn:hover { background: #55aa00; }
+
+        .tier-badge { display: inline-block; font-size: 0.64em; font-weight: 700; padding: 2px 7px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+        .tier-all { background: #f3f4f6; color: #374151; }
+        .tier-advanced { background: #f5f0ff; color: #4B286D; border: 1px solid #7B5EA7; }
+        .tier-enterprise { background: #f0fff0; color: #2d6600; border: 1px solid #66CC00; }
+        .tier-pcn { background: #fdf4ff; color: #2B1B4E; border: 1px solid #4B286D; }
+        .tier-ba { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+
+        .section-callout { border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 0.82em; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+        .section-callout .ci { font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
+        .section-callout strong { display: block; margin-bottom: 2px; }
+        .callout-advanced { background: #f5f0ff; border: 1px solid #7B5EA7; color: #4B286D; }
+        .callout-enterprise { background: #f0fff0; border: 1px solid #66CC00; color: #2d6600; }
+        .callout-info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+
+        .bottom-cta { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px 28px; margin-top: 44px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-left: 4px solid #66CC00; }
+        .bottom-cta-text h3 { font-size: 1em; font-weight: 700; color: #2B1B4E; margin-bottom: 4px; }
+        .bottom-cta-text p { font-size: 0.83em; color: #6b7280; line-height: 1.5; }
+        .bottom-cta-text small { font-size: 0.76em; color: #9ca3af; display: block; margin-top: 4px; }
+        .bottom-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .bottom-cta-btn { display: inline-block; background: #4B286D; color: white; font-weight: 700; font-size: 0.88em; padding: 11px 24px; border-radius: 10px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; font-family: inherit; }
+        .bottom-cta-btn:hover { background: #2B1B4E; transform: translateY(-1px); }
+        .bottom-cta-btn-outline { display: inline-block; background: white; color: #4B286D; font-weight: 700; font-size: 0.88em; padding: 11px 24px; border-radius: 10px; text-decoration: none; transition: all 0.2s; white-space: nowrap; border: 2px solid #4B286D; cursor: pointer; font-family: inherit; }
+        .bottom-cta-btn-outline:hover { background: #f5f0ff; }
+        .bottom-cta-btn-outline.copied { background: #66CC00; color: #1a1a1a; border-color: #66CC00; }
+
+        .note-box { background: #f9fafb; border-left: 4px solid #4B286D; border-radius: 0 8px 8px 0; padding: 11px 15px; margin-top: 24px; font-size: 0.8em; color: #6b7280; line-height: 1.6; }
+        .note-box strong { color: #2B1B4E; }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 30px 20px 26px; }
+            .page-header h1 { font-size: 1.5em; }
+            .cta-bar { padding: 12px 20px; }
+            .cta-bar-inner { flex-wrap: wrap; }
+            .bottom-cta { flex-direction: column; }
+            .steps-row { flex-direction: column; gap: 10px; }
+            .step-item::after { display: none; }
+            .step-item { padding-right: 0; }
+            .jump-nav-links { gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <div class="page-header-inner">
+        <div class="breadcrumb">Analytics · Request Submission Guide</div>
+        <h1>📋 How to Submit Your Analytics Request</h1>
+        <p class="subtitle">A service-by-service guide on what to include when emailing the CARE team — with a filled example and one blank copy-paste template per section.</p>
+        <div class="last-updated">Last updated: April 2026</div>
+    </div>
+</div>
+
+<div class="cta-bar">
+    <div class="cta-bar-inner">
+        <div class="cta-bar-text">
+            Find your section below, copy the blank template, fill in your details, and send.
+            <small>If the email button doesn't open, copy the address manually.</small>
+        </div>
+        <div class="cta-btn-group">
+            <button class="cta-btn" onclick="openGmail('Analytics Service Request')">📧 Email CARE Team</button>
+            <button class="cta-btn-outline" id="topCopyBtn" onclick="copyEmail(this)">📋 Copy Email</button>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+
+    <div class="intro-text">
+        To get the fastest turnaround on your analytics request, include the right information when you email the CARE team. Each section below has a <strong>filled example</strong> on the left and one <strong>blank copy-paste template</strong> on the right. Copy the template, fill it in, and send it to <strong>care.emraccounts@telus.com</strong>.
+    </div>
+
+    <div class="jump-nav">
+        <h3>Jump to a section</h3>
+        <div class="jump-nav-links">
+            <a href="#quick-fixes" onclick="jumpTo('quick-fixes', event)">⚡ Quick Fixes</a>
+            <a href="#core-services" onclick="jumpTo('core-services', event)">🔧 Core Services</a>
+            <a href="#complex-projects" onclick="jumpTo('complex-projects', event)">⚙️ Complex Projects</a>
+            <a href="#advanced-services" onclick="jumpTo('advanced-services', event)">📦 Advanced Client Services</a>
+            <a href="#enterprise-services" onclick="jumpTo('enterprise-services', event)">🏢 Enterprise &amp; PCN Services</a>
+        </div>
+    </div>
+
+    <div class="standard-fields-box">
+        <div class="sf-icon">📌</div>
+        <div class="sf-content">
+            <h3>These two fields are required in every request — don't forget them!</h3>
+            <ul>
+                <li>Your clinic domain / URL (e.g., myclinic.teluschr.com)</li>
+                <li>Your name and email address</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="how-it-works">
+        <h2>📌 How It Works</h2>
+        <div class="steps-row">
+            <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-text"><strong>Find your section</strong>Jump to the category that matches your need</div>
+            </div>
+            <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-text"><strong>Review the example</strong>See what a complete request looks like</div>
+            </div>
+            <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-text"><strong>Copy the template</strong>Use the one blank template for that section</div>
+            </div>
+            <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-text"><strong>Fill in your details</strong>Type your information into the blank fields</div>
+            </div>
+            <div class="step-item" style="padding-right:0;">
+                <span class="step-num">5</span>
+                <div class="step-text"><strong>Fill &amp; send</strong>Email care.emraccounts@telus.com</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLLAPSE ALL CONTROL -->
+    <div class="accordion-controls">
+        <button class="collapse-all-btn" onclick="collapseAll()">⬆ Collapse All</button>
+    </div>
+
+    <!-- ⚡ QUICK FIXES ACCORDION -->
+    <div class="accordion-group open section-anchor" id="quick-fixes">
+        <button class="accordion-header" onclick="toggleAccordion('quick-fixes')">
+            <div class="accordion-header-inner">
+                <div class="accordion-title-block">
+                    <div class="accordion-title">⚡ Quick Fixes</div>
+                    <div class="accordion-services-preview">
+                        <span class="preview-pill">🐛 Bug or Error</span>
+                        <span class="preview-pill">📊 Dashboard Issues</span>
+                        <span class="preview-pill">✏️ Minor Dashboard Updates</span>
+                    </div>
+                    <div class="accordion-meta">Available to all clients &nbsp;·&nbsp; No BA review required &nbsp;·&nbsp; Resolved within 5 business days</div>
+                </div>
+                <span class="accordion-chevron">▼</span>
+            </div>
+        </button>
+        <div class="accordion-body" id="body-quick-fixes">
+            <div class="accordion-body-inner">
+
+                <div class="services-list">
+                    <div class="services-list-label">Services included in this section — use the template below for any of these:</div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🐛 Bug or Error</div>
+                                <div class="service-entry-desc">Something that was working has stopped working or is behaving unexpectedly.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="service-entry-meta">Est. 60–120 min</span>
+                            <button class="gmail-btn" onclick="openGmail('Bug/Error – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">📊 Dashboard Issues</div>
+                                <div class="service-entry-desc">A specific dashboard element (filter, tile, chart) is broken or not displaying correctly.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="service-entry-meta">Est. 60–90 min</span>
+                            <button class="gmail-btn" onclick="openGmail('Dashboard Issue – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">✏️ Minor Dashboard Updates</div>
+                                <div class="service-entry-desc">Small changes — updating labels, fixing typos, or adding a single column or filter.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="service-entry-meta">Est. 60–90 min</span>
+                            <button class="gmail-btn" onclick="openGmail('Minor Dashboard Update – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-block-header">
+                        <span>📧 Quick Fixes — Example &amp; Copy-Paste Template</span>
+                        <small>Use for: Bug or Error · Dashboard Issues · Minor Updates</small>
+                    </div>
+                    <div class="category-block-body">
+                        <div class="two-col-layout">
+                            <div>
+                                <div class="col-header col-header-example">Filled Example</div>
+                                <div class="col-title-row">
+                                    <h4>See what a complete request looks like</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'qf-example')">Copy</button>
+                                </div>
+                                <div class="example-email" id="qf-example">Subject: Bug/Error – Patient Appointments Overview
+
+Hi CARE Team,
+
+I'm writing to report an issue with one of our analytics dashboards.
+
+Domain: myclinic.teluschr.com
+Contact: Jane Smith (jane.smith@myclinic.com)
+Dashboard: Patient Appointments Overview
+
+Issue Description:
+The date range filter is not working correctly. When I select "Last 30 Days," the dashboard shows data from 6 months ago.
+
+I've attached a screenshot showing the issue.
+
+Thank you,
+Jane Smith</div>
+                            </div>
+                            <div>
+                                <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                                <div class="col-title-row">
+                                    <h4>Copy this, fill in your details, and send</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'qf-template')">Copy</button>
+                                </div>
+                                <div class="template-email" id="qf-template">Subject: [Bug/Error / Dashboard Issue / Minor Update] –
+
+Hi CARE Team,
+
+Domain:
+Contact:
+Dashboard:
+
+Issue / Change Description:
+
+I've attached a screenshot if applicable.
+
+Thank you,</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔧 CORE SERVICES ACCORDION -->
+    <div class="accordion-group section-anchor" id="core-services">
+        <button class="accordion-header" onclick="toggleAccordion('core-services')">
+            <div class="accordion-header-inner">
+                <div class="accordion-title-block">
+                    <div class="accordion-title">🔧 Core Services</div>
+                    <div class="accordion-services-preview">
+                        <span class="preview-pill">💬 Consultation Request</span>
+                        <span class="preview-pill">📈 New Simple Custom Dashboard</span>
+                        <span class="preview-pill">🔧 Modify Existing Dashboard</span>
+                    </div>
+                    <div class="accordion-meta">Available to all clients &nbsp;·&nbsp; 5–10 business day turnaround</div>
+                </div>
+                <span class="accordion-chevron">▼</span>
+            </div>
+        </button>
+        <div class="accordion-body" id="body-core-services">
+            <div class="accordion-body-inner">
+
+                <div class="services-list">
+                    <div class="services-list-label">Services included in this section — use the template below for any of these:</div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">💬 Consultation Request</div>
+                                <div class="service-entry-desc">Book a session with the analytics team to explore what's possible before requesting a new dashboard.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="service-entry-meta">Est. 60–90 min</span>
+                            <button class="gmail-btn" onclick="openGmail('Consultation Request – Analytics')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">📈 New Simple Custom Dashboard</div>
+                                <div class="service-entry-desc">Request a brand-new dashboard with up to 9 tiles and one page of requirements.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; Max 9 tiles, 29 columns</span>
+                            <button class="gmail-btn" onclick="openGmail('New Simple Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🔧 Modify Existing Dashboard</div>
+                                <div class="service-entry-desc">Add tiles, edit existing ones, or adjust data display on a dashboard that already exists.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="service-entry-meta">Est. 60–120 min &nbsp;·&nbsp; One page of requirements</span>
+                            <button class="gmail-btn" onclick="openGmail('Modify Existing Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-block-header">
+                        <span>📧 Core Services — Example &amp; Copy-Paste Template</span>
+                        <small>Use for: Consultation · New Dashboard · Modify Dashboard</small>
+                    </div>
+                    <div class="category-block-body">
+                        <div class="two-col-layout">
+                            <div>
+                                <div class="col-header col-header-example">Filled Example</div>
+                                <div class="col-title-row">
+                                    <h4>See what a complete request looks like</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'core-example')">Copy</button>
+                                </div>
+                                <div class="example-email" id="core-example">Subject: New Simple Custom Dashboard – Patient Symptom Tracking
+
+Hi CARE Team,
+
+Domain: myclinic.teluschr.com
+Contact: Lisa Park (l.park@myclinic.com)
+Clinic: Menopause Wellness Clinic
+Dashboard Name: Patient Symptom Tracking – Pre/Post
+
+Goal:
+Track symptom severity scores before and after treatment.
+
+Data Source:
+- CHR Section: Questionnaire Responses
+- Fields: Patient name, DOB, Pre-score, Post-score, Date completed
+- Date range: Jan 1, 2025 onward
+- Filter: Active patients only
+
+Tiles (3 total):
+1. Total Patients with Pre & Post Scores | Type: Scorecard | Metric: Count of patients with both responses
+2. Average Score Comparison | Type: Bar Chart | Metric: Avg pre vs. post score
+3. Patient Detail Table | Type: Table | Columns: Name, DOB, Pre, Post, Change, Provider
+
+Filters: Date range, Provider
+
+Reference: Excel mockup attached.
+
+Thank you,
+Lisa Park</div>
+                            </div>
+                            <div>
+                                <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                                <div class="col-title-row">
+                                    <h4>Copy this, fill in your details, and send</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'core-template')">Copy</button>
+                                </div>
+                                <div class="template-email" id="core-template">Subject: [Consultation / New Dashboard / Modify Dashboard] –
+
+Hi CARE Team,
+
+Domain:
+Contact:
+Clinic:
+Dashboard Name:
+
+Goal:
+
+Data Source:
+- CHR Section:
+- Fields:
+- Date range:
+- Filter:
+
+Tiles / Changes:
+1.
+2.
+3.
+
+Filters:
+
+Reference:
+
+Thank you,</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ⚙️ COMPLEX PROJECTS ACCORDION -->
+    <div class="accordion-group section-anchor" id="complex-projects">
+        <button class="accordion-header" onclick="toggleAccordion('complex-projects')">
+            <div class="accordion-header-inner">
+                <div class="accordion-title-block">
+                    <div class="accordion-title">⚙️ Complex Projects</div>
+                    <div class="accordion-services-preview">
+                        <span class="preview-pill">🏗️ New Complex Custom Dashboard</span>
+                        <span class="preview-pill">⚙️ Complex Modifications</span>
+                        <span class="preview-pill">🌐 Multi-Domain Reporting</span>
+                    </div>
+                    <div class="accordion-meta">Available to all clients &nbsp;·&nbsp; BA review required &nbsp;·&nbsp; 10+ business days</div>
+                </div>
+                <span class="accordion-chevron">▼</span>
+            </div>
+        </button>
+        <div class="accordion-body" id="body-complex-projects">
+            <div class="accordion-body-inner">
+
+                <div class="section-callout callout-info">
+                    <span class="ci">⚠️</span>
+                    <div>
+                        <strong>BA Review Required for All Complex Projects</strong>
+                        After submitting your request, a Business Analyst will reach out to review your requirements before scheduling begins. Providing detailed information upfront will significantly speed up this process.
+                    </div>
+                </div>
+
+                <div class="services-list">
+                    <div class="services-list-label">Services included in this section — use the template below for any of these:</div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🏗️ New Complex Custom Dashboard</div>
+                                <div class="service-entry-desc">Dashboards with 10+ tiles, 30+ columns, multiple data sources, or multi-page requirements.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="tier-badge tier-ba">⚠️ BA Review</span>
+                            <span class="service-entry-meta">Est. 240–360 min</span>
+                            <button class="gmail-btn" onclick="openGmail('New Complex Custom Dashboard – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">⚙️ Complex Modifications to Existing Dashboard</div>
+                                <div class="service-entry-desc">Changes requiring LookML updates, new data sources, or more than one page of requirements.</div>
+                            </div>
+                            <span class="tier-badge tier-all">All Clients</span>
+                            <span class="tier-badge tier-ba">⚠️ BA Review</span>
+                            <span class="service-entry-meta">Est. 120–240 min</span>
+                            <button class="gmail-btn" onclick="openGmail('Complex Dashboard Modification – [Dashboard Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🌐 Multi-Domain Reporting</div>
+                                <div class="service-entry-desc">Set up cross-clinic reporting so one user can view and report across multiple clinic domains within your PCN.</div>
+                            </div>
+                            <span class="tier-badge tier-pcn">🌐 Alberta PCN Only</span>
+                            <span class="tier-badge tier-ba">⚠️ BA Review</span>
+                            <span class="service-entry-meta">Est. TBA &nbsp;·&nbsp; BA scoping required</span>
+                            <button class="gmail-btn" onclick="openGmail('Multi-Domain Reporting Request – [PCN Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-block-header">
+                        <span>📧 Complex Projects — Example &amp; Copy-Paste Template</span>
+                        <small>Use for: Complex Dashboard · Complex Modifications · Multi-Domain Reporting</small>
+                    </div>
+                    <div class="category-block-body">
+                        <div class="two-col-layout">
+                            <div>
+                                <div class="col-header col-header-example">Filled Example</div>
+                                <div class="col-title-row">
+                                    <h4>See what a complete request looks like</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'complex-example')">Copy</button>
+                                </div>
+                                <div class="example-email" id="complex-example">Subject: New Complex Custom Dashboard – PCN Chronic Disease Report
+
+Hi CARE Team,
+
+Domain: pcnclinic.teluschr.com
+Contact: Dr. Aisha Patel (a.patel@pcnclinic.com)
+Clinic: Northern Alberta PCN
+Dashboard Name: PCN Chronic Disease Management Report 2026
+
+Goal:
+Comprehensive reporting on chronic disease management across 5 clinics — tracking patient panels, encounter frequency, medication adherence, and outcome scores.
+
+Data Sources:
+1. Demographics – Name, DOB, gender, status, provider, location
+2. Encounters – Type, date, provider, reason (filter: chronic disease only)
+3. Prescriptions – Medication, status, prescriber
+4. Questionnaire Responses – "Chronic Disease Outcomes" – Pre/Post scores
+
+Tiles (12 total):
+- 3 scorecards | 4 bar charts | 2 line graphs | 2 tables | 1 pie chart
+
+Filters: Date range, Clinic/Location, Provider, Disease Type, Risk Level
+
+Custom logic:
+- Encounter Frequency = total encounters / months since enrollment
+- Flag patients with no encounter in last 90 days
+
+Requirements doc + Excel mockup attached.
+Timeline: May 15, 2026.
+
+Thank you,
+Dr. Aisha Patel</div>
+                            </div>
+                            <div>
+                                <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                                <div class="col-title-row">
+                                    <h4>Copy this, fill in your details, and send</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'complex-template')">Copy</button>
+                                </div>
+                                <div class="template-email" id="complex-template">Subject: [Complex Dashboard / Complex Modification / Multi-Domain] –
+
+Hi CARE Team,
+
+Domain:
+Contact:
+Clinic:
+Dashboard Name:
+
+Goal:
+
+Data Sources:
+1.
+2.
+3.
+
+Tiles / Changes (   total):
+-
+-
+-
+
+Filters:
+
+Custom logic:
+-
+-
+
+Requirements doc + mockup attached.
+Timeline:
+
+Thank you,</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 📦 ADVANCED CLIENT SERVICES ACCORDION -->
+    <div class="accordion-group section-anchor" id="advanced-services">
+        <button class="accordion-header" onclick="toggleAccordion('advanced-services')">
+            <div class="accordion-header-inner">
+                <div class="accordion-title-block">
+                    <div class="accordion-title">📦 Advanced Client Services</div>
+                    <div class="accordion-services-preview">
+                        <span class="preview-pill">🤖 Automated Scheduled Reports</span>
+                    </div>
+                    <div class="accordion-meta">Available for Advanced &amp; Enterprise clients &nbsp;·&nbsp; Included in your monthly hours allocation</div>
+                </div>
+                <span class="accordion-chevron">▼</span>
+            </div>
+        </button>
+        <div class="accordion-body" id="body-advanced-services">
+            <div class="accordion-body-inner">
+
+                <div class="section-callout callout-advanced">
+                    <span class="ci">📦</span>
+                    <div>
+                        <strong>Analytics Advanced &amp; Enterprise Clients</strong>
+                        The services in this section are available to Analytics Advanced and Enterprise package clients. If you are unsure whether these apply to your package, contact your CARE team at <strong>care.emraccounts@telus.com</strong>.
+                    </div>
+                </div>
+
+                <div class="services-list">
+                    <div class="services-list-label">Services included in this section — use the template below for any of these:</div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🤖 Automated Scheduled Reports</div>
+                                <div class="service-entry-desc">Set up recurring report delivery to your inbox or SFTP — automatically, without manual effort.</div>
+                            </div>
+                            <span class="tier-badge tier-advanced">📦 Advanced+</span>
+                            <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                            <span class="service-entry-meta">Est. TBA</span>
+                            <button class="gmail-btn" onclick="openGmail('Automated Scheduled Report Request – [Report Name]')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-block-header">
+                        <span>📧 Advanced Services — Example &amp; Copy-Paste Template</span>
+                        <small>Use for: Automated Scheduled Reports</small>
+                    </div>
+                    <div class="category-block-body">
+                        <div class="two-col-layout">
+                            <div>
+                                <div class="col-header col-header-example">Filled Example</div>
+                                <div class="col-title-row">
+                                    <h4>See what a complete request looks like</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'advanced-example')">Copy</button>
+                                </div>
+                                <div class="example-email" id="advanced-example">Subject: Automated Scheduled Report Request – Monthly Billing Summary
+
+Hi CARE Team,
+
+Domain: myclinic.teluschr.com
+Contact: Kim Nguyen (k.nguyen@myclinic.com)
+
+Report to schedule: Monthly Billing Summary Dashboard
+
+Delivery details:
+- Method: Email
+- Recipients: k.nguyen@myclinic.com, admin@myclinic.com
+- Frequency: Monthly | Day: 1st | Time: 8:00 AM MT
+- Format: PDF
+
+Filters at delivery:
+- Date range: Previous full month
+- Provider: All
+
+Please confirm once set up.
+
+Thank you,
+Kim Nguyen</div>
+                            </div>
+                            <div>
+                                <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                                <div class="col-title-row">
+                                    <h4>Copy this, fill in your details, and send</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'advanced-template')">Copy</button>
+                                </div>
+                                <div class="template-email" id="advanced-template">Subject: Automated Scheduled Report Request –
+
+Hi CARE Team,
+
+Domain:
+Contact:
+
+Report to schedule:
+
+Delivery details:
+- Method:
+- Recipients:
+- Frequency: | Day: | Time:
+- Format:
+
+Filters at delivery:
+- Date range:
+-
+
+Thank you,</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏢 ENTERPRISE & PCN SERVICES ACCORDION -->
+    <div class="accordion-group section-anchor" id="enterprise-services">
+        <button class="accordion-header" onclick="toggleAccordion('enterprise-services')">
+            <div class="accordion-header-inner">
+                <div class="accordion-title-block">
+                    <div class="accordion-title">🏢 Enterprise &amp; PCN Services</div>
+                    <div class="accordion-services-preview">
+                        <span class="preview-pill">📚 Looker Training</span>
+                        <span class="preview-pill">🎓 CHR Analytics Training</span>
+                        <span class="preview-pill">👤 Additional User Request</span>
+                        <span class="preview-pill">🔄 Swap Licensed User</span>
+                    </div>
+                    <div class="accordion-meta">Available for Enterprise &amp; Alberta PCN clients only &nbsp;·&nbsp; Included in your package</div>
+                </div>
+                <span class="accordion-chevron">▼</span>
+            </div>
+        </button>
+        <div class="accordion-body" id="body-enterprise-services">
+            <div class="accordion-body-inner">
+
+                <div class="section-callout callout-enterprise">
+                    <span class="ci">🏢</span>
+                    <div>
+                        <strong>Analytics Enterprise &amp; Alberta PCN Clients Only</strong>
+                        The services below are available exclusively to Analytics Enterprise and Alberta PCN package clients. If you are unsure whether these apply to your package, contact your CARE team at <strong>care.emraccounts@telus.com</strong>.
+                    </div>
+                </div>
+
+                <div class="services-list">
+                    <div class="services-list-label">Services included in this section — use the template below for any of these:</div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">📚 Looker Training</div>
+                                <div class="service-entry-desc">Book a training session on Looker — navigation, dashboard management, folder organization, and sharing settings.</div>
+                            </div>
+                            <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                            <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                            <span class="service-entry-meta">Est. 60–90 min</span>
+                            <button class="gmail-btn" onclick="openGmail('Looker Training Request')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🎓 CHR Analytics Training</div>
+                                <div class="service-entry-desc">Book a training session on building and editing dashboards directly within CHR Analytics.</div>
+                            </div>
+                            <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                            <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                            <span class="service-entry-meta">Est. 60–90 min</span>
+                            <button class="gmail-btn" onclick="openGmail('CHR Analytics Training Request')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">👤 Looker Additional User Request</div>
+                                <div class="service-entry-desc">Add a new Looker licensed user beyond your standard allocation. Note: a monthly recurring charge applies.</div>
+                            </div>
+                            <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                            <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                            <span class="service-entry-meta">Ongoing monthly charge applies</span>
+                            <button class="gmail-btn" onclick="openGmail('Looker Additional User Request')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+
+                    <div class="service-entry">
+                        <div class="service-entry-header">
+                            <div class="service-entry-title-block">
+                                <div class="service-entry-title">🔄 Swap Looker Licensed User</div>
+                                <div class="service-entry-desc">Transfer a Looker license from a departing staff member to a new user at no additional cost.</div>
+                            </div>
+                            <span class="tier-badge tier-enterprise">🏢 Enterprise</span>
+                            <span class="tier-badge tier-pcn">🌐 Alberta PCN</span>
+                            <span class="service-entry-meta">No additional cost for like-for-like swap</span>
+                            <button class="gmail-btn" onclick="openGmail('Swap Looker Licensed User')">📧 Email CARE Team</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-block-header">
+                        <span>📧 Enterprise &amp; PCN Services — Example &amp; Copy-Paste Template</span>
+                        <small>Use for: Looker Training · CHR Analytics Training · User Management</small>
+                    </div>
+                    <div class="category-block-body">
+                        <div class="two-col-layout">
+                            <div>
+                                <div class="col-header col-header-example">Filled Example</div>
+                                <div class="col-title-row">
+                                    <h4>See what a complete request looks like</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'enterprise-example')">Copy</button>
+                                </div>
+                                <div class="example-email" id="enterprise-example">Subject: Looker Training Request
+
+Hi CARE Team,
+
+Domain: myclinic.teluschr.com
+Contact: Priya Singh (p.singh@myclinic.com)
+
+Attendees:
+- Priya Singh (p.singh@myclinic.com) – Clinic Manager
+- Ben Carter (b.carter@myclinic.com) – Admin Coordinator
+
+Experience level: Beginner — we've viewed dashboards but haven't managed folders or sharing.
+
+Topics to cover:
+- Navigate the Looker interface
+- Move and organize dashboards into folders
+- Share dashboards and set permissions
+
+Preferred times: Any afternoon the week of April 21, 2026
+
+Thank you,
+Priya Singh</div>
+                            </div>
+                            <div>
+                                <div class="col-header col-header-template">📋 Copy &amp; Paste Template</div>
+                                <div class="col-title-row">
+                                    <h4>Copy this, fill in your details, and send</h4>
+                                    <button class="copy-btn" onclick="copyText(this, 'enterprise-template')">Copy</button>
+                                </div>
+                                <div class="template-email" id="enterprise-template">Subject: [Looker Training / CHR Analytics Training / User Request] –
+
+Hi CARE Team,
+
+Domain:
+Contact:
+
+Attendees (if applicable):
+-
+-
+
+Experience level / context:
+
+Topics to cover / Request details:
+-
+-
+-
+
+Preferred times:
+
+Thank you,</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="note-box">
+        <strong>📌 Note:</strong> All service times are estimates and may vary depending on complexity and scope. Your CARE team will confirm the final scope, timeline, and any applicable costs after your request is submitted. For questions about your package or service availability, contact <strong>care.emraccounts@telus.com</strong>.
+    </div>
+
+    <div class="bottom-cta">
+        <div class="bottom-cta-text">
+            <h3>Ready to submit your request?</h3>
+            <p>Find your section above, copy the blank template, fill in your details, and send it to the CARE team. They'll review your submission and reach out within 1–2 business days.</p>
+            <small>If the email button doesn't open your email client, use the Copy button and paste the address manually.</small>
+        </div>
+        <div class="bottom-cta-actions">
+            <button class="bottom-cta-btn" onclick="openGmail('Analytics Service Request')">📧 Email CARE Team</button>
+            <button class="bottom-cta-btn-outline" id="bottomCopyBtn" onclick="copyEmail(this)">📋 Copy Email Address</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const CARE_EMAIL = 'care.emraccounts@telus.com';
+
+    // On load: open the first accordion
+    window.addEventListener('DOMContentLoaded', () => {
+        openAccordion('quick-fixes');
+    });
+
+    function openAccordion(id) {
+        const group = document.getElementById(id);
+        const body = document.getElementById('body-' + id);
+        if (!group || !body) return;
+        group.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+    }
+
+    function closeAccordion(id) {
+        const group = document.getElementById(id);
+        const body = document.getElementById('body-' + id);
+        if (!group || !body) return;
+        group.classList.remove('open');
+        body.style.maxHeight = '0';
+    }
+
+    function toggleAccordion(id) {
+        const group = document.getElementById(id);
+        if (!group) return;
+        if (group.classList.contains('open')) {
+            closeAccordion(id);
+        } else {
+            openAccordion(id);
+        }
+    }
+
+    function collapseAll() {
+        ['quick-fixes', 'core-services', 'complex-projects', 'advanced-services', 'enterprise-services'].forEach(id => {
+            closeAccordion(id);
+        });
+    }
+
+    function jumpTo(id, event) {
+        if (event) event.preventDefault();
+        const el = document.getElementById(id);
+        if (!el) return;
+        openAccordion(id);
+        // Wait for animation to start, then scroll
+        setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+    }
+
+    function openGmail(subject) {
+        const encodedSubject = encodeURIComponent(subject);
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CARE_EMAIL)}&su=${encodedSubject}`;
+        window.open(gmailUrl, '_blank');
+    }
+
+    function copyEmail(btn) {
+        navigator.clipboard.writeText(CARE_EMAIL).then(() => {
+            const original = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
+        }).catch(() => {
+            const textArea = document.createElement('textarea');
+            textArea.value = CARE_EMAIL;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            const original = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
+        });
+    }
+
+    function copyText(btn, elementId) {
+        const el = document.getElementById(elementId);
+        const text = el.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = '✓ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+        }).catch(() => {
+            const range = document.createRange();
+            range.selectNode(el);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            btn.textContent = '✓ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
