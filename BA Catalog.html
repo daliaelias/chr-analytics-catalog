@@ -1,0 +1,1540 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHR Professional Services Catalog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            color: #1a2332;
+        }
+
+        /* COMPACT HERO */
+        .hero {
+            background: linear-gradient(135deg, #4b286d 0%, #6b3fa0 50%, #2b5c8a 100%);
+            color: white;
+            padding: 24px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .hero h1 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .hero h1 span { color: #66d9e8; }
+        .hero p {
+            font-size: 13px;
+            opacity: 0.85;
+            max-width: 500px;
+            line-height: 1.5;
+        }
+        .hero-cta {
+            display: inline-block;
+            background: white;
+            color: #4b286d;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+
+        /* NAV TABS */
+        .nav-tabs {
+            background: white;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 14px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .nav-tab:hover { color: #4b286d; background: #f9f5ff; }
+        .nav-tab.active { color: #4b286d; border-bottom-color: #4b286d; }
+
+        /* SECTIONS */
+        .section { display: none; padding: 50px 40px; max-width: 1100px; margin: 0 auto; }
+        .section.active { display: block; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header .tag {
+            display: inline-block;
+            background: #f0e8ff;
+            color: #4b286d;
+            border-radius: 20px;
+            padding: 5px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-header h2 {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a2332;
+            margin-bottom: 10px;
+        }
+        .section-header p {
+            font-size: 15px;
+            color: #555;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* SERVICE CARDS GRID */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(75,40,109,0.15);
+            border-color: #4b286d;
+        }
+        .service-card.featured {
+            border-color: #4b286d;
+            position: relative;
+        }
+        .service-card.advanced-card {
+            border: 2px dashed #c0392b;
+            background: linear-gradient(135deg, #fff9f9, #fff);
+            position: relative;
+        }
+        .service-card.advanced-card:hover {
+            border-color: #c0392b;
+            box-shadow: 0 12px 40px rgba(192,57,43,0.15);
+        }
+        .featured-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #4b286d;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+        .advanced-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #c0392b;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .card-header {
+            padding: 22px 22px 14px;
+            position: relative;
+        }
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .icon-purple { background: linear-gradient(135deg, #4b286d, #6b3fa0); }
+        .icon-teal   { background: linear-gradient(135deg, #0d7c8c, #1aabbd); }
+        .icon-green  { background: linear-gradient(135deg, #1a7a4a, #26a869); }
+        .icon-gold   { background: linear-gradient(135deg, #b5860d, #e0a820); }
+        .icon-red    { background: linear-gradient(135deg, #922b21, #c0392b); }
+
+        .card-header h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: #1a2332;
+            margin-bottom: 5px;
+        }
+        .card-header .subtitle {
+            font-size: 12px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .card-body { padding: 0 22px 22px; }
+        .card-body p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .feature-list { list-style: none; margin-bottom: 18px; }
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 12px;
+            color: #444;
+            margin-bottom: 7px;
+            line-height: 1.5;
+        }
+        .feature-list li::before {
+            content: '✓';
+            color: #4b286d;
+            font-weight: 800;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .feature-list.red-check li::before { color: #c0392b; }
+
+        .price-tag {
+            background: #f8f4ff;
+            border-radius: 12px;
+            padding: 11px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .price-tag.red-bg { background: #fff2f2; }
+        .price-tag .price {
+            font-size: 19px;
+            font-weight: 800;
+            color: #4b286d;
+        }
+        .price-tag .price-label {
+            font-size: 11px;
+            color: #888;
+        }
+        .price-tag .cta-btn {
+            background: #4b286d;
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .price-tag .cta-btn:hover { background: #6b3fa0; transform: scale(1.05); }
+        .price-tag .cta-btn.red-btn { background: #c0392b; }
+        .price-tag .cta-btn.red-btn:hover { background: #922b21; }
+
+        /* DIVIDER for advanced section */
+        .advanced-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 36px 0 24px;
+        }
+        .advanced-divider hr {
+            flex: 1;
+            border: none;
+            border-top: 2px dashed #e0c0c0;
+        }
+        .advanced-divider-label {
+            background: #fff2f2;
+            border: 2px dashed #c0392b;
+            color: #c0392b;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 24px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from{transform:translateY(30px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: #f0f0f0;
+            border: none;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover { background: #e0e0e0; }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .comparison-table th {
+            background: #4b286d;
+            color: white;
+            padding: 14px 14px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .comparison-table th.advanced-th { background: #922b21; }
+        .comparison-table td {
+            padding: 12px 14px;
+            font-size: 12px;
+            color: #444;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table tr:nth-child(even) td { background: #fafafa; }
+        .check { color: #26a869; font-weight: 800; }
+        .cross { color: #e74c3c; font-weight: 800; }
+
+        /* PROCESS STEPS */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin: 28px 0;
+        }
+        .step {
+            text-align: center;
+            padding: 22px 14px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+        .step-number {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #4b286d, #6b3fa0);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 15px;
+            margin: 0 auto 12px;
+        }
+        .step h4 { font-size: 13px; font-weight: 700; color: #1a2332; margin-bottom: 5px; }
+        .step p { font-size: 12px; color: #666; line-height: 1.5; }
+
+        /* ROI GRID */
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin: 22px 0;
+        }
+        .roi-card {
+            background: linear-gradient(135deg, #4b286d, #6b3fa0);
+            color: white;
+            border-radius: 16px;
+            padding: 22px 14px;
+            text-align: center;
+        }
+        .roi-number {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: #66d9e8;
+        }
+        .roi-label { font-size: 12px; opacity: 0.85; line-height: 1.4; }
+
+        /* TESTIMONIAL */
+        .testimonial-box {
+            background: #f8f4ff;
+            border-left: 4px solid #4b286d;
+            border-radius: 0 16px 16px 0;
+            padding: 18px 22px;
+            margin: 22px 0;
+            font-style: italic;
+            color: #444;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .testimonial-author {
+            font-style: normal;
+            font-weight: 700;
+            color: #4b286d;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        /* FOOTER */
+        .catalog-footer {
+            background: #1a2332;
+            color: white;
+            text-align: center;
+            padding: 30px 40px;
+        }
+        .catalog-footer h3 { font-size: 20px; margin-bottom: 8px; }
+        .catalog-footer p { opacity: 0.7; margin-bottom: 14px; font-size: 13px; }
+        .footer-btn {
+            display: inline-block;
+            background: #4b286d;
+            color: white;
+            padding: 11px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        .footer-btn:hover { background: #6b3fa0; transform: translateY(-2px); }
+
+        /* SERVICE DETAIL BLOCKS */
+        .service-detail-block {
+            background: white;
+            border-radius: 20px;
+            padding: 34px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .service-detail-block.advanced-block {
+            border: 2px dashed #c0392b;
+            background: linear-gradient(135deg, #fff9f9, #fff);
+        }
+        .sdb-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .sdb-title h3 { font-size: 21px; font-weight: 800; color: #1a2332; }
+        .sdb-title p { color: #888; font-size: 12px; margin-top: 3px; }
+        .sdb-price { margin-left: auto; text-align: right; }
+        .sdb-price .amount { font-size: 24px; font-weight: 900; }
+        .sdb-price .unit { font-size: 11px; color: #888; }
+        .sdb-desc { color: #555; line-height: 1.7; margin-bottom: 18px; font-size: 13px; }
+        .sdb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .sdb-grid h4 { font-weight: 700; margin-bottom: 9px; font-size: 13px; }
+
+        /* ADVANCED SERVICE NOTICE BOX */
+        .advanced-notice {
+            background: #fff2f2;
+            border: 2px dashed #c0392b;
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .advanced-notice-icon { font-size: 24px; flex-shrink: 0; }
+        .advanced-notice-text h4 { font-size: 14px; font-weight: 800; color: #922b21; margin-bottom: 5px; }
+        .advanced-notice-text p { font-size: 13px; color: #666; line-height: 1.6; }
+
+        /* GET STARTED / CONTACT */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        @media (max-width: 750px) {
+            .contact-layout { grid-template-columns: 1fr; }
+            .hero { padding: 16px 20px; }
+            .hero h1 { font-size: 18px; }
+            .nav-tab { padding: 11px 12px; font-size: 11px; }
+            .section { padding: 28px 16px; }
+            .sdb-grid { grid-template-columns: 1fr; }
+        }
+
+        .contact-info-panel h3 { font-size: 19px; font-weight: 800; margin-bottom: 12px; color: #1a2332; }
+        .contact-info-panel p { color: #555; line-height: 1.7; margin-bottom: 14px; font-size: 13px; }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #444;
+        }
+        .contact-item .icon { font-size: 17px; }
+
+        /* EMAIL PANEL */
+        .email-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .email-panel h3 {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #1a2332;
+        }
+        .email-panel .subtitle {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        /* Email template preview */
+        .email-template {
+            background: #f8f4ff;
+            border: 2px solid #d8c8f0;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.8;
+        }
+        .email-template .template-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4b286d;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .email-template .field-line {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .email-template .field-label {
+            font-weight: 700;
+            color: #4b286d;
+            white-space: nowrap;
+        }
+        .email-template .field-hint {
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Email button */
+        .email-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .email-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .email-btn.primary {
+            background: linear-gradient(135deg, #4b286d, #6b3fa0);
+            color: white;
+        }
+        .email-btn.primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(75,40,109,0.3); }
+        .email-btn.secondary {
+            background: #f0e8ff;
+            color: #4b286d;
+            border: 2px solid #d8c8f0;
+        }
+        .email-btn.secondary:hover { background: #e4d4ff; transform: translateY(-1px); }
+
+        .copy-success {
+            display: none;
+            background: #e8f8f0;
+            border: 2px solid #26a869;
+            border-radius: 10px;
+            padding: 10px 14px;
+            text-align: center;
+            color: #1a7a4a;
+            font-weight: 600;
+            font-size: 13px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+        .note-box {
+            background: #f0f4f8;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 14px;
+        }
+        .note-box strong { color: #4b286d; }
+    </style>
+</head>
+<body>
+
+<!-- COMPACT HERO -->
+<div class="hero" id="page-top">
+    <div class="hero-left">
+        <div class="hero-badge">🏥 TELUS CHR · EMR Learning Team</div>
+        <h1>Unlock the Full Power of Your <span>CHR System</span></h1>
+        <p>Expert-led professional services to transform how your clinic operates — smarter workflows, certified teams, stronger adoption.</p>
+    </div>
+    <button class="hero-cta" onclick="switchTab('services')">Explore Our Services ↓</button>
+</div>
+
+<!-- NAV -->
+<div class="nav-tabs" id="nav-bar">
+    <div class="nav-tab active" onclick="switchTab('overview')">Overview</div>
+    <div class="nav-tab" onclick="switchTab('services')">Our Services</div>
+    <div class="nav-tab" onclick="switchTab('process')">How It Works</div>
+    <div class="nav-tab" onclick="switchTab('compare')">Compare Plans</div>
+    <div class="nav-tab" onclick="switchTab('contact')">Get Started</div>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<div id="tab-overview" class="section active">
+    <div class="section-header">
+        <div class="tag">Why Choose Us</div>
+        <h2>More Than Training — We Drive Results</h2>
+        <p>Your CHR system is powerful. But without the right strategy, workflows, and insights, you're leaving value on the table.</p>
+    </div>
+
+    <div class="roi-grid">
+        <div class="roi-card">
+            <div class="roi-number">40%</div>
+            <div class="roi-label">Average time saved on<br>administrative tasks</div>
+        </div>
+        <div class="roi-card">
+            <div class="roi-number">3×</div>
+            <div class="roi-label">Faster onboarding with<br>optimized workflows</div>
+        </div>
+        <div class="roi-card">
+            <div class="roi-number">85%</div>
+            <div class="roi-label">Client satisfaction after<br>workflow optimization</div>
+        </div>
+        <div class="roi-card">
+            <div class="roi-number">$0</div>
+            <div class="roi-label">Hidden fees — transparent<br>pricing always</div>
+        </div>
+    </div>
+
+    <div class="testimonial-box">
+        "We thought we were using the CHR well — turns out we were only scratching the surface. After the workflow optimization engagement, our providers saved nearly an hour a day. That's real money."
+        <div class="testimonial-author">— Clinic Director, Multi-Provider Family Practice</div>
+    </div>
+
+    <div class="section-header" style="margin-top:40px;">
+        <div class="tag">Our Core Services</div>
+        <h2>Built for Every Clinic</h2>
+        <p>Three core services for all clinics, plus one specialized offering for data-driven organizations.</p>
+    </div>
+
+    <!-- 3 CORE CARDS -->
+    <div class="services-grid">
+        <div class="service-card featured" onclick="openModal('workflow')">
+            <div class="featured-badge">⭐ Most Popular</div>
+            <div class="card-header">
+                <div class="card-icon icon-purple">⚙️</div>
+                <h3>Workflow Optimization</h3>
+                <div class="subtitle">Consulting & Implementation</div>
+            </div>
+            <div class="card-body">
+                <p>We audit your CHR usage, identify bottlenecks, and design custom workflows that save your team hours every week.</p>
+                <ul class="feature-list">
+                    <li>Full CHR usage audit & gap analysis</li>
+                    <li>Custom workflow design for your specialty</li>
+                    <li>Remote implementation support</li>
+                    <li>Staff enablement & handoff documentation</li>
+                </ul>
+                <div class="price-tag">
+                    <div>
+                        <div class="price">$2,500+</div>
+                        <div class="price-label">per engagement</div>
+                    </div>
+                    <button class="cta-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="openModal('certification')">
+            <div class="card-header">
+                <div class="card-icon icon-gold">🎓</div>
+                <h3>Clinic-Specific Certification</h3>
+                <div class="subtitle">Specialty Tracks & Credentials</div>
+            </div>
+            <div class="card-body">
+                <p>Specialty-tailored CHR certification programs with competency assessments and official credentials for your team.</p>
+                <ul class="feature-list">
+                    <li>Specialty tracks (Pediatrics, Billing-Heavy, etc.)</li>
+                    <li>Competency assessments & certificates</li>
+                    <li>Role-based learning paths</li>
+                    <li>Quarterly refresher modules</li>
+                </ul>
+                <div class="price-tag">
+                    <div>
+                        <div class="price">$500+</div>
+                        <div class="price-label">per staff member</div>
+                    </div>
+                    <button class="cta-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="openModal('adoption')">
+            <div class="card-header">
+                <div class="card-icon icon-green">🚀</div>
+                <h3>Change Management & Adoption</h3>
+                <div class="subtitle">People, Process & Culture</div>
+            </div>
+            <div class="card-body">
+                <p>Technology only works when people use it. We help your team embrace the CHR with proven change management strategies.</p>
+                <ul class="feature-list">
+                    <li>Staff resistance assessment</li>
+                    <li>Champion identification & coaching</li>
+                    <li>Leadership alignment sessions</li>
+                    <li>Adoption tracking & accountability</li>
+                </ul>
+                <div class="price-tag">
+                    <div>
+                        <div class="price">$3,000+</div>
+                        <div class="price-label">per project</div>
+                    </div>
+                    <button class="cta-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="advanced-divider">
+        <hr>
+        <div class="advanced-divider-label">🔬 Advanced / Specialized Service</div>
+        <hr>
+    </div>
+
+    <!-- ADVANCED DATA INTELLIGENCE CARD -->
+    <div class="services-grid" style="grid-template-columns: 1fr;">
+        <div class="service-card advanced-card" onclick="openModal('analytics')" style="max-width:500px;margin:0 auto;width:100%;">
+            <div class="advanced-badge">🔬 Advanced</div>
+            <div class="card-header">
+                <div class="card-icon icon-red">🧠</div>
+                <h3>Advanced Data Intelligence</h3>
+                <div class="subtitle">BA-Led Data Diagnostics & Reporting</div>
+            </div>
+            <div class="card-body">
+                <p>When your CHR reports aren't telling the right story, we investigate why. Our BA team traces data entry issues back to their source and fixes the workflow root cause.</p>
+                <ul class="feature-list red-check">
+                    <li>Report accuracy diagnostic & root cause analysis</li>
+                    <li>Data entry workflow investigation</li>
+                    <li>Collaboration with your analytics team</li>
+                    <li>Ideal for research clinics & data-driven organizations</li>
+                </ul>
+                <div class="price-tag red-bg">
+                    <div>
+                        <div class="price" style="color:#c0392b;">Custom</div>
+                        <div class="price-label">scoped per engagement</div>
+                    </div>
+                    <button class="cta-btn red-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SERVICES DETAIL ===== -->
+<div id="tab-services" class="section">
+    <div class="section-header">
+        <div class="tag">Service Details</div>
+        <h2>What's Included in Each Service</h2>
+        <p>Click any card to explore the full scope of each offering.</p>
+    </div>
+
+    <!-- SERVICE 1: Workflow -->
+    <div class="service-detail-block">
+        <div class="sdb-header">
+            <div class="card-icon icon-purple" style="flex-shrink:0;">⚙️</div>
+            <div class="sdb-title">
+                <h3>Workflow Optimization Service</h3>
+                <p>Remote · All clinic types · 4–8 week engagement</p>
+            </div>
+            <div class="sdb-price">
+                <div class="amount" style="color:#4b286d;">$2,500</div>
+                <div class="unit">starting price</div>
+            </div>
+        </div>
+        <p class="sdb-desc">Many clinics use only 30–40% of what the CHR can do. Our Workflow Optimization service is a structured engagement where our CHR experts analyze your current setup, identify inefficiencies, and co-design workflows that match how your clinic actually operates — not a generic template.</p>
+        <div class="sdb-grid">
+            <div>
+                <h4 style="color:#4b286d;">Phase 1: Discovery (Week 1–2)</h4>
+                <ul class="feature-list">
+                    <li>Intake questionnaire & clinic profile</li>
+                    <li>Live CHR usage observation (remote)</li>
+                    <li>Provider & staff interviews</li>
+                    <li>Bottleneck & inefficiency mapping</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#4b286d;">Phase 2: Design & Build (Week 3–5)</h4>
+                <ul class="feature-list">
+                    <li>Custom workflow blueprint creation</li>
+                    <li>CHR configuration recommendations</li>
+                    <li>Template & form optimization</li>
+                    <li>Automation opportunity identification</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#4b286d;">Phase 3: Implementation (Week 6–7)</h4>
+                <ul class="feature-list">
+                    <li>Remote guided rollout sessions</li>
+                    <li>Staff training on new workflows</li>
+                    <li>Issue resolution & fine-tuning</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#4b286d;">Phase 4: Handoff (Week 8)</h4>
+                <ul class="feature-list">
+                    <li>Workflow documentation package</li>
+                    <li>30-day follow-up check-in included</li>
+                    <li>Recommendations for next steps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE 2: Certification -->
+    <div class="service-detail-block">
+        <div class="sdb-header">
+            <div class="card-icon icon-gold" style="flex-shrink:0;">🎓</div>
+            <div class="sdb-title">
+                <h3>Clinic-Specific Certification Programs</h3>
+                <p>Remote · All clinic types · Ongoing quarterly refreshers</p>
+            </div>
+            <div class="sdb-price">
+                <div class="amount" style="color:#b5860d;">$500</div>
+                <div class="unit">per staff member</div>
+            </div>
+        </div>
+        <p class="sdb-desc">Generic training doesn't cut it for specialized clinics. Our Certification Programs are built around your clinic's specialty — whether you're a pediatric practice, a billing-heavy multi-provider clinic, or an allied health team. Staff earn verifiable credentials that prove CHR competency.</p>
+        <div class="sdb-grid">
+            <div>
+                <h4 style="color:#b5860d;">Specialty Tracks Available</h4>
+                <ul class="feature-list">
+                    <li>CHR for Family Medicine</li>
+                    <li>CHR for Pediatric Clinics</li>
+                    <li>CHR for Billing-Heavy Practices</li>
+                    <li>CHR for Allied Health Providers</li>
+                    <li>CHR for Multidisciplinary Teams</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#b5860d;">What's Included</h4>
+                <ul class="feature-list">
+                    <li>Role-based learning paths per staff type</li>
+                    <li>Competency assessments at each module</li>
+                    <li>Official CHR Certification on completion</li>
+                    <li>Quarterly refresher modules (new features)</li>
+                    <li>Clinic-level completion dashboard</li>
+                    <li>Bulk pricing for teams of 5+</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE 3: Change Management -->
+    <div class="service-detail-block">
+        <div class="sdb-header">
+            <div class="card-icon icon-green" style="flex-shrink:0;">🚀</div>
+            <div class="sdb-title">
+                <h3>Change Management & Adoption Service</h3>
+                <p>Remote · All clinic sizes · 6–10 week project</p>
+            </div>
+            <div class="sdb-price">
+                <div class="amount" style="color:#1a7a4a;">$3,000</div>
+                <div class="unit">starting price</div>
+            </div>
+        </div>
+        <p class="sdb-desc">The #1 reason EMR investments fail isn't the technology — it's people not using it. Our Change Management service ensures your entire team is aligned, confident, and actually using the CHR to its full potential.</p>
+        <div class="sdb-grid">
+            <div>
+                <h4 style="color:#1a7a4a;">People Strategy</h4>
+                <ul class="feature-list">
+                    <li>Resistance assessment survey</li>
+                    <li>Champion identification & coaching</li>
+                    <li>Role-based training plans</li>
+                    <li>Leadership alignment sessions</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#1a7a4a;">Adoption Tracking</h4>
+                <ul class="feature-list">
+                    <li>Weekly adoption check-ins</li>
+                    <li>CHR usage metrics monitoring</li>
+                    <li>Accountability coaching</li>
+                    <li>Final adoption report & team certificate</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="advanced-divider">
+        <hr>
+        <div class="advanced-divider-label">🔬 Advanced / Specialized Service</div>
+        <hr>
+    </div>
+
+    <!-- SERVICE 4: Advanced Data Intelligence -->
+    <div class="service-detail-block advanced-block">
+        <div class="sdb-header">
+            <div class="card-icon icon-red" style="flex-shrink:0;">🧠</div>
+            <div class="sdb-title">
+                <h3>Advanced Data Intelligence</h3>
+                <p>Remote · Research & data-driven clinics · Custom scope</p>
+            </div>
+            <div class="sdb-price">
+                <div class="amount" style="color:#c0392b;">Custom</div>
+                <div class="unit">scoped per engagement</div>
+            </div>
+        </div>
+
+        <div class="advanced-notice">
+            <div class="advanced-notice-icon">⚠️</div>
+            <div class="advanced-notice-text">
+                <h4>Specialized Service — Requires Analytics Team Involvement</h4>
+                <p>This service is designed for clinics with active research programs, complex data reporting needs, or data quality issues affecting clinical decision-making. It involves collaboration with our dedicated analytics team and is scoped individually based on your clinic's data environment. <strong>Not all clinics will require this service.</strong></p>
+            </div>
+        </div>
+
+        <p class="sdb-desc">When your CHR reports aren't producing accurate numbers, the problem is rarely the report itself — it's how data is being entered upstream. Our Business Analysts trace the issue back through your workflows, identify where and why incorrect data is being captured, and work with your analytics team to fix both the process and the output.</p>
+        <div class="sdb-grid">
+            <div>
+                <h4 style="color:#c0392b;">Diagnostic Phase</h4>
+                <ul class="feature-list red-check">
+                    <li>Report accuracy review & discrepancy mapping</li>
+                    <li>Data entry workflow tracing (source to output)</li>
+                    <li>Root cause identification (human, process, or config)</li>
+                    <li>Stakeholder interviews (clinical + admin + analytics)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#c0392b;">Resolution & Handoff</h4>
+                <ul class="feature-list red-check">
+                    <li>Workflow correction recommendations</li>
+                    <li>Collaboration with your analytics/data team</li>
+                    <li>Staff re-training on corrected data entry</li>
+                    <li>Validation report confirming data accuracy</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#c0392b;">Ideal For</h4>
+                <ul class="feature-list red-check">
+                    <li>Clinics with active research or data mining programs</li>
+                    <li>Multi-provider clinics with inconsistent reporting</li>
+                    <li>Organizations preparing for accreditation or audit</li>
+                    <li>Clinics where billing data doesn't match clinical data</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:#c0392b;">What Makes This Different</h4>
+                <ul class="feature-list red-check">
+                    <li>BA-led investigation (not just IT or training)</li>
+                    <li>Bridges the gap between clinical workflow & data output</li>
+                    <li>Works alongside your existing analytics team</li>
+                    <li>Fixes the root cause, not just the symptom</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== HOW IT WORKS ===== -->
+<div id="tab-process" class="section">
+    <div class="section-header">
+        <div class="tag">Our Process</div>
+        <h2>Simple, Remote, Effective</h2>
+        <p>All our services are delivered 100% remotely. No travel, no disruption — just results.</p>
+    </div>
+
+    <div class="process-steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h4>Discovery Call</h4>
+            <p>30-minute call to understand your clinic's goals, challenges, and current CHR usage.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h4>Proposal & Scope</h4>
+            <p>We send a tailored proposal within 48 hours with clear deliverables, timeline, and pricing.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <h4>Kick-off & Audit</h4>
+            <p>We begin with a deep-dive audit of your CHR setup via remote screen-share sessions.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <h4>Design & Build</h4>
+            <p>Our experts design your optimized workflows, certification tracks, or adoption plan.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">5</div>
+            <h4>Implementation</h4>
+            <p>We guide your team through rollout with live remote sessions and Q&A support.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">6</div>
+            <h4>Handoff & Follow-up</h4>
+            <p>You receive full documentation and a 30-day follow-up to ensure lasting results.</p>
+        </div>
+    </div>
+
+    <div class="testimonial-box">
+        "The remote delivery model was perfect for us. We didn't have to shut down the clinic or fly anyone in. The team worked around our schedule and the results were immediate."
+        <div class="testimonial-author">— Office Manager, 6-Provider Multidisciplinary Clinic</div>
+    </div>
+
+    <div class="roi-grid" style="margin-top:28px;">
+        <div class="roi-card">
+            <div class="roi-number">100%</div>
+            <div class="roi-label">Remote delivery — no travel required</div>
+        </div>
+        <div class="roi-card">
+            <div class="roi-number">48h</div>
+            <div class="roi-label">Proposal turnaround after discovery call</div>
+        </div>
+        <div class="roi-card">
+            <div class="roi-number">4–8</div>
+            <div class="roi-label">Weeks to full implementation</div>
+        </div>
+        <div class="roi-card">
+            <div class="roi-number">30</div>
+            <div class="roi-label">Day follow-up included in every engagement</div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== COMPARE ===== -->
+<div id="tab-compare" class="section">
+    <div class="section-header">
+        <div class="tag">Compare Plans</div>
+        <h2>Find the Right Service for Your Clinic</h2>
+        <p>Not sure which service fits your needs? Use this guide to decide.</p>
+    </div>
+
+    <div style="overflow-x:auto;">
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>Feature / Service</th>
+                <th>⚙️ Workflow Optimization</th>
+                <th>🎓 Certification Programs</th>
+                <th>🚀 Change Management</th>
+                <th class="advanced-th">🧠 Advanced Data Intelligence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Best For</strong></td>
+                <td>Clinics with slow/manual processes</td>
+                <td>Clinics needing verified staff competency</td>
+                <td>Clinics with low CHR adoption</td>
+                <td>Research/data-driven clinics with reporting issues</td>
+            </tr>
+            <tr>
+                <td><strong>Starting Price</strong></td>
+                <td>$2,500 / engagement</td>
+                <td>$500 / staff member</td>
+                <td>$3,000 / project</td>
+                <td>Custom scoped</td>
+            </tr>
+            <tr>
+                <td><strong>Duration</strong></td>
+                <td>4–8 weeks</td>
+                <td>Ongoing (quarterly)</td>
+                <td>6–10 weeks</td>
+                <td>Varies by complexity</td>
+            </tr>
+            <tr>
+                <td><strong>Remote Delivery</strong></td>
+                <td><span class="check">✓ Yes</span></td>
+                <td><span class="check">✓ Yes</span></td>
+                <td><span class="check">✓ Yes</span></td>
+                <td><span class="check">✓ Yes</span></td>
+            </tr>
+            <tr>
+                <td><strong>Analytics Team Involved</strong></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="check">✓ Required</span></td>
+            </tr>
+            <tr>
+                <td><strong>Certification / Credential</strong></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="check">✓ Yes</span></td>
+                <td><span class="check">✓ Adoption cert.</span></td>
+                <td><span class="check">✓ Validation report</span></td>
+            </tr>
+            <tr>
+                <td><strong>Data / Report Diagnostics</strong></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="cross">✗ No</span></td>
+                <td><span class="check">✓ Core focus</span></td>
+            </tr>
+            <tr>
+                <td><strong>Staff Training</strong></td>
+                <td><span class="check">✓ Included</span></td>
+                <td><span class="check">✓ Core program</span></td>
+                <td><span class="check">✓ Full program</span></td>
+                <td><span class="check">✓ Corrective re-training</span></td>
+            </tr>
+            <tr>
+                <td><strong>30-Day Follow-up</strong></td>
+                <td><span class="check">✓ Yes</span></td>
+                <td><span class="check">✓ Quarterly refresh</span></td>
+                <td><span class="check">✓ Yes</span></td>
+                <td><span class="check">✓ Validation check</span></td>
+            </tr>
+            <tr>
+                <td><strong>Ideal Clinic Size</strong></td>
+                <td>Any size</td>
+                <td>Any size</td>
+                <td>Any size</td>
+                <td>Mid-large / Research orgs</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div style="background:#f8f4ff;border-radius:16px;padding:26px;margin-top:22px;text-align:center;">
+        <h3 style="font-size:17px;font-weight:800;color:#4b286d;margin-bottom:8px;">💡 Pro Tip: Bundle & Save</h3>
+        <p style="color:#555;margin-bottom:12px;font-size:13px;">Combine Workflow Optimization + Certification for a complete clinic transformation. Ask about our bundle pricing.</p>
+        <button class="footer-btn" onclick="switchTab('contact')">Request Bundle Pricing</button>
+    </div>
+</div>
+
+<!-- ===== GET STARTED ===== -->
+<div id="tab-contact" class="section">
+    <div class="section-header">
+        <div class="tag">Get Started</div>
+        <h2>Ready to Transform Your Clinic?</h2>
+        <p>Book a free 30-minute discovery call. No commitment, no pressure — just a conversation about your clinic's needs.</p>
+    </div>
+
+    <div class="contact-layout">
+        <!-- LEFT: Info -->
+        <div class="contact-info-panel">
+            <h3>Why Book a Discovery Call?</h3>
+            <p>We don't believe in one-size-fits-all solutions. Every clinic is different — different specialties, different team sizes, different pain points. A quick email is all it takes to get started.</p>
+            <p>In 30 minutes, we'll:</p>
+            <ul class="feature-list" style="margin-bottom:20px;">
+                <li>Understand your current CHR usage</li>
+                <li>Identify your top 3 pain points</li>
+                <li>Recommend the right service(s) for you</li>
+                <li>Give you a rough estimate on the spot</li>
+            </ul>
+            <div class="contact-item"><span class="icon">🌐</span> 100% Remote — we work with clinics across Canada</div>
+            <div class="contact-item"><span class="icon">⏱️</span> 30-minute call, no obligation</div>
+            <div class="contact-item"><span class="icon">📋</span> Proposal within 48 hours</div>
+            <div class="contact-item"><span class="icon">💬</span> Powered by TELUS CHR Experts</div>
+
+            <div class="testimonial-box" style="margin-top:24px;">
+                "We sent a quick email and had a proposal in our inbox within two days. The team made it incredibly easy to get started."
+                <div class="testimonial-author">— Practice Manager, Allied Health Clinic</div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Email Panel -->
+        <div class="email-panel">
+            <h3>📧 Email Our Care Team</h3>
+            <p class="subtitle">Click the button below to open a pre-filled email with everything our team needs to get back to you quickly.</p>
+
+            <!-- Email Template Preview -->
+            <div class="email-template">
+                <span class="template-label">📋 Your email will include these fields:</span>
+                <div class="field-line">
+                    <span class="field-label">Clinic Name:</span>
+                    <span class="field-hint">Your clinic's name</span>
+                </div>
+                <div class="field-line">
+                    <span class="field-label">Your Name:</span>
+                    <span class="field-hint">Your full name & role</span>
+                </div>
+                <div class="field-line">
+                    <span class="field-label">Email Address:</span>
+                    <span class="field-hint">Best email to reach you</span>
+                </div>
+                <div class="field-line">
+                    <span class="field-label">Service of Interest:</span>
+                    <span class="field-hint">Which service(s) you're exploring</span>
+                </div>
+                <div class="field-line">
+                    <span class="field-label">Biggest Challenge:</span>
+                    <span class="field-hint">What's not working right now</span>
+                </div>
+            </div>
+
+            <!-- Service Selector -->
+            <div style="margin-bottom:16px;">
+                <label style="font-size:12px;font-weight:700;color:#444;display:block;margin-bottom:6px;">Select a Service to Pre-fill Your Email:</label>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="serviceSelector">
+                    <button class="service-select-btn" onclick="selectService('workflow', this)" style="background:#f0e8ff;border:2px solid #d8c8f0;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;color:#4b286d;cursor:pointer;transition:all 0.2s;text-align:left;">⚙️ Workflow Optimization</button>
+                    <button class="service-select-btn" onclick="selectService('certification', this)" style="background:#fff8e8;border:2px solid #f0d890;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;color:#b5860d;cursor:pointer;transition:all 0.2s;text-align:left;">🎓 Certification Programs</button>
+                    <button class="service-select-btn" onclick="selectService('adoption', this)" style="background:#e8f8f0;border:2px solid #b0e0c8;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;color:#1a7a4a;cursor:pointer;transition:all 0.2s;text-align:left;">🚀 Change Management</button>
+                    <button class="service-select-btn" onclick="selectService('analytics', this)" style="background:#fff2f2;border:2px solid #f0c0c0;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;color:#c0392b;cursor:pointer;transition:all 0.2s;text-align:left;">🧠 Advanced Data Intel.</button>
+                    <button class="service-select-btn" onclick="selectService('bundle', this)" style="background:#f0f4f8;border:2px solid #d0d8e4;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;color:#444;cursor:pointer;transition:all 0.2s;text-align:left;grid-column:span 2;">💼 Bundle / Not Sure Yet</button>
+                </div>
+            </div>
+
+            <!-- Email Buttons -->
+            <div class="email-btn-group">
+                <a id="emailLink" href="#" class="email-btn primary" onclick="openEmail(event)">
+                    ✉️ Open Email to Care Team
+                </a>
+                <button class="email-btn secondary" onclick="copyTemplate()">
+                    📋 Copy Email Template
+                </button>
+            </div>
+
+            <div class="copy-success" id="copySuccess">
+                ✅ Email template copied! Paste it into your email client and send to our care team.
+            </div>
+
+            <div class="note-box">
+                <strong>📬 Our care team email:</strong> chr-learning@telus.com<br>
+                We respond within <strong>1 business day</strong> to schedule your free 30-minute discovery call.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="catalog-footer">
+    <h3>TELUS CHR · EMR Professional Services</h3>
+    <p>Helping Canadian clinics work smarter, not harder — one workflow at a time.</p>
+    <button class="footer-btn" onclick="switchTab('contact')">Get Started Today</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modalContent">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+    const serviceNames = {
+        workflow: 'Workflow Optimization',
+        certification: 'Clinic-Specific Certification Programs',
+        adoption: 'Change Management & Adoption',
+        analytics: 'Advanced Data Intelligence',
+        bundle: 'Bundle / Multiple Services / Not Sure Yet'
+    };
+
+    let selectedService = 'workflow';
+
+    function selectService(key, btn) {
+        selectedService = key;
+        document.querySelectorAll('.service-select-btn').forEach(b => {
+            b.style.opacity = '0.6';
+            b.style.transform = 'scale(1)';
+        });
+        btn.style.opacity = '1';
+        btn.style.transform = 'scale(1.03)';
+        btn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.12)';
+    }
+
+    function buildEmailBody() {
+        const svc = serviceNames[selectedService] || 'Not specified';
+        return `Hello CHR Care Team,
+
+I am interested in learning more about your professional services. Please find my details below:
+
+Clinic Name: [Your Clinic Name]
+
+Your Name: [Your Full Name & Role]
+
+Email Address: [Your Email Address]
+
+Service of Interest: ${svc}
+
+Biggest Challenge Right Now: [Please describe what's not working — e.g., our providers spend too much time on documentation, our reports don't match our billing data, staff aren't using the CHR consistently, etc.]
+
+I would love to book a free 30-minute discovery call at your earliest convenience.
+
+Thank you,
+[Your Name]`;
+    }
+
+    function openEmail(e) {
+        e.preventDefault();
+        const subject = encodeURIComponent('CHR Professional Services — Discovery Call Request');
+        const body = encodeURIComponent(buildEmailBody());
+        window.location.href = `mailto:chr-learning@telus.com?subject=${subject}&body=${body}`;
+    }
+
+    function copyTemplate() {
+        const text = `To: chr-learning@telus.com
+Subject: CHR Professional Services — Discovery Call Request
+
+${buildEmailBody()}`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showCopySuccess();
+            }).catch(() => {
+                fallbackCopy(text);
+            });
+        } else {
+            fallbackCopy(text);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const el = document.createElement('textarea');
+        el.value = text;
+        el.style.position = 'fixed';
+        el.style.opacity = '0';
+        document.body.appendChild(el);
+        el.select();
+        try {
+            document.execCommand('copy');
+            showCopySuccess();
+        } catch(e) {}
+        document.body.removeChild(el);
+    }
+
+    function showCopySuccess() {
+        const el = document.getElementById('copySuccess');
+        el.style.display = 'block';
+        setTimeout(() => { el.style.display = 'none'; }, 4000);
+    }
+
+    const modalData = {
+        workflow: {
+            icon: '⚙️',
+            color: '#4b286d',
+            title: 'Workflow Optimization Service',
+            subtitle: 'Remote · 4–8 weeks · Starting at $2,500',
+            description: 'A structured engagement where CHR experts analyze your clinic\'s current system usage, identify inefficiencies, and co-design workflows tailored to your specialty and team.',
+            includes: [
+                'Full CHR usage audit via remote screen-share',
+                'Provider & staff interviews',
+                'Custom workflow blueprint',
+                'CHR configuration recommendations',
+                'Remote implementation support',
+                'Staff training on new workflows',
+                'Workflow documentation package',
+                '30-day follow-up check-in'
+            ],
+            ideal: 'Clinics experiencing slow patient intake, excessive documentation time, or inconsistent processes across providers.',
+            price: '$2,500',
+            unit: 'per engagement'
+        },
+        certification: {
+            icon: '🎓',
+            color: '#b5860d',
+            title: 'Clinic-Specific Certification Programs',
+            subtitle: 'Remote · All clinic types · Quarterly refreshers',
+            description: 'Specialty-tailored CHR certification programs that give your staff verifiable credentials and ensure every team member is competent in the features that matter most to your clinic.',
+            includes: [
+                'Specialty track selection (Family, Pediatrics, Billing, Allied Health)',
+                'Role-based learning paths per staff type',
+                'Competency assessments at each module',
+                'Official CHR Certification on completion',
+                'Clinic-level completion dashboard',
+                'Quarterly refresher modules (new CHR features)',
+                'Bulk pricing for teams of 5+'
+            ],
+            ideal: 'Clinics onboarding new staff, practices that want to standardize CHR knowledge across their team, or clinics in specialized fields that need tailored training.',
+            price: '$500',
+            unit: 'per staff member'
+        },
+        adoption: {
+            icon: '🚀',
+            color: '#1a7a4a',
+            title: 'Change Management & Adoption Service',
+            subtitle: 'Remote · 6–10 weeks · Starting at $3,000',
+            description: 'The #1 reason EMR investments fail is people not using the system. Our Change Management service ensures your entire team is aligned, confident, and actually using the CHR.',
+            includes: [
+                'Staff resistance assessment survey',
+                'Champion identification & coaching',
+                'Role-based training plans',
+                'Leadership alignment sessions',
+                'Weekly adoption check-ins',
+                'CHR usage metrics monitoring',
+                'Accountability coaching',
+                'Final adoption report & team certificate'
+            ],
+            ideal: 'Clinics transitioning to CHR, clinics with low system adoption, or practices where only some staff use the system consistently.',
+            price: '$3,000',
+            unit: 'per project'
+        },
+        analytics: {
+            icon: '🧠',
+            color: '#c0392b',
+            title: 'Advanced Data Intelligence',
+            subtitle: 'Remote · Research & data-driven clinics · Custom scoped',
+            description: 'When your CHR reports aren\'t telling the right story, we investigate why. Our Business Analysts trace data entry issues back to their workflow source — fixing the root cause, not just the report. This service requires collaboration with your analytics team and is scoped individually.',
+            includes: [
+                'Report accuracy review & discrepancy mapping',
+                'Data entry workflow tracing (source to output)',
+                'Root cause identification (human, process, or config)',
+                'Stakeholder interviews (clinical + admin + analytics)',
+                'Workflow correction recommendations',
+                'Collaboration with your analytics/data team',
+                'Staff re-training on corrected data entry',
+                'Validation report confirming data accuracy'
+            ],
+            ideal: 'Clinics with active research programs, complex data reporting needs, multi-provider organizations with inconsistent reporting, or clinics preparing for accreditation or audit.',
+            price: 'Custom',
+            unit: 'scoped per engagement'
+        }
+    };
+
+    function switchTab(tab) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+        document.getElementById('tab-' + tab).classList.add('active');
+
+        const tabs = ['overview','services','process','compare','contact'];
+        const idx = tabs.indexOf(tab);
+        document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+
+        const navBar = document.getElementById('nav-bar');
+        const navTop = navBar.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: navTop, behavior: 'smooth' });
+    }
+
+    function openModal(key) {
+        const d = modalData[key];
+        const isAdvanced = key === 'analytics';
+        document.getElementById('modalBody').innerHTML = `
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+                <div style="width:50px;height:50px;background:${d.color};border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">${d.icon}</div>
+                <div>
+                    <h2 style="font-size:19px;font-weight:800;color:#1a2332;">${d.title}</h2>
+                    <p style="font-size:12px;color:#888;">${d.subtitle}</p>
+                </div>
+            </div>
+            ${isAdvanced ? `<div style="background:#fff2f2;border:2px dashed #c0392b;border-radius:12px;padding:13px 16px;margin-bottom:16px;font-size:12px;color:#922b21;"><strong>⚠️ Specialized Service:</strong> Requires analytics team involvement. Custom scoped per engagement.</div>` : ''}
+            <p style="color:#555;line-height:1.7;margin-bottom:18px;font-size:13px;">${d.description}</p>
+            <h4 style="font-weight:700;color:${d.color};margin-bottom:9px;font-size:13px;">What's Included:</h4>
+            <ul class="feature-list" style="margin-bottom:18px;">
+                ${d.includes.map(i => `<li style="font-size:13px;">${i}</li>`).join('')}
+            </ul>
+            <div style="background:#f8f8f8;border-radius:12px;padding:13px;margin-bottom:18px;">
+                <strong style="color:#333;font-size:12px;">Ideal For:</strong>
+                <p style="color:#555;font-size:13px;margin-top:5px;line-height:1.6;">${d.ideal}</p>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:${isAdvanced ? '#fff2f2' : '#f0e8ff'};border-radius:12px;padding:14px 16px;">
+                <div>
+                    <div style="font-size:24px;font-weight:900;color:${d.color};">${d.price}</div>
+                    <div style="font-size:11px;color:#888;">${d.unit}</div>
+                </div>
+                <button onclick="switchTab('contact');closeModal();" style="background:${d.color};color:white;border:none;padding:10px 20px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer;">Get Started →</button>
+            </div>
+        `;
+        document.getElementById('modalOverlay').classList.add('open');
+    }
+
+    function closeModal(e) {
+        if (!e || e.target === document.getElementById('modalOverlay')) {
+            document.getElementById('modalOverlay').classList.remove('open');
+        }
+    }
+
+    // Pre-select first service on load
+    document.addEventListener('DOMContentLoaded', () => {
+        const firstBtn = document.querySelector('.service-select-btn');
+        if (firstBtn) selectService('workflow', firstBtn);
+    });
+</script>
+
+</body>
+</html>
